@@ -57,7 +57,8 @@
                     &nbsp;&nbsp;&nbsp;
                     <span class="app-menu__label">Items</span>
                     
-                </a>   
+                </a>
+                
             </li>
             <li >
                 <a class="app-menu__item" href="{{url('/admin/order')}}" >
@@ -65,7 +66,7 @@
                     &nbsp;&nbsp;&nbsp;
                     <span class="app-menu__label">Orders</span>
                     
-                </a> 
+                </a>
             </li>
             <li >
                 <a class="app-menu__item" href="{{url('/admin/supplier')}}" >
@@ -129,21 +130,18 @@
                                     <input class="form-control" name="item_title" type="text" placeholder="Enter title">
                                 </div>
                             </div>
-
                             <div class="form-group row">
                                 <label class="control-label col-md-3">Origin Price</label>
                                 <div class="col-md-8">
                                     <input class="form-control" name="item_origin_price" type="float" placeholder="Enter origin price">
                                 </div>
                             </div>
-
                             <div class="form-group row">
                                 <label class="control-label col-md-3">Price</label>
                                 <div class="col-md-8">
                                     <input class="form-control" name="item_price" type="float" placeholder="Enter price">
                                 </div>
                             </div>
-
                             <div class="form-group row">
                                 <label class="control-label col-md-3">Menu</label>
                                 <div class="col-md-8">
@@ -154,21 +152,19 @@
                                         @endforeach
                                     </select>
                                 </div>
+                                
                             </div>
-
                             <div class="form-group row">
                                 <label class="control-label col-md-3">Supplier</label>
                                 <div class="col-md-8">
-                                    <select class="form-control" name="item_menu" required="">
-                                        <option value="" selected="">Add a supplier here </option>
+                                    <select class="form-control" name="item_supplier" required="">
+                                        <option value="" selected="">suppliers</option>
                                         @foreach($supplier as $supplier)
                                         <option value="{{$supplier->name_supplier}}">{{$supplier->name_supplier}}</option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
-
-
                             <div class="form-group row">
                                 <label class="control-label col-md-3">Description</label>
                                 <div class="col-md-8">
