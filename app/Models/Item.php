@@ -46,6 +46,12 @@ class Item extends Model
         return $this->hasMany(Cart::class, 'item_id');
     }
 
+    public function  filter()
+    {
+        return $this->hasMany(Menu::class, 'name_menu');
+    }
+   
+
     // public function orders()
     // {
     //     return $this->belongsToMany(Order::class, 'order_items')

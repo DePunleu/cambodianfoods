@@ -15,17 +15,24 @@ class ItemController extends Controller
     public function item()
     {
         $item = Item::with('menus')->orderByDesc('id')->get(); // Include the menu relationship
+        $menus = Menu::all();
         $count = 1;
+       
         return view(
             'admin.home.item.list_item',
-            compact('count', 'item')
+            compact('count', 'item', 'menus')
         );
     }
+  
+
+
     //==================End Method=======================//
-    //==================Show Create Item Form=======================//
+
+    //==================Create_item=======================//
     public function create_item() {
         $menu = Menu::all();
-        return view('admin.home.item.create_item', compact('menu'));
+        $supplier = Supplier::all();
+        return view('admin.home.item.create_item', compact('menu','supplier'));
     }
     //==================End Method=======================//
 
@@ -33,12 +40,9 @@ class ItemController extends Controller
     public function create_itemPost(Request $request)
     {
         $data['title'] = $request->item_title;
-        $data['price'] = $request->item_price;
         $data['origin_price'] = $request->item_origin_price;
-
-        $data['description'] = $request->item_description ;
-
-        
+        $data['price'] = $request->item_price;
+        $data['description'] = $request->item_description;
         // Retrieve the selected menu
         $menu = Menu::where('name_menu', $request->item_menu)->firstOrFail();
         if ($request->file('item_image')) {
@@ -48,6 +52,10 @@ class ItemController extends Controller
             $data['image'] = $filename;
         }
         $data['menu_id'] = $menu->id; // Store the menu ID in the items table
+        //Retrieve the selected supplier
+        $supplier = Supplier::where('name_supplier', $request->item_supplier)->firstOrFail();
+        $data['supplier_id'] = $supplier->id; // Store the supplier ID in the items table
+
         Item::create($data);
         return redirect()->back()->with("success", "Item Created successfully!");
     }
@@ -57,7 +65,8 @@ class ItemController extends Controller
     {
         $item = Item::where('id',$id)->first();
         $menu = Menu::all();
-        return view('admin.home.item.update_item',compact('item','menu'));
+        $supplier = Supplier::all();
+        return view('admin.home.item.update_item',compact('item','menu','supplier'));
     }
     //=====================End Method==========================//
     //==================Store Update Item =======================//
@@ -92,4 +101,25 @@ class ItemController extends Controller
         ->with("success","Item deleted successfully!");
     }
     //=====================End Method==========================//
+    // public function filter_item(Request $request)
+    // {
+    //     $filter = $request->query('filter');
+    //     $count = 1;
+    //     $menu = Menu::all();
+    //     $item = Item::all();
+    //     $query = Item::query(); // Create a base query
+    //     $item = Item::where('title', 'LIKE', "%$filter%")
+    //         ->orWhereHas('menus', function ($query) use ($filter) {
+    //             $query->where('name_menu', 'LIKE', "%$filter%");
+    //         })
+    //         ->orWhere('menu_id', $filter)
+    //         ->paginate(20);
+    //     return view('admin.home.item.list_item')
+    //     ->with('count', $count)
+    //     ->with('menu', $menu)
+    //     ->with('item', $item)
+    //     ->with('filter', $filter);
+    // }
+
+  
 }

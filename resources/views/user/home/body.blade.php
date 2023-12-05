@@ -50,13 +50,14 @@
 <!-- Service End -->
 <section class="food_section layout_padding-bottom">
     <div class="container">
+      <!-- Menu -->
       <div class="heading_container heading_center">
         <h2>
           Our Menu
         </h2>
       </div>
       <div class="d-flex justify-content-center">
-        <ul class="filters_menu custom rounded-pill">
+      <ul class="filters_menu custom rounded-pill">
           <li class="active text-warning" data-filter="*">All</li>
           @foreach ($menu as $row)
           <li data-filter=".{{ $row->name_menu }}">
@@ -66,6 +67,8 @@
         
         </ul>
       </div>
+      <!-- End Menu -->
+
       <div class="filters-content">
         <div class="row grid">
           @foreach ($item as $data)

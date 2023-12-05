@@ -112,7 +112,7 @@
                                 <td>{{$row->price}}$</td>
                                 <td>{{$row->menus->name_menu}}</td>
                                 <td>{{$row->description}}</td>
-                                <td>{{$row->supplier_id}}</td> 
+                                <td>{{$row->suppliers->description}}</td>
                                 <td>
                                     <img class="" src="{{(!empty($row->image))
                                     ? url('upload/item_images/'.$row->image):url('frontend/user_images/no_image.jpg')}}" 

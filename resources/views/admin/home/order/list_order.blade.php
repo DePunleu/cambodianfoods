@@ -149,7 +149,7 @@
                                     
                                         <span id="delivery-status-{{ $order->id }}">
                                             @if ($order->delivery_status === 'Order Received')
-                                                <span class="badge badge-primary">{{ $order->delivery_status }}</span>
+                                                <span class="badge badge-primary">{{ $order->delivery_status }}</span>                           
                                             @elseif ($order->delivery_status === 'In-Progress')
                                                 <span class="badge badge-secondary">{{ $order->delivery_status }}</span>
                                             @elseif ($order->delivery_status === 'Shipped')
@@ -166,16 +166,20 @@
                                     
                                     
                                 </td>
+                                <!-- Start Action -->
                                 <td>
-                                    <select class="form-control order-status-select small-width" data-order-id="{{ $order->id }}" data-url="{{ route('admin.updateOrderStatus') }}">
+                                    <select class="form-control order-status-select small-width" data-order-id="{{ $order->id }}" data-url="{{ route('admin.updateOrderStatus')  }}">
                                         @foreach ($orderStatuses as $orderStatus)
                                             <option value="{{ $orderStatus }}" {{ $order->delivery_status == $orderStatus ? 'selected' : '' }}>
                                                 {{ $orderStatus }}
+                                                
+                                        </span>
                                             </option>
                                         @endforeach
                                     </select>
                                     
-                                </td>
+                                <!-- End Action -->
+
                                 <td class="text-center">
                                     {{-- <a class="badge badge-warning edit " href="{{url('/admin/update_order/'.$order->id)}}" title="Update" data-toggle="tooltip">
                                         <i class="fa fa-edit"></i>

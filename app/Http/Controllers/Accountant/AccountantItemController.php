@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Item;
 use App\Models\Menu;
+use App\Models\Supplier;
 
 
 class AccountantItemController extends Controller
@@ -24,7 +25,8 @@ class AccountantItemController extends Controller
     //==================Show Create Item Form=======================//
     public function create_item() {
         $menu = Menu::all();
-        return view('accountant.home.item.create_item', compact('menu'));
+        $supplier = Supplier::all();
+        return view('accountant.home.item.create_item', compact('menu','supplier'));
     }
     //==================End Method=======================//
 
@@ -44,6 +46,10 @@ class AccountantItemController extends Controller
             $data['image'] = $filename;
         }
         $data['menu_id'] = $menu->id; // Store the menu ID in the items table
+        //Retrieve the selected supplier
+        $supplier = Supplier::where('name_supplier', $request->item_supplier)->firstOrFail();
+        $data['supplier_id'] = $supplier->id; // Store the menu ID in the items table
+
         Item::create($data);
         return redirect()->back()->with("success", "Item Created successfully!");
     }

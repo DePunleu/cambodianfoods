@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('item_title')->nullable();
             $table->string('quantity')->nullable();
             $table->string('price')->nullable();
+            $table->string('origin_price')->nullable();
             $table->string('image')->nullable();
             $table->timestamps();
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');

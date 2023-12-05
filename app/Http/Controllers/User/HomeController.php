@@ -10,8 +10,6 @@ use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Item;
-//use App\Models\Booking;
-//use App\Models\Table;
 use App\Models\Cart;
 use App\Models\Menu;
 
@@ -63,42 +61,6 @@ class HomeController extends Controller
     }
     //================End Method==================//
 
-    // //================Booking==================//
-    // public function booking()
-    // {
-    //     $user_id = Auth::id();
-    //     $count = Cart::where('user_id',$user_id)->count();
-    //     $table = Table::all();
-    //     return view('user.home.subpages.book',compact('count','table'));
-    // }
-    //================End Method==================//
-    //================BookingPost==================//
-    // public function bookingPost(Request $request)
-    // {
-    //     $data['name'] = $request -> user_name;
-    //     $data['email'] = $request -> user_email;
-    //     $data['phone'] = $request -> user_phone;
-    //     $data['guest'] = $request -> user_guest;  
-    //     $table = Table::where('name', $request->user_table)->firstOrFail();
-    //     $data['table_id'] = $table->id; // Store the menu ID in the items table 
-    //     $data['date'] = $request -> user_date;  
-    //     $data['time'] = $request -> user_time;  
-    //     $data['message'] = $request -> user_message;  
-    //     if ($request->user_guest > $table->guest) {
-    //         return back()->with('error', 'Please choose a table based on the number of guests.');
-    //     }
-    //     $requestDate = Carbon::parse($request->user_date)->format('Y-m-d');
-    //     $existingBooking = Booking::where('table_id', $table->id)
-    //         ->where('date', $requestDate)
-    //         ->where('time', $request->user_time)
-    //         ->first();
-    //     if ($existingBooking) {
-    //         return back()->with('error', 'This table is already booked for the selected date and time.');
-    //     }
-    //     Booking::create($data);
-    //     return redirect()->back()->with("success","Your Booking is confirmed!");
-    // }
-    //================End Method==================//
 
     //================Search Item==================//   
     public function search(Request $request)

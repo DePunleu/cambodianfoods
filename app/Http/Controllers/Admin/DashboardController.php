@@ -13,8 +13,6 @@ use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use App\Models\Menu;
 use App\Models\Item;
-//use App\Models\Table;
-//use App\Models\Booking;
 use App\Models\Order;
 
 
@@ -35,11 +33,22 @@ class DashboardController extends Controller
     {
         $menus_count = Menu::all()->count();
         $items_count = Item::all()->count();
+        $foods_count = Item::where('menu_id', 1)->count();
+        $combo_count = Item::where('menu_id', 2)->count();
+        $dessert_count = Item::where('menu_id', 3)->count();
+        $drink_count = Item::where('menu_id', 4)->count();
         $orders_count = Order::all()->count();
         // Total price of completed orders
         $completedOrdersTotalPrice = Order::where('delivery_status', 'Completed')
         ->join('order_items', 'orders.id', '=', 'order_items.order_id')
         ->sum(DB::raw('order_items.price * order_items.quantity'));
+
+
+        // Total origin price
+        // $origin_price = Order::where('delivery_status', 'Completed')
+        // ->join();
+        
+
         $users_count = User::where('role', '0')->count();
         $users = User::where('role', '0')->selectRaw('MONTH(created_at) as month, COUNT(*) as count')
             ->whereYear('created_at', date('Y'))
@@ -86,10 +95,11 @@ class DashboardController extends Controller
                 'backgroundColor' => $colors
             ]   
         ];
-        return view('admin.home.dashboard', compact('menus_count','items_count',//'bookings_count',
-        //'tables_count',
+
+       
+        return view('admin.home.dashboard', compact('menus_count','items_count',
         'users_count', 'orders_count','completedOrdersTotalPrice',
-        'datasets', 'labels', 'orderDataset', 'orderLabels'));
+        'datasets', 'labels', 'orderDataset', 'orderLabels', 'foods_count', 'combo_count', 'dessert_count', 'drink_count'));
     }
     //=========================End Method============================//   
 

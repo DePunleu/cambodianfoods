@@ -157,6 +157,19 @@
                             </div>
 
                             <div class="form-group row">
+                                <label class="control-label col-md-3">Supplier</label>
+                                <div class="col-md-8">
+                                    <select class="form-control" name="item_menu" required="">
+                                        <option value="" selected="">Add a supplier here </option>
+                                        @foreach($supplier as $supplier)
+                                        <option value="{{$supplier->name_supplier}}">{{$supplier->name_supplier}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group row">
                                 <label class="control-label col-md-3">Description</label>
                                 <div class="col-md-8">
                                     <input class="form-control" name="item_description" type="text" placeholder="Enter Description">

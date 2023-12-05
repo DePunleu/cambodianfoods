@@ -193,6 +193,7 @@ Route::controller(ItemController::class)->middleware('authadmin')->group(functio
 })->middleware('cache');
 
 
+
 //================Admin Orders Management Route=========================//
 Route::controller(OrderController::class)->middleware('authadmin')->group(function () {
     Route::get('/admin/order', 'order')->name('admin.order');
@@ -204,6 +205,8 @@ Route::controller(OrderController::class)->middleware('authadmin')->group(functi
     Route::get('/admin/invoice/{id}', 'invoice')->name('admin.invoice');
     Route::get('/admin/order/{id}', 'delete_order')->name('admin.delete_order');   
     Route::get('/admin/invoice_pdf/{id}', 'invoice_pdf')->name('admin.invoice_pdf');
+    //
+    Route::post('admin.performAction', 'order')->name('admin.order');
 })->middleware('cache');
 
 
