@@ -134,18 +134,6 @@ class OrderController extends Controller
 
 
     
-    public function index()
-    {
-        $orders = Order::all();
-        return view('orders.index', compact('orders'));
-    }
 
-    public function update(Order $order, Request $request)
-    {
-        $newStatus = $request->input('status');
-        $order->updateStatus($newStatus);
-        // Redirect or return response as needed...
-    }
-    
 
 }

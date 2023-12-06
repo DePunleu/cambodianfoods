@@ -134,25 +134,14 @@
             </div>
           </div>
           <div class="col-md-6 col-lg-3">
-            <div class="widget-small info coloured-icon"><i class="icon fas fa-hamburger fa-3x"></i>
+            <div class="widget-small info coloured-icon"><i class="icon fas fa-coffee fa-3x" ></i>
               <div class="info">
                 <h4>Drink</h4>
                 <p><b>{{ $drink_count }}</b></p>
               </div>
             </div>
-          </div>
-          
-          <!-- <div class="col-md-6 col-lg-3">
-            <div class="widget-small warning coloured-icon"><i class="icon fas fa-hamburger fa-3x"></i>
-              <div class="info">
-                <h4>Drink</h4>
-                <p><b>{{ $drink_count }}</b></p>
-              </div>
-            </div>
-          </div>
-         -->
-        
-          
+          </div> 
+
         </div>
     
         <div class="row">
