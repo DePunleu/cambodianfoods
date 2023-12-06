@@ -161,23 +161,22 @@
                                             @else
                                             <span class="badge badge-danger">{{ $order->delivery_status }}</span>
                                             @endif
-                                        </span>
-
-                                    
+                                        </span>                                    
                                     
                                 </td>
-                                <!-- Start Action -->
+                                
+                                <!-- Start Action -->                                  
                                 <td>
-                                    <select class="form-control order-status-select small-width" data-order-id="{{ $order->id }}" data-url="{{ route('admin.updateOrderStatus')  }}">
-                                        @foreach ($orderStatuses as $orderStatus)
-                                            <option value="{{ $orderStatus }}" {{ $order->delivery_status == $orderStatus ? 'selected' : '' }}>
-                                                {{ $orderStatus }}
+                                <select class="form-control order-status-select small-width" data-order-id="{{ $order->id }}" data-url="{{ route('admin.updateOrderStatus') }}">
+                                    @foreach ($orderStatuses as $orderStatus)
+                                        <option value="{{ $orderStatus }}" {{ $order->delivery_status == $orderStatus ? 'selected' : '' }}>
+                                            {{ $orderStatus }}
                                                 
                                         </span>
                                             </option>
                                         @endforeach
                                     </select>
-                                    
+                                </td> 
                                 <!-- End Action -->
 
                                 <td class="text-center">
@@ -284,5 +283,8 @@
         });
     });
 </script>
+
+
+
 </body>
 </html>

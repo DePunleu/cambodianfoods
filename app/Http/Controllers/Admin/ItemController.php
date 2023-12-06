@@ -101,6 +101,28 @@ class ItemController extends Controller
         ->with("success","Item deleted successfully!");
     }
     //=====================End Method==========================//
- 
+
+    //===================== Filter Method==========================//
+    public function filter_item(Request $request)
+    {
+        $filter = $request->query('filter');
+        $count = 1;
+        $menu = Menu::all();
+        $item = Item::all();
+        $query = Item::query(); // Create a base query
+        $item = Item::where('title', 'LIKE', "%$filter%")
+            ->orWhereHas('menus', function ($query) use ($filter) {
+                $query->where('name_menu', 'LIKE', "%$filter%");
+            })
+            ->orWhere('menu_id', $filter)
+            ->paginate(20);
+        return view('admin.home.item.list_item')
+        ->with('count', $count)
+        ->with('menu', $menu)
+        ->with('item', $item)
+        ->with('filter', $filter);
+    
+    }
+    //=====================End Method==========================//
   
 }

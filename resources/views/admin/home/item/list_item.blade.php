@@ -113,6 +113,33 @@
                             </div>
                         </div><br>
                     </div>
+
+                    {{-- <form class="form-inline" method="GET">
+                        <div class="form-group mb-2">
+                            <label for="filter" class="col-sm-2 col-form-label">Filter</label>
+                            <input type="text" class="form-control" id="filter" name="filter" placeholder="Name..." value="">
+                        </div>
+                        <button type="submit" class="btn btn-default mb-2">Filter</button>
+                    </form> --}}
+                    <form action="{{ route('admin.filter_item') }}" method="GET">
+                        <div class="form-group mb-2">
+                            {{-- <label for="filter" class="col-sm-2 col-form-label">Filter</label> --}}
+                            <select name="filter" id="filter">
+                                <option value="">All</option>
+                                @foreach($menu as $menu)
+                                        <option value="{{$menu->name_menu}}">{{$menu->name_menu}}</option>
+                                    @endforeach
+                            </select>
+                            {{-- <select name="filter" id="filter">
+                                @foreach($item as $row)
+                                        <option value="{{$row->title}}">{{$row->title}}</option>
+                                @endforeach
+                            </select> --}}
+                        </div>
+                        <button type="submit">Filter</button>
+                        
+                    </form>
+          
                     <table class="table table-hover table-bordered" id="sampleTable">
                         <thead class="bg-light text-dark p-3 text-center">
                             <tr>
@@ -137,7 +164,7 @@
                                 <td>{{$row->price}}$</td>
                                 <td>{{$row->menus->name_menu}}</td>
                                 <td>{{$row->description}}</td> 
-                                <td>{{$row->suppliers}}</td>
+                                <td>{{$row->suppliers->description}}</td>
                                 
                                 <td>
                                     <img class="" src="{{(!empty($row->image))

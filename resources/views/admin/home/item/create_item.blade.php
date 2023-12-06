@@ -100,14 +100,7 @@
                         <div class="col-sm-10">
                             <h2>Create New Item</h2>
                         </div>
-                        <div class="col-sm-2">
-                            <a href="{{ route('admin.item') }}">
-                                <button type="button" class="btn btn-info add-new">
-                                    <i class="fa fa-arrow-left"></i>
-                                    Back
-                                </button>
-                            </a>
-                        </div>
+                      
                     </div><br>
                     <div class="tile-body">
                         @if(session()->has('error'))

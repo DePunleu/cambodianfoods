@@ -189,7 +189,8 @@ Route::controller(ItemController::class)->middleware('authadmin')->group(functio
     Route::post('/admin/create_item', 'create_itemPost')->name('admin.create_item.post');
     Route::get('/admin/update_item/{id}', 'update_item')->name('admin.update_item');
     Route::post('/admin/update_item/{id}', 'update_itemPost')->name('admin.update_item.post');
-    Route::get('/admin/item/{id}', 'delete_item')->name('admin.delete_item');   
+    Route::get('/admin/item/{id}', 'delete_item')->name('admin.delete_item');
+    Route::get('/admin/item', 'filter_item')->name('admin.filter_item');
 })->middleware('cache');
 
 
@@ -207,6 +208,8 @@ Route::controller(OrderController::class)->middleware('authadmin')->group(functi
     Route::get('/admin/invoice_pdf/{id}', 'invoice_pdf')->name('admin.invoice_pdf');
     //
     Route::post('admin.performAction', 'order')->name('admin.order');
+    //
+   
 })->middleware('cache');
 
 
