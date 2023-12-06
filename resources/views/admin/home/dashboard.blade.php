@@ -126,7 +126,7 @@
           </div>
 
           <div class="col-md-6 col-lg-3">
-            <div class="widget-small info coloured-icon"><i class="icon fas fa-hamburger fa-3x"></i>
+            <div class="widget-small info coloured-icon"><i class="icon fas fa-cheese fa-3x"></i>
               <div class="info">
                 <h4>Dessert</h4>
                 <p><b>{{ $dessert_count }}</b></p>
