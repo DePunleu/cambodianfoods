@@ -28,6 +28,7 @@ class User extends Authenticatable
         'image',
         'address',
         'phone',
+        'role',
     ];
     public function reviews()
     {

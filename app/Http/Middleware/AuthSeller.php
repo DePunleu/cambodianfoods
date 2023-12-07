@@ -18,7 +18,7 @@ class AuthSeller
     public function handle(Request $request, Closure $next): Response
     {
         if (Auth::check()) {
-            if (Auth::user()->role == 2) {
+            if (Auth::user()->role == 'seller') {
                 return $next($request);
             } else {
 

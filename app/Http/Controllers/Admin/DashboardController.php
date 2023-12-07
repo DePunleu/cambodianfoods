@@ -49,8 +49,8 @@ class DashboardController extends Controller
         // ->join();
         
 
-        $users_count = User::where('role', '0')->count();
-        $users = User::where('role', '0')->selectRaw('MONTH(created_at) as month, COUNT(*) as count')
+        $users_count = User::where('role', 'user')->count();
+        $users = User::where('role', 'user')->selectRaw('MONTH(created_at) as month, COUNT(*) as count')
             ->whereYear('created_at', date('Y'))
             ->groupBy('month')
             ->orderBy('month')

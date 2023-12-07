@@ -122,6 +122,7 @@
                       <th>#</th>
                       <th>Image</th>
                       <th>Name</th>
+                      <th>Role</th>
                       <th>Email</th>
                       <th>Phone</th>
                       <th>Address</th>
@@ -140,6 +141,7 @@
                         
                       </td>
                       <td>{{$row->name}}</td>
+                      <td>{{$row->role}}</td>
                       <td>{{$row->email}}</td>
                       <td>{{$row->phone}}</td>
                       <td>{{$row->address}}</td>

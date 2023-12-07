@@ -132,6 +132,20 @@
                                     <input class="form-control" name="user_name" type="text" placeholder="Enter full name">
                                 </div>
                             </div>
+
+                            <div class="form-group row">
+                                <label class="control-label col-md-3">Role</label>
+                                <div class="col-md-8">
+                                    <select class="form-control"  name="user_role" >
+                                        <option value="user">user</option>
+                                        <option value="seller">seller</option>
+                                        <option value="accountant">accountant</option>
+                                    </select>
+                                    
+                                </div>
+                            </div>
+                          
+
                             <div class="form-group row">
                                 <label class="control-label col-md-3">Email</label>
                                 <div class="col-md-8">

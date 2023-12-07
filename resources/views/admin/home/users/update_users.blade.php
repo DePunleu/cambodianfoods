@@ -135,6 +135,12 @@
                                 </div>
                             </div>
                             <div class="form-group row">
+                                <label class="control-label col-md-3">Role</label>
+                                <div class="col-md-8">
+                                    <input class="form-control" name="user_role" type="text" value="{{$user->role}}">
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label class="control-label col-md-3">Email</label>
                                 <div class="col-md-8">
                                     <input class="form-control" name="user_email" type="email" value="{{$user->email}}">

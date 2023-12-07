@@ -17,7 +17,7 @@ class AuthAccountant
     public function handle(Request $request, Closure $next): Response
     {
         if (Auth::check()) {
-            if (Auth::user()->role == 3) {
+            if (Auth::user()->role == 'accountant') {
                 return $next($request);
             } else {
 

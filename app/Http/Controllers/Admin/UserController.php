@@ -16,7 +16,14 @@ class UserController extends Controller
 {
     //==================Show All Users=======================//
     public function users(){
-        $users = User::orderByDesc('id')->where('role', '0')->get();
+        $users = User::orderByDesc('id')
+        ->where(function ($query) {
+            $query->where('role', 'user')
+                  ->orWhere('role', 'seller')
+                  ->orWhere('role', 'accountant');
+        })
+        ->get();
+
         $count = 1;
         return view(
             'admin.home.users.list_users',
@@ -26,9 +33,12 @@ class UserController extends Controller
             )
         );
     }
+    //=====================End Method==========================//
+
     //==================Show Create Users Form=======================//
     public function create_user() {
-        return view('admin.home.users.create_users');
+        $users = User::all();
+        return view('admin.home.users.create_users', compact('users'));
     }
     //=====================End Method==========================//
 
@@ -38,6 +48,7 @@ class UserController extends Controller
         $data['email'] = $request -> user_email;
         $data['password'] = Hash::make($request -> user_password) ;
         $data['phone'] = $request -> user_phone;
+        $data['role'] = $request -> user_role;
         $data['address'] = $request -> user_address;             
             if($request->file('user_image')){
                 $file = $request->file('user_image');
@@ -72,6 +83,7 @@ class UserController extends Controller
             $file -> move(public_path('frontend/user_images'),$filename);
             $user['image'] = $filename;
         }
+        $user->role=$request->user_role;
         $user->save();
         return redirect()->back()->with("success","Updated User successfully!");
     }
