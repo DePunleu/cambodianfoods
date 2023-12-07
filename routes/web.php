@@ -209,7 +209,8 @@ Route::controller(OrderController::class)->middleware('authadmin')->group(functi
     //
     Route::post('admin.performAction', 'order')->name('admin.order');
     //
-   
+    Route::get('/admin/detail_order', 'detail_order') -> name('admin.detail_order');
+    Route::post('/admin/detail_order', 'detail_orderPost')->name('admin.detail_order.post');
 })->middleware('cache');
 
 

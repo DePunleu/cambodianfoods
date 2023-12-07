@@ -115,6 +115,7 @@
                         <div class="row">                
                             <div class="col-sm-10">
                                 <h2>All Orders</h2>
+                                
                             </div>
                             <div class="col-sm-2">
                                 {{-- <a href="{{ route('admin.create_order') }}">
@@ -134,6 +135,7 @@
                                 <th>Status</th>
                                 <th class="text-center">Action</th>
                                 <th class="text-center"></th>
+                                
                             </tr>
                         </thead>
                         <tbody >
@@ -161,25 +163,31 @@
                                             @else
                                             <span class="badge badge-danger">{{ $order->delivery_status }}</span>
                                             @endif
-                                        </span>                                    
+                                        </span>   
+                                        
+                                        
+
+
+
+
                                     
                                 </td>
                                 
-                                <!-- Start Action -->                                  
+                                <!-- Start Action --> 
                                 <td>
-                                <select class="form-control order-status-select small-width" data-order-id="{{ $order->id }}" data-url="{{ route('admin.updateOrderStatus') }}">
+                                     <select class="form-control order-status-select small-width " data-order-id="{{ $order->id }}" data-url="{{ route('admin.updateOrderStatus') }}">
                                     @foreach ($orderStatuses as $orderStatus)
-                                        <option value="{{ $orderStatus }}" {{ $order->delivery_status == $orderStatus ? 'selected' : '' }}>
+                                        <option  value="{{ $orderStatus }}" {{ $order->delivery_status == $orderStatus ? 'selected' : '' }}>
                                             {{ $orderStatus }}                                               
                                         </option>                                       
                                     @endforeach
                                     </select>
-                                </td> 
-                                <!-- End Action -->
-                                <!--  -->
+                                </td>
                                 
-                                <td class="text-center">
-                                    {{-- <a class="badge badge-warning edit " href="{{url('/admin/update_order/'.$order->id)}}" title="Update" data-toggle="tooltip">
+
+                                <td>
+                                
+                                {{-- <a class="badge badge-warning edit " href="{{url('/admin/update_order/'.$order->id)}}" title="Update" data-toggle="tooltip">
                                         <i class="fa fa-edit"></i>
                                     </a>                         --}}
                                     &nbsp;
@@ -191,10 +199,12 @@
                                     <a class="badge badge-success view" href="{{url('/admin/invoice/'.$order->id)}}" title="View" data-toggle="tooltip">
                                         <i class="fa fa-eye"></i>
                                     </a>
-                                    
-                                    
-                                                            
-                                </td>
+                               
+                                </td> 
+                                <!-- End Action -->
+                                <!--  -->
+                                
+                                
                             </tr>
                             @endforeach
                         </tbody>
@@ -212,13 +222,19 @@
                 </div>                
             </div>
         </div>
-            
+           <!-- <button class="btn btn-primary alert_class">hello</button>  -->
     </main>
     <!-- Essential javascripts for application to work-->
     @include('admin.js.script') 
 
 <!-- Include jQuery library -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- <script>
+    $('.alert_class').click(function(){
+        //var alert_class = $(this).date('orderStatus');
+        alert('hello');
+    });
+</script> -->
 <script>
     $(document).ready(function() {
         $('#sampleTable').on('change', '.order-status-select', function() {

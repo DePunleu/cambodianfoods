@@ -23,6 +23,8 @@ class OrderController extends Controller
         $orderStatuses = ['Order Received','In-Progress', 'Shipped', 'Completed','Canceled'];
         return view('admin.home.order.list_order',compact('count','orders','orderStatuses'));
     }
+
+
      //==================Update Order Status=======================//
     public function updateOrderStatus(Request $request)
     {
@@ -38,70 +40,83 @@ class OrderController extends Controller
         }
         return response()->json(['success' => false, 'message' => 'Order not found']);
     }
+    //==================End Method=======================//
 
-     //==================Show Form=======================//
-    public function create_order() {
-        $item = Item::all();
-        return view('admin.home.order.create_order',compact('item'));
-    }
-    //==================Store create order=======================//
-    public function create_orderPost(Request $request) {
-        $order = new Order();
-        $order->order_id = now()->format('YmdHis') . Str::random(4);
-        $order->name = $request->input('order_name');
-        $order->email = $request->input('order_email');
-        $order->phone = $request->input('order_phone');
-        $order->address = $request->input('order_address');
-        $order->payment_status = $request->input('order_payment');
-        $order->delivery_status = "Order Received";
-        $order->save();
-        
-        $item = Item::where('title', $request->input('order_item'))->firstOrFail();
-        $orderItem = new OrderItem();
-        $orderItem->order_id = $order->id;
-        $orderItem->item_id = $item->id;
-        $orderItem->item_title = $item->title;
-        $orderItem->quantity = $request->input('order_quantity');
-        $orderItem->price = $item->price;
-        $orderItem->image = $item->image;
-        $orderItem->save();
-        
-        return redirect()->back()->with('success', 'Order created successfully!');
-        
-    }
-    //==================Show Update Order Form=======================//
-    public function update_order($id)
+    //==================Invoice=======================//
+    public function invoice($orderId)
     {
-        $order = Order::with('orderItems')->find($id);
-        $items = Item::all();
-        return view('admin.home.order.update_order',compact('items','order'));
-    }
-    //==================Store Update Order =======================//
-    public function update_orderPost(Request $request, $id)
-    {
-        $order = Order::find($id);
-        $order->name = $request->input('order_name');
-        $order->email = $request->input('order_email');
-        $order->phone = $request->input('order_phone');
-        $order->address = $request->input('order_address');
-        $order->payment_status = $request->input('order_payment');
-        $order->delivery_status = "Order Received";
-        $order->save();
+        $order = Order::with('orderItems')->find($orderId);;
         
-        $orderItem = OrderItem::where('order_id', $order->id)->first();
-        $item = Item::where('title', $request->input('order_item'))->firstOrFail();
-        if (!$orderItem) {
-            $orderItem = new OrderItem();
-            $orderItem->order_id = $order->id;
-        }
-        $orderItem->item_id = $item->id;
-        $orderItem->item_title = $item->title;
-        $orderItem->quantity = $request->input('order_quantity');
-        $orderItem->price = $item->price;
-        $orderItem->image = $item->image;
-        $orderItem->save();
-        return redirect()->back()->with("success", "Updated Item successfully!");
+        return view('admin.home.order.invoice', compact('order'));
     }
+
+
+
+
+
+    // //==================Show Form=======================//
+    // public function create_order() {
+    //     $item = Item::all();
+    //     return view('admin.home.order.create_order',compact('item'));
+    // }
+    // //==================Store create order=======================//
+    // public function create_orderPost(Request $request) {
+    //     $order = new Order();
+    //     $order->order_id = now()->format('YmdHis') . Str::random(4);
+    //     $order->name = $request->input('order_name');
+    //     $order->email = $request->input('order_email');
+    //     $order->phone = $request->input('order_phone');
+    //     $order->address = $request->input('order_address');
+    //     $order->payment_status = $request->input('order_payment');
+    //     $order->delivery_status = "Order Received";
+    //     $order->save();
+        
+    //     $item = Item::where('title', $request->input('order_item'))->firstOrFail();
+    //     $orderItem = new OrderItem();
+    //     $orderItem->order_id = $order->id;
+    //     $orderItem->item_id = $item->id;
+    //     $orderItem->item_title = $item->title;
+    //     $orderItem->quantity = $request->input('order_quantity');
+    //     $orderItem->price = $item->price;
+    //     $orderItem->image = $item->image;
+    //     $orderItem->save();
+        
+    //     return redirect()->back()->with('success', 'Order created successfully!');
+        
+    // }
+    // //==================Show Update Order Form=======================//
+    // public function update_order($id)
+    // {
+    //     $order = Order::with('orderItems')->find($id);
+    //     $items = Item::all();
+    //     return view('admin.home.order.update_order',compact('items','order'));
+    // }
+    // //==================Store Update Order =======================//
+    // public function update_orderPost(Request $request, $id)
+    // {
+    //     $order = Order::find($id);
+    //     $order->name = $request->input('order_name');
+    //     $order->email = $request->input('order_email');
+    //     $order->phone = $request->input('order_phone');
+    //     $order->address = $request->input('order_address');
+    //     $order->payment_status = $request->input('order_payment');
+    //     $order->delivery_status = "Order Received";
+    //     $order->save();
+        
+    //     $orderItem = OrderItem::where('order_id', $order->id)->first();
+    //     $item = Item::where('title', $request->input('order_item'))->firstOrFail();
+    //     if (!$orderItem) {
+    //         $orderItem = new OrderItem();
+    //         $orderItem->order_id = $order->id;
+    //     }
+    //     $orderItem->item_id = $item->id;
+    //     $orderItem->item_title = $item->title;
+    //     $orderItem->quantity = $request->input('order_quantity');
+    //     $orderItem->price = $item->price;
+    //     $orderItem->image = $item->image;
+    //     $orderItem->save();
+    //     return redirect()->back()->with("success", "Updated Item successfully!");
+    // }
 
     //==================Delete Order=======================//
     public function delete_order($id_order) {
@@ -116,12 +131,7 @@ class OrderController extends Controller
         return redirect('/admin/order')->with("error", "Order not found.");
     }
 
-    //==================Invoice=======================//
-    public function invoice($orderId)
-    {
-        $order = Order::with('orderItems')->find($orderId);
-        return view('admin.home.order.invoice', compact('order'));
-    }
+    
 
     //==================Download PDF=======================//
     // public function invoice_pdf($orderId)

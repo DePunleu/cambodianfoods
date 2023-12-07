@@ -147,6 +147,7 @@
                             <th>Title</th>
                             <th>Origin_Price</th>
                             <th>Price</th>
+                            <th>Quantity</th>
                             <th>Menu</th>
                             <th>Description</th>
                             <th>Supplier</th>
@@ -162,6 +163,7 @@
                                 <td>{{$row->title}}</td>
                                 <td>{{$row->origin_price}}$</td>
                                 <td>{{$row->price}}$</td>
+                                <td>{{$row->quantity}}</td>
                                 <td>{{$row->menus->name_menu}}</td>
                                 <td>{{$row->description}}</td> 
                                 <td>{{$row->suppliers->description}}</td>

@@ -136,6 +136,12 @@
                                 </div>
                             </div>
                             <div class="form-group row">
+                                <label class="control-label col-md-3">Quantity</label>
+                                <div class="col-md-8">
+                                    <input class="form-control" name="item_quantity" type="float" placeholder="Enter quantity">
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label class="control-label col-md-3">Menu</label>
                                 <div class="col-md-8">
                                     <select class="form-control" name="item_menu" required="">

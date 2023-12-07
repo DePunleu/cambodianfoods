@@ -26,6 +26,7 @@ class Item extends Model
         'image',
         'num_review',
         'discount',
+        'quantity',
     ];
     public function suppliers()
     {
