@@ -66,7 +66,7 @@ class SellerItemController extends Controller
     {
         $item = Item::find($id);
         $item->title = $request->item_title;
-        $item->origin_price = $request->item_origin_price;
+        // $item->origin_price = $request->item_origin_price;
         $item->price = $request->item_price;
         $menu = Menu::where('name_menu', $request->item_menu)->firstOrFail();
         $item->menu_id = $menu->id; // Assign the menu ID to the menu_id attribute

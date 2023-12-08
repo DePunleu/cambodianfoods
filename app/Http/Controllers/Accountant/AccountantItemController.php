@@ -34,8 +34,8 @@ class AccountantItemController extends Controller
     public function create_itemPost(Request $request)
     {
         $data['title'] = $request->item_title;
-        $data['origin_price'] = $request->item_origin_price;
         $data['price'] = $request->item_price;
+        $data['quantity'] = $request->item_quantity;
         $data['description'] = $request->item_description;
         // Retrieve the selected menu
         $menu = Menu::where('name_menu', $request->item_menu)->firstOrFail();
@@ -46,10 +46,8 @@ class AccountantItemController extends Controller
             $data['image'] = $filename;
         }
         $data['menu_id'] = $menu->id; // Store the menu ID in the items table
-        //Retrieve the selected supplier
         $supplier = Supplier::where('name_supplier', $request->item_supplier)->firstOrFail();
-        $data['supplier_id'] = $supplier->id; // Store the menu ID in the items table
-
+        $data['supplier_id'] = $supplier->id; // Store the supplier ID in the items table
         Item::create($data);
         return redirect()->back()->with("success", "Item Created successfully!");
     }
@@ -67,11 +65,12 @@ class AccountantItemController extends Controller
     {
         $item = Item::find($id);
         $item->title = $request->item_title;
-        $item->origin_price = $request->item_origin_price;
+        // $item->origin_price = $request->item_origin_price;
         $item->price = $request->item_price;
         $menu = Menu::where('name_menu', $request->item_menu)->firstOrFail();
         $item->menu_id = $menu->id; // Assign the menu ID to the menu_id attribute
         $item->description = $request->item_description;
+        $item->quantity = $request->item_quantity;
         if ($request->file('item_image')) {
             $file = $request->file('item_image');
             $filename = date('YdmHi') . $file->getClientOriginalName();

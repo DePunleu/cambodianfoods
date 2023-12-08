@@ -77,7 +77,7 @@ class ItemController extends Controller
         $item->title = $request->item_title;
         $item->price = $request->item_price;
         $item->quantity = $request->item_quantity;
-        $item->origin_price = $request->item_origin_price;
+        // $item->origin_price = $request->item_origin_price;
        
        
         $menu = Menu::where('name_menu', $request->item_menu)->firstOrFail();
