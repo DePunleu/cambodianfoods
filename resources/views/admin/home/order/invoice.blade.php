@@ -226,7 +226,7 @@
 
                                                             <td class="no-line text-center"><strong>Total</strong></td>
                                                             <td class="no-line text-right"><strong>{{$totalprice}}$</strong></td>
-                                                        </tr>
+                                                        </tr>                                
                                                     </tbody>
                                                 </table>
                                             </div>

@@ -40,7 +40,7 @@ class ItemController extends Controller
     public function create_itemPost(Request $request)
     {
         $data['title'] = $request->item_title;
-        $data['origin_price'] = $request->item_origin_price;
+        //$data['origin_price'] = $request->item_origin_price;
         $data['price'] = $request->item_price;
         $data['description'] = $request->item_description;
         $data['quantity'] = $request->item_quantity;

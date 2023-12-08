@@ -18,15 +18,15 @@ class Item extends Model
     use HasFactory;
     protected $fillable = [
         'title',
-        'origin_price',
         'price',
+        'quantity',
         'supplier_id',
         'menu_id',
         'description',
         'image',
         'num_review',
         'discount',
-        'quantity',
+        
     ];
     public function suppliers()
     {

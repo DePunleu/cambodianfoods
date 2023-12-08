@@ -27,7 +27,7 @@
             </div>
         </div>
         <ul class="app-menu">
-            
+           
             <li >
                 <a class="app-menu__item active" href="{{url('/seller/item')}}" >
                     <i class="fas fa-hamburger"></i>
@@ -44,7 +44,6 @@
                     <span class="app-menu__label">Orders</span>
                     
                 </a>
-                
             </li>
         </ul>
     </aside>
@@ -82,13 +81,41 @@
                             </div>
                         </div><br>
                     </div>
+
+                    {{-- <form class="form-inline" method="GET">
+                        <div class="form-group mb-2">
+                            <label for="filter" class="col-sm-2 col-form-label">Filter</label>
+                            <input type="text" class="form-control" id="filter" name="filter" placeholder="Name..." value="">
+                        </div>
+                        <button type="submit" class="btn btn-default mb-2">Filter</button>
+                    </form> --}}
+                    <form action="{{ route('seller.filter_item') }}" method="GET">
+                        <div class="form-group mb-2">
+                            {{-- <label for="filter" class="col-sm-2 col-form-label">Filter</label> --}}
+                            <select name="filter" id="filter">
+                                <option value="">All</option>
+                                @foreach($menu as $menu)
+                                        <option value="{{$menu->name_menu}}">{{$menu->name_menu}}</option>
+                                    @endforeach
+                            </select>
+                            {{-- <select name="filter" id="filter">
+                                @foreach($item as $row)
+                                        <option value="{{$row->title}}">{{$row->title}}</option>
+                                @endforeach
+                            </select> --}}
+                        </div>
+                        <button type="submit">Filter</button>
+                        
+                    </form>
+          
                     <table class="table table-hover table-bordered" id="sampleTable">
                         <thead class="bg-light text-dark p-3 text-center">
                             <tr>
                             <th>#</th>
                             <th>Title</th>
-                            <th>Origin_Price</th>
+                            <!-- <th>Origin_Price</th> -->
                             <th>Price</th>
+                            <th>Quantity</th>
                             <th>Menu</th>
                             <th>Description</th>
                             <th>Supplier</th>
@@ -102,11 +129,13 @@
                             <tr>
                                 <td>{{$count++}}</td>                              
                                 <td>{{$row->title}}</td>
-                                <td>{{$row->origin_price}}$</td>
+                                <!-- <td>{{$row->origin_price}}$</td> -->
                                 <td>{{$row->price}}$</td>
+                                <td>{{$row->quantity}}</td>
                                 <td>{{$row->menus->name_menu}}</td>
                                 <td>{{$row->description}}</td> 
-                                <td>{{$row->suppliers->name_supplier}}</td> 
+                                <td>{{$row->suppliers->description}}</td>
+                                
                                 <td>
                                     <img class="" src="{{(!empty($row->image))
                                     ? url('upload/item_images/'.$row->image):url('frontend/user_images/no_image.jpg')}}" 

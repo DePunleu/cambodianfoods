@@ -23,11 +23,10 @@
             @endif
             <div>
             <a href="#" class="d-block">{{Auth::guard('web')->user()->name}}</a>
-            <p class="app-sidebar__user-designation">seller</p>
+            <p class="app-sidebar__user-designation">Sellerv</p>
             </div>
         </div>
         <ul class="app-menu">
-            
             <li >
                 <a class="app-menu__item active" href="{{url('/seller/item')}}" >
                     <i class="fas fa-hamburger"></i>
@@ -37,6 +36,7 @@
                 </a>
                 
             </li>
+            
             <li >
                 <a class="app-menu__item" href="{{url('/seller/order')}}" >
                     <i class="fa fa-shopping-cart"></i>
@@ -44,7 +44,6 @@
                     <span class="app-menu__label">Orders</span>
                     
                 </a>
-                
             </li>
         </ul>
     </aside>
@@ -69,14 +68,7 @@
                         <div class="col-sm-10">
                             <h2>Update Item</h2>
                         </div>
-                        <div class="col-sm-2">
-                            <a href="{{ route('seller.item') }}">
-                                <button type="button" class="btn btn-info add-new">
-                                    <i class="fa fa-arrow-left"></i>
-                                    Back
-                                </button>
-                            </a>
-                        </div>
+                       
                     </div><br>
                     <div class="tile-body">
                         @if(session()->has('error'))
@@ -99,16 +91,22 @@
                                     <input class="form-control" name="item_title" type="text" value="{{$item->title}}">
                                 </div>
                             </div>
-                            <div class="form-group row">
+                            <!-- <div class="form-group row">
                                 <label class="control-label col-md-3">Origin Price</label>
                                 <div class="col-md-8">
                                     <input class="form-control" name="item_origin_price" type="float" placeholder="Enter price" value="{{$item->origin_price}}">
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="form-group row">
                                 <label class="control-label col-md-3">Price</label>
                                 <div class="col-md-8">
                                     <input class="form-control" name="item_price" type="float" placeholder="Enter price" value="{{$item->price}}">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="control-label col-md-3">Quantity</label>
+                                <div class="col-md-8">
+                                    <input class="form-control" name="item_quantity" type="float" placeholder="Enter quantity" value="{{$item->quantity}}">
                                 </div>
                             </div>
                             <div class="form-group row">

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Item;
 use App\Models\Menu;
+use App\Models\Supplier;
 
 
 class SellerItemController extends Controller
@@ -34,7 +35,7 @@ class SellerItemController extends Controller
     {
         $data['title'] = $request->item_title;
         $data['price'] = $request->item_price;
-        $data['origin_price'] = $request->item_origin_price;
+        $data['quantity'] = $request->item_quantity;
         $data['description'] = $request->item_description;
         // Retrieve the selected menu
         $menu = Menu::where('name_menu', $request->item_menu)->firstOrFail();
@@ -45,6 +46,8 @@ class SellerItemController extends Controller
             $data['image'] = $filename;
         }
         $data['menu_id'] = $menu->id; // Store the menu ID in the items table
+        $supplier = Supplier::where('name_supplier', $request->item_supplier)->firstOrFail();
+        $data['supplier_id'] = $supplier->id; // Store the supplier ID in the items table
         Item::create($data);
         return redirect()->back()->with("success", "Item Created successfully!");
     }

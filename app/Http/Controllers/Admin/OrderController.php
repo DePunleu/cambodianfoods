@@ -28,10 +28,12 @@ class OrderController extends Controller
      //==================Update Order Status=======================//
     public function updateOrderStatus(Request $request)
     {
+        // Retrieve orderId and status from the request
         $orderId = $request->input('orderId');
         $status = $request->input('status');
         // Find the order by ID
         $order = Order::find($orderId);
+        // Check if the order exists
         if ($order) {
             // Update the delivery status
             $order->delivery_status = $status;
@@ -45,11 +47,22 @@ class OrderController extends Controller
     //==================Invoice=======================//
     public function invoice($orderId)
     {
-        $order = Order::with('orderItems')->find($orderId);;
-        
+        $order = Order::with('orderItems')->find($orderId);   
         return view('admin.home.order.invoice', compact('order'));
     }
 
+     //==================Delete Order=======================//
+     public function delete_order($id_order) {
+        $order = Order::find($id_order);
+        if ($order) {
+            // Delete associated order items
+            $order->orderItems()->delete();
+            // Delete the order itself
+            $order->delete();
+            return redirect('/admin/order')->with("success", "Order deleted successfully!");
+        }
+        return redirect('/admin/order')->with("error", "Order not found.");
+    }
 
 
 
@@ -118,18 +131,7 @@ class OrderController extends Controller
     //     return redirect()->back()->with("success", "Updated Item successfully!");
     // }
 
-    //==================Delete Order=======================//
-    public function delete_order($id_order) {
-        $order = Order::find($id_order);
-        if ($order) {
-            // Delete associated order items
-            $order->orderItems()->delete();
-            // Delete the order itself
-            $order->delete();
-            return redirect('/admin/order')->with("success", "Order deleted successfully!");
-        }
-        return redirect('/admin/order')->with("error", "Order not found.");
-    }
+   
 
     
 

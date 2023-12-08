@@ -198,8 +198,8 @@ Route::controller(ItemController::class)->middleware('authadmin')->group(functio
 //================Admin Orders Management Route=========================//
 Route::controller(OrderController::class)->middleware('authadmin')->group(function () {
     Route::get('/admin/order', 'order')->name('admin.order');
-    Route::get('/admin/create_order', 'create_order')->name('admin.create_order');
-    Route::post('/admin/create_order', 'create_orderPost')->name('admin.create_order.post');
+    // Route::get('/admin/create_order', 'create_order')->name('admin.create_order');
+    // Route::post('/admin/create_order', 'create_orderPost')->name('admin.create_order.post');
     Route::get('/admin/update_order/{id}', 'update_order')->name('admin.update_order');
     Route::post('/admin/update_order/{id}', 'update_orderPost')->name('admin.update_order.post');
     Route::post('/admin/update-order-status', 'updateOrderStatus')->name('admin.updateOrderStatus');
@@ -261,7 +261,7 @@ Route::controller(SellerItemController::class)->middleware('authseller')->group(
     Route::get('/seller/update_item/{id}', 'update_item')->name('seller.update_item');
     Route::post('/seller/update_item/{id}', 'update_itemPost')->name('seller.update_item.post');
     Route::get('/seller/item/{id}', 'delete_item')->name('seller.delete_item');
-    Route::get('/seller/item', 'filter_item')->name('seller.filter_item');  
+    Route::get('/seller/item', 'filter_item')->name('seller.filter_item'); 
 })->middleware('cache');
 
 
@@ -315,7 +315,8 @@ Route::controller(AccountantItemController::class)->middleware('authaccountant')
     Route::post('/accountant/create_item', 'create_itemPost')->name('accountant.create_item.post');
     Route::get('/accountant/update_item/{id}', 'update_item')->name('accountant.update_item');
     Route::post('/accountant/update_item/{id}', 'update_itemPost')->name('accountant.update_item.post');
-    Route::get('/accountant/item/{id}', 'delete_item')->name('accountant.delete_item');   
+    Route::get('/accountant/item/{id}', 'delete_item')->name('accountant.delete_item');
+    Route::get('/accountant/item', 'filter_item')->name('accountant.filter_item');   
 })->middleware('cache');
 
 

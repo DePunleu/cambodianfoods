@@ -145,7 +145,7 @@
                             <tr>
                             <th>#</th>
                             <th>Title</th>
-                            <th>Origin_Price</th>
+                            <!-- <th>Origin_Price</th> -->
                             <th>Price</th>
                             <th>Quantity</th>
                             <th>Menu</th>
@@ -161,7 +161,7 @@
                             <tr>
                                 <td>{{$count++}}</td>                              
                                 <td>{{$row->title}}</td>
-                                <td>{{$row->origin_price}}$</td>
+                                <!-- <td>{{$row->origin_price}}$</td> -->
                                 <td>{{$row->price}}$</td>
                                 <td>{{$row->quantity}}</td>
                                 <td>{{$row->menus->name_menu}}</td>
