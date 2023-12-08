@@ -33,8 +33,10 @@ class AccountantDashboardController extends Controller
     {
         $menus_count = Menu::all()->count();
         $items_count = Item::all()->count();
-        //$tables_count = Table::all()->count();
-        //$bookings_count = Booking::all()->count();
+        $foods_count = Item::where('menu_id', 1)->count();
+        $combo_count = Item::where('menu_id', 2)->count();
+        $dessert_count = Item::where('menu_id', 3)->count();
+        $drink_count = Item::where('menu_id', 4)->count();
         $orders_count = Order::all()->count();
         // Total price of completed orders
         $completedOrdersTotalPrice = Order::where('delivery_status', 'Completed')
@@ -69,6 +71,11 @@ class AccountantDashboardController extends Controller
                 'backgroundColor' => $colors
             ]   
         ];
+        
+        
+
+
+
         // Pie chart for order delivery statuses
         $deliveryStatusCounts = Order::select('delivery_status', DB::raw('count(*) as count'))
         ->groupBy('delivery_status')
@@ -86,8 +93,7 @@ class AccountantDashboardController extends Controller
                 'backgroundColor' => $colors
             ]   
         ];
-        return view('accountant.home.dashboard', compact('menus_count','items_count',//'bookings_count',
-        //'tables_count',
+        return view('accountant.home.dashboard', compact('menus_count','items_count','foods_count', 'combo_count', 'dessert_count', 'drink_count',
         'users_count', 'orders_count','completedOrdersTotalPrice',
         'datasets', 'labels', 'orderDataset', 'orderLabels'));
     }

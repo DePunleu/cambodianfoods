@@ -60,7 +60,7 @@ class SellerController extends Controller
             ];
             $this->validate($request,$rules);
             //upload seller Image
-            if($request->hasFile('v_image')){
+            if($request->hasFile('seller_image')){
             $image_tmp = $request->file('seller_image');
             if($image_tmp->isValid()){
                 //Get image extension
@@ -80,24 +80,10 @@ class SellerController extends Controller
             
             //update seller details
             User::where('email',Auth::guard('web')->user()->email)->update(['name'=>$data['seller_name'],'phone'=>$data['seller_phone'],'image'=> $imageName]);
-            return redirect()->back()->with('success_message', 'seller details has been updated successfully!');
+            return redirect()->back()->with('success_message', 'Seller details has been updated successfully!');
         }
         return view('seller.home.seller.update_details');
     }
     //==================End Update Seller Details=======================//
-
-    //==================Start Update user Details=======================//
-    public function updateUserRole(Request $request, $userId) {
-        // Fetch the user
-        $user = User::find($userId);
-    
-        // Update the user role
-        $user->role = $request->input('user_role');
-        $user->save();
-    
-        // Redirect or show a success message
-        return redirect()->back()->with('message', 'User role updated successfully!');
-    }
-    //==================End Update user Details=======================//
     
 }

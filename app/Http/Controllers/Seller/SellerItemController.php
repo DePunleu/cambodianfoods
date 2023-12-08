@@ -24,7 +24,8 @@ class SellerItemController extends Controller
     //==================Show Create Item Form=======================//
     public function create_item() {
         $menu = Menu::all();
-        return view('seller.home.item.create_item', compact('menu'));
+        $supplier = Supplier::all();
+        return view('seller.home.item.create_item', compact('menu','supplier'));
     }
     //==================End Method=======================//
 
@@ -53,7 +54,8 @@ class SellerItemController extends Controller
     {
         $item = Item::where('id',$id)->first();
         $menu = Menu::all();
-        return view('seller.home.item.update_item',compact('item','menu'));
+        $supplier = Supplier::all();
+        return view('seller.home.item.update_item',compact('item','menu','supplier'));
     }
     //=====================End Method==========================//
     //==================Store Update Item =======================//
@@ -86,4 +88,26 @@ class SellerItemController extends Controller
         ->with("success","Item deleted successfully!");
     }
     //=====================End Method==========================//
+     //===================== Filter Method==========================//
+     public function filter_item(Request $request)
+     {
+         $filter = $request->query('filter');
+         $count = 1;
+         $menu = Menu::all();
+         $item = Item::all();
+         $query = Item::query(); // Create a base query
+         $item = Item::where('title', 'LIKE', "%$filter%")
+             ->orWhereHas('menus', function ($query) use ($filter) {
+                 $query->where('name_menu', 'LIKE', "%$filter%");
+             })
+             ->orWhere('menu_id', $filter)
+             ->paginate(20);
+         return view('seller.home.item.list_item')
+         ->with('count', $count)
+         ->with('menu', $menu)
+         ->with('item', $item)
+         ->with('filter', $filter);
+     
+     }
+     //=====================End Method==========================//
 }

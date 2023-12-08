@@ -56,7 +56,7 @@
             @if (session('success'))
                 <div class="alert alert-success" role="alert">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                    {{ session('status') }}
+                    {{ session('success') }}
                 </div>
             @elseif (session('error'))
                 <div class="alert alert-danger" role="alert">

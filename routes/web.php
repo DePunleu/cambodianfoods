@@ -260,7 +260,8 @@ Route::controller(SellerItemController::class)->middleware('authseller')->group(
     Route::post('/seller/create_item', 'create_itemPost')->name('seller.create_item.post');
     Route::get('/seller/update_item/{id}', 'update_item')->name('seller.update_item');
     Route::post('/seller/update_item/{id}', 'update_itemPost')->name('seller.update_item.post');
-    Route::get('/seller/item/{id}', 'delete_item')->name('seller.delete_item');   
+    Route::get('/seller/item/{id}', 'delete_item')->name('seller.delete_item');
+    Route::get('/seller/item', 'filter_item')->name('seller.filter_item');  
 })->middleware('cache');
 
 

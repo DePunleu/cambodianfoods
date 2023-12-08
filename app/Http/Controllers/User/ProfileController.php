@@ -48,7 +48,7 @@ class ProfileController extends Controller
         $profileData = User::find($id);
         $user_id = Auth::id();
         $count = Cart::where('user_id',$user_id)->count();
-        return view('user.home.profile.change_password',compact('profileData','count'));
+        return view('user.home.profile.change_password', compact('profileData', 'count'));
     }
      //====================End Method===============================//
     //====================Change Passwoed Post=====================//

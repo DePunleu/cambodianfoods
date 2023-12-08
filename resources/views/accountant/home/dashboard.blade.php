@@ -71,27 +71,44 @@
           </ul>
         </div>
         <div class="row">
-          <div class="col-md-6 col-lg-6">
+          <div class="col-md-6 col-lg-3">
             <div class="widget-small info coloured-icon"><i class="icon fas fa-utensils fa-3x"></i>
               <div class="info">
-                <h4>Menus</h4>
-                <p><b>{{ $menus_count }}</b></p>
+                <h4>Foods</h4>
+                <p><b>{{$foods_count}}</b></p>
               </div>
             </div>
           </div>
-          <div class="col-md-6 col-lg-6">
-            <div class="widget-small warning coloured-icon"><i class="icon fas fa-hamburger fa-3x"></i>
+          <div class="col-md-6 col-lg-3">
+            <div class="widget-small info coloured-icon"><i class="icon fas fa-utensils fa-3x"></i>
               <div class="info">
-                <h4>Items</h4>
-                <p><b>{{ $items_count }}</b></p>
+                <h4>Combo</h4>
+                <p><b>{{ $combo_count }}</b></p>
               </div>
             </div>
           </div>
+
+          <div class="col-md-6 col-lg-3">
+            <div class="widget-small info coloured-icon"><i class="icon fas fa-cheese fa-3x"></i>
+              <div class="info">
+                <h4>Dessert</h4>
+                <p><b>{{ $dessert_count }}</b></p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <div class="widget-small info coloured-icon"><i class="icon fas fa-coffee fa-3x" ></i>
+              <div class="info">
+                <h4>Drink</h4>
+                <p><b>{{ $drink_count }}</b></p>
+              </div>
+            </div>
+          </div> 
         
           
         </div>
     
-        <div class="row">
+        <!-- <div class="row">
           <div class="col-md-6">
             <div class="tile">
               <h3 class="tile-title">Users Chart</h3>
@@ -100,7 +117,7 @@
                 </canvas>
               </div>    
             </div>
-          </div>
+          </div> -->
           <div class="col-md-6">
             <div class="tile">
               <h3 class="tile-title">Orders Status Chart</h3>
@@ -124,7 +141,7 @@
     <!-- Essential javascripts for application to work-->
     @include('accountant.js.script') 
     <!-- User Chart script-->   
-    <script>
+    <!-- <script>
       var ctx = document.getElementById('chart').getContext('2d');
       var userChart = new Chart(ctx,{
         type:'bar',
@@ -133,7 +150,7 @@
           datasets: {!! json_encode($datasets) !!}
         },
       });
-    </script>
+    </script> -->
     <script>
       // Order Delivery Status Chart
     var orderStatusData = {

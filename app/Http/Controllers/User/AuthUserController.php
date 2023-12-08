@@ -53,7 +53,7 @@ class AuthUserController extends Controller
         $arr = [
             'email' => $request->email,
             'password' => $request->password,
-            'role' => 0, // add this line to ensure only users can login
+            'role' => 'user', // add this line to ensure only users can login
         ];
         if (Auth::attempt($arr)) {
             return redirect('/');
