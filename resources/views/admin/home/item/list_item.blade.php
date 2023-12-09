@@ -157,7 +157,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($item as $row)
+                            @foreach($item->reverse() as $row)
                             <tr>
                                 <td>{{$count++}}</td>                              
                                 <td>{{$row->title}}</td>
