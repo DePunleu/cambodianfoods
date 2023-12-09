@@ -115,13 +115,8 @@
                         <div class="row">                
                             <div class="col-sm-10">
                                 <h2>All Orders</h2>
-                                
                             </div>
-                            <div class="col-sm-2">
-                                {{-- <a href="{{ route('admin.create_order') }}">
-                                <button type="button" class="btn btn-info add-new"><i class="fa fa-plus"></i> Add New</button>
-                                </a> --}}
-                            </div>
+                            
                         </div><br>
                     </div>
                     <table class="table table-hover table-bordered" id="sampleTable">
@@ -134,14 +129,14 @@
                                 <th>Order Date</th>
                                 <th>Status</th>
                                 <th class="text-center">Action</th>
+                                <th class="text-center">Action</th>
                                 <th class="text-center"></th>
-                                
                             </tr>
                         </thead>
                         <tbody >
                             @foreach ($orders->reverse() as $order)
                             <tr  data-order-id="{{ $order->id }}">
-                                <td>{{$count++}}</td> 
+                                <td>{{$count++}}</td>   
                                 {{-- <td>{{ $loop->iteration }}</td>                                                               --}}
                                 <td>{{ $order->name }}</td>
                                 <td>{{ $order->orderItems->sum(function ($orderItem) { return $orderItem->price * $orderItem->quantity; }) }}$</td>
@@ -163,42 +158,34 @@
                                             @else
                                             <span class="badge badge-danger">{{ $order->delivery_status }}</span>
                                             @endif
-                                        </span>   
-                                        
-                                        
-
-
-
+                                        </span>
 
                                     
+                                    
                                 </td>
-                                
-                                <!-- Start Action --> 
+                                <!-- Start Action -->
                                 <td>
-                                     <!-- <select class="form-control order-status-select small-width " data-order-id="{{ $order->id }}" data-url="{{ route('admin.updateOrderStatus') }}">
-                                    @foreach ($orderStatuses as $orderStatus)
-                                        <option  value="{{ $orderStatus }}" {{ $order->delivery_status == $orderStatus ? 'selected' : '' }}>
-                                            {{ $orderStatus }}                                               
-                                        </option>                                       
-                                    @endforeach
-                                    </select> -->
-                                
+                                    <select class="form-control order-status-select small-width" data-order-id="{{ $order->id }}" data-url="{{ route('admin.updateOrderStatus')  }}">
+                                        @foreach ($orderStatuses as $orderStatus)
+                                            <option value="{{ $orderStatus }}" {{ $order->delivery_status == $orderStatus ? 'selected' : '' }}>
+                                                {{ $orderStatus }}
+                                                
+                                        </span>
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    
+                                <!-- End Action -->
+                                <td>
                                     <a href="{{ url('/admin/detail_order/'.$order->id) }}">
-                                    <button type="button" class="btn btn-primary">
-                                        <i class="fa fa-fw fa-lg fa-check-circle"></i>
-                                        Order Detail
-                                    </button>
-                                    </a>
-                              
+                                        <button type="button" class="btn btn-primary center-text" >
+                                            <i class="fa fa-fw fa-lg fa-check-circle"></i>
+                                            Order Detail
+                                        </button>
+                                        </a>
+                                    </td>
 
-                                </td>
-                                <!-- End Action --> 
-
-                                <td>
-                                
-                                {{-- <a class="badge badge-warning edit " href="{{url('/admin/update_order/'.$order->id)}}" title="Update" data-toggle="tooltip">
-                                        <i class="fa fa-edit"></i>
-                                    </a>                         --}}
+                                <td class="text-center">                   
                                     &nbsp;
                                     <a class="badge badge-danger delete" href="{{url('/admin/order/'.$order->id)}}" onclick="return confirm('Are you sure?')" title="Delete" data-toggle="tooltip">
                                         <i class="fa fa-trash"></i>
@@ -208,12 +195,10 @@
                                     <a class="badge badge-success view" href="{{url('/admin/invoice/'.$order->id)}}" title="View" data-toggle="tooltip">
                                         <i class="fa fa-eye"></i>
                                     </a>
-                               
-                                </td> 
-                                <!-- End Action -->
-                                <!--  -->
-                                
-                                
+                                    
+                                    
+                                                            
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>
@@ -231,19 +216,13 @@
                 </div>                
             </div>
         </div>
-           <!-- <button class="btn btn-primary alert_class">hello</button>  -->
+            
     </main>
     <!-- Essential javascripts for application to work-->
     @include('admin.js.script') 
 
 <!-- Include jQuery library -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<!-- <script>
-    $('.alert_class').click(function(){
-        //var alert_class = $(this).date('orderStatus');
-        alert('hello');
-    });
-</script> -->
 <script>
     $(document).ready(function() {
         $('#sampleTable').on('change', '.order-status-select', function() {
@@ -307,8 +286,5 @@
         });
     });
 </script>
-
-
-
 </body>
 </html>

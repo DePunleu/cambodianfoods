@@ -7,6 +7,24 @@
     <!-- Font-icon css-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .small-width {
+            width:150px;
+        }
+        .invoice-title h2, .invoice-title h3 {
+            display: inline-block;
+        }
+        .table > tbody > tr > .no-line {
+            border-top: none;
+        }
+        .table > thead > tr > .no-line {
+            border-bottom: none;
+        }
+        .table > tbody > tr > .thick-line {
+            border-top: 2px solid;
+        }
+    </style>
+
 </head>
 <body class="app sidebar-mini rtl">
     <!-- Navbar-->
@@ -80,126 +98,296 @@
             </li>
         </ul>
     </aside>
+    
+    <!-- Body-->
     <!-- Body-->
     <main class="app-content">
         <div class="app-title">
             <div>
-                <h1><i class="fa fa-th-list"></i>Orders Detail</h1>          
+                <h1><i class="fa fa-th-list"></i> Orders</h1>          
             </div>
             <ul class="app-breadcrumb breadcrumb side">
                 <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
                 <li class="breadcrumb-item">Orders</li>
-                <li class="breadcrumb-item active"><a href="#">Orders Detail</a></li>
+                <li class="breadcrumb-item active"><a href="#">Invoice</a></li>
             </ul>
         </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="tile">
-                    <div class="row">
-                        <div class="col-sm-10">
-                            <h2>Orders Detail</h2>
-                        </div>
-                        <div class="col-sm-2">
-                            <a href="{{ url('admin/order') }}">
-                                <button type="button" class="btn btn-info add-new">
-                                    <i class="fa fa-arrow-left"></i>
-                                    Back
-                                </button>
-                            </a>
-                        </div>
-                    </div><br>
-                    {{-- error message --}}
-                    @if(Session::has('error'))
-                    <div class="alert alert-danger alert-dismissible fade in" role="alert">
-                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                        <strong>Error:</strong> {{Session::get('error')}}
-                    </div>
-                    @endif
-                    {{-- success message --}}
-                    @if(Session::has('success'))
-                    <div class="alert alert-success alert-dismissible fade in" role="alert">
-                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                        <strong>Success:</strong> {{Session::get('success')}}
-                    </div>
-                    @endif
-                    
-                    <form method="POST" action="{{url('/admin/update_order/'.$order->id)}}" enctype="multipart/form-data">
-                        @csrf
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="form-group row">
-                                    <label class="control-label col-md-3">Name</label>
-                                    <div class="col-md-8">
-                                        <input class="form-control" name="order_name" type="text" value="{{$order->name}}">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="control-label col-md-3">Email</label>
-                                    <div class="col-md-8">
-                                        <input class="form-control" name="order_email" type="text" value="{{$order->email}}">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="control-label col-md-3">Phone</label>
-                                    <div class="col-md-8">
-                                        <input class="form-control" name="order_phone" type="text" value="{{$order->phone}}">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="control-label col-md-3">Address</label>
-                                    <div class="col-md-8">
-                                        <input class="form-control" name="order_address" type="text" value="{{$order->address}}">
-                                    </div>
-                                </div>
-                                
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="form-group row">
-                                    <label class="control-label col-md-3">Foods</label>
-                                    <div class="col-md-8">
-                                        <select class="form-control" name="order_item" required="">
-                                            <option value="{{ $order->orderItems->first()->item_title }}" selected="">{{ $order->orderItems->first()->item_title }}</option>
-                                            @foreach($items as $item)
-                                                <option value="{{ $item->title }}">{{ $item->title }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
+                    <div class="tile-body" id="invoice-details">
+                        <div class="table-title">
+                            <div class="row">                
+                                <div class="col-sm-10">
                                     
                                 </div>
-                                <div class="form-group row">
-                                    <label class="control-label col-md-3">Order Quantity</label>
-                                    <div class="col-md-8">
-                                        <input class="form-control" name="order_quantity" type="number" value="{{$order->orderItems->first()->quantity}}">
+                                <div class="d-print-none col-sm-2">
+                                    <div class="float-right">
+                                        <a href="javascript:window.print()" class="btn btn-success waves-effect waves-light">
+                                            <i class="fa fa-print"></i>PRINT
+                                        </a>
+                                    
                                     </div>
                                 </div>
-                                
-                                <div class="form-group row">
-                                    <label class="control-label col-md-3">Payment</label>
-                                    <div class="col-md-8">
-                                        <select class="form-control" name="order_payment" required="">
-                                            
-                                            
-                                                <option value="Cash" {{ $order->payment_status == 'Cash' ? 'selected' : '' }}>Cash</option>
-                                                <option value="Paid" {{ $order->payment_status == 'Paid' ? 'selected' : '' }}>Paid</option>
-                                                
-                                            
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            </div>
-                            <!-- <div class="tile-footer text-center">
-                                <button class="btn btn-primary" type="submit">
-                                    <i class="fa fa-fw fa-lg fa-check-circle"></i>Update
-                                </button> -->
-                               
-                            </div>
+                            </div><br>
                         </div>
-                    </form>       
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="invoice-title">
+                                        <h2>Invoice</h2>
+                                        <h3 class="float-right">Order # {{$order->order_id}}</h3>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <address>
+                                            <strong>Billed From:</strong><br>
+                                                Cambodian Foods<br>
+                                                +84 879274961<br>
+                                                cambodianfoods@gmail.com<br>
+                                                Phnom Penh Cambodia
+                                                
+                                            </address>
+                                        </div>
+                                        <div class="col-md-6 text-right">
+                                            <address>
+                                            <strong>Shipped To:</strong><br>
+                                                {{$order->name}}<br>
+                                                {{$order->phone}}<br>
+                                                {{$order->email}}<br>
+                                                {{$order->address}}
+                                                
+                                            </address>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <address>
+                                                <strong>Payment Method:</strong><br>
+                                                {{$order->payment_status}}<br>
+                                                
+                                            </address>
+                                        </div>
+                                        <div class="col-md-6 text-right">
+                                            <address>
+                                                <strong>Order Date:</strong><br>
+                                                {{$order->created_at}}<br><br>
+                                            </address>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h3 class="panel-title"><strong>Order summary</strong></h3>
+                                        </div>
+                                        <div class="panel-body">
+                                            <div class="table-responsive">
+                                                <table class="table table-condensed">
+                                                    <thead>
+                                                        <tr>
+                                                            <td><strong>#</strong></td>
+                                                            <td><strong>Item</strong></td>
+                                                            <td class="text-center"><strong>Price</strong></td>
+                                                            <td class="text-center"><strong>Quantity</strong></td>
+                                                            <td class="text-right"><strong>Totals</strong></td>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <?php $totalprice=0; ?>
+                                                        @foreach ($order->orderItems as $index => $orderItem)
+                                                        <tr>
+                                                            <td>{{ $index + 1 }}</td>
+                                                            <td>{{ $orderItem->items->title }}</td>
+                                                            <td class="text-center">${{ $orderItem->price }}</td>
+                                                            <td class="text-center">{{ $orderItem->quantity }}</td>
+                                                            <td class="text-right">${{ $orderItem->price * $orderItem->quantity }}</td>
+                                                        </tr>
+                                                        <?php $totalprice=$totalprice + ($orderItem->price*$orderItem->quantity); ?>
+                                                        @endforeach                             
+                                                        <tr>
+                                                            <td class="thick-line"></td>
+                                                            <td class="thick-line"></td>
+                                                            <td class="thick-line"></td>
+                                                            <td class="thick-line text-center"><strong>Subtotal</strong></td>
+                                                            <td class="thick-line text-right">{{$totalprice}}$</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="no-line"></td>
+                                                            <td class="no-line"></td>
+                                                            <td class="no-line"></td>
+
+                                                            <td class="no-line text-center"><strong>Shipping</strong></td>
+                                                            <td class="no-line text-right">0$</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="no-line"></td>
+                                                            <td class="no-line"></td>
+                                                            <td class="no-line"></td>
+
+                                                            <td class="no-line text-center"><strong>Total</strong></td>
+                                                            <td class="no-line text-right"><strong>{{$totalprice}}$</strong></td>
+                                                        </tr>
+
+
+                                                        
+                                                       
+
+                                                        <td >
+                                                            
+                                                            <select class="form-control order-status-select small-width " data-order-id="{{ $order->id }}" data-update-url="{{ route('admin.detail_order.updateOrderStatus') }}">
+                                                                @foreach ($orderStatuses as $orderStatus)
+                                                                    <option  value="{{ $orderStatus }}" {{ $order->delivery_status == $orderStatus ? 'selected' : '' }}>
+                                                                        {{ $orderStatus }}                                               
+                                                                    </option>                                       
+                                                                @endforeach
+                                                            </select>            
+                                                            <br>
+
+                                                            <a href="{{ url('admin/order') }}" id="redirectLink"> <button class="btn btn-primary center-text" >Submit</button> </a>
+                                                        </td>
+                                                        <td class="form-control order-status-select small-width">
+                                    
+                                                            <span id="delivery-status-{{ $order->id }}">
+                                                                @if ($order->delivery_status === 'Order Received')
+                                                                    <span class="badge badge-primary">{{ $order->delivery_status }}</span>                           
+                                                                @elseif ($order->delivery_status === 'In-Progress')
+                                                                    <span class="badge badge-secondary">{{ $order->delivery_status }}</span>
+                                                                @elseif ($order->delivery_status === 'Shipped')
+                                                                    <span class="badge badge-warning">{{ $order->delivery_status }}</span>
+                                                                @elseif ($order->delivery_status === 'Delivered')
+                                                                    <span class="badge badge-info">{{ $order->delivery_status }}</span>
+                                                                @elseif ($order->delivery_status === 'Completed')
+                                                                    <span class="badge badge-success">{{ $order->delivery_status }}</span>
+                                                                @else
+                                                                <span class="badge badge-danger">{{ $order->delivery_status }}</span>
+                                                                @endif
+                                                            </span>
+                                                        </td>
+                                                        
+
+                                                                                        
+                                                    </tbody>
+               
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> 
+                        </div>
+                    </div>
+                </div>                
             </div>
         </div>
        
-    
+            
+    </main>
+    <!-- Essential javascripts for application to work-->
+    @include('admin.js.script') 
+
+<!-- Include jQuery library -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.2/html2canvas.min.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.10.2/jspdf.umd.min.js"></script> -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  // Function to generate and download the PDF
+    function downloadPDF() {
+        // Get the invoice section element
+        var element = document.getElementById('invoice-details');
+        // Create a new canvas element to capture the section
+        html2canvas(element).then(function(canvas) {
+        // Convert the canvas to an image data URL
+        var imgData = canvas.toDataURL('image/png');
+        // Create a new jsPDF instance
+        var pdf = new jsPDF();
+        // Set the document size based on the captured section
+        var width = canvas.width * 0.75;
+        var height = canvas.height * 0.75;
+        // Add the image to the PDF
+        pdf.addImage(imgData, 'PNG', 15, 15, width, height);
+        // Generate a filename for the PDF
+        var filename = 'invoice.pdf';
+        // Download the PDF file
+        pdf.save(filename);
+        });
+    }
+  // Attach click event listener to the "Download PDF" button
+    var downloadBtn = document.getElementById('download-pdf');
+    downloadBtn.addEventListener('click', downloadPDF);
+</script>
+
+<!-- Link update status to list order -->
+<!-- Include jQuery library -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#sampleTable').on('change', '.order-status-select', function() {
+        var select = $(this);
+        var orderId = select.data('order-id');
+        var status = select.val();
+        var url = select.data('url');
+        // Send an AJAX request to update the status
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: {
+                _token: '{{ csrf_token() }}',
+                orderId: orderId,
+                status: status
+            },
+            success: function(response) {
+                console.log('AJAX request successful');
+                console.log(response); // Debug: Check the response object
+                if (response.success) {
+                    // Update the delivery status text
+                    $('#delivery-status-' + orderId).text(status);
+                } else {
+                    console.log(response.message);
+                }
+            },
+            error: function(xhr, status, error) {
+                console.log('AJAX request failed');
+                console.log(error); // Debug: Check the error message
+            }
+        });
+    });
+});
+
+</script>
+<script>
+    $(document).ready(function () {
+        // Update status column color when select option changes
+        $('#sampleTable').on('.order-status-select').change(function () {
+            var statusBadge = $(this).closest('tr').find('.delivery-status-badge');
+            var selectedStatus = $(this).val();
+            
+            if (selectedStatus === 'Order Received') {
+                statusBadge.html('<span class="badge badge-primary">' + selectedStatus + '</span>');
+            } else if (selectedStatus === 'In-Progress') {
+                statusBadge.html('<span class="badge badge-secondary">' + selectedStatus + '</span>');
+            } else if (selectedStatus === 'Shipped') {
+                statusBadge.html('<span class="badge badge-warning">' + selectedStatus + '</span>');
+            } else if (selectedStatus === 'Delivered') {
+                statusBadge.html('<span class="badge badge-info">' + selectedStatus + '</span>');
+            } else if (selectedStatus === 'Completed') {
+                statusBadge.html('<span class="badge badge-success">' + selectedStatus + '</span>');
+            } 
+            else if (selectedStatus === 'Canceled') {
+                statusBadge.html('<span class="badge badge-danger">' + selectedStatus + '</span>');
+            }
+            else {
+                statusBadge.text(selectedStatus);
+            }
+            location.reload();
+        });
+    });
+</script>
 </body>
 </html>
