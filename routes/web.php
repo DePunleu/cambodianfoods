@@ -200,6 +200,8 @@ Route::controller(OrderController::class)->middleware('authadmin')->group(functi
     Route::get('/admin/order', 'order')->name('admin.order');
     // Route::get('/admin/create_order', 'create_order')->name('admin.create_order');
     // Route::post('/admin/create_order', 'create_orderPost')->name('admin.create_order.post');
+    Route::get('/admin/detail_order/{id}', 'detail_order')->name('admin.detail_order');
+    Route::post('/admin/detail_order/{id}', 'detail_orderPost')->name('admin.detail_order.post');
     Route::get('/admin/update_order/{id}', 'update_order')->name('admin.update_order');
     Route::post('/admin/update_order/{id}', 'update_orderPost')->name('admin.update_order.post');
     Route::post('/admin/update-order-status', 'updateOrderStatus')->name('admin.updateOrderStatus');
@@ -209,8 +211,8 @@ Route::controller(OrderController::class)->middleware('authadmin')->group(functi
     //
     Route::post('admin.performAction', 'order')->name('admin.order');
     //
-    Route::get('/admin/detail_order', 'detail_order') -> name('admin.detail_order');
-    Route::post('/admin/detail_order', 'detail_orderPost')->name('admin.detail_order.post');
+    // Route::get('/admin/detail_order', 'detail_order') -> name('admin.detail_order');
+    // Route::post('/admin/detail_order', 'detail_orderPost')->name('admin.detail_order.post');
 })->middleware('cache');
 
 

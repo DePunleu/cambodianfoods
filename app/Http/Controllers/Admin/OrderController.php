@@ -64,6 +64,44 @@ class OrderController extends Controller
         return redirect('/admin/order')->with("error", "Order not found.");
     }
 
+     //==================Show Detail Order Form=======================//
+    public function detail_order($id)
+    {
+        $order = Order::with('orderItems')->find($id);
+        $items = Item::all();
+        return view('admin.home.order.detail_order',compact('items','order'));
+    }
+    //==================Store Detail Order =======================//
+    public function update_orderPost(Request $request, $id)
+    {
+        $order = Order::find($id);
+        $order->name = $request->input('order_name');
+        $order->email = $request->input('order_email');
+        $order->phone = $request->input('order_phone');
+        $order->address = $request->input('order_address');
+        $order->payment_status = $request->input('order_payment');
+        $order->delivery_status = "Order Received";
+        $order->save();
+
+        $item = Item::find($id);
+        $item -> quantity = $request->input('store_quantity');
+        $item ->save();
+        
+        $orderItem = OrderItem::where('order_id', $order->id)->first();
+        $item = Item::where('title', $request->input('order_item'))->firstOrFail();
+        if (!$orderItem) {
+            $orderItem = new OrderItem();
+            $orderItem->order_id = $order->id;
+        }
+        $orderItem->item_id = $item->id;
+        $orderItem->item_title = $item->title;
+        $orderItem->quantity = $request->input('order_quantity');
+        $orderItem->price = $item->price;
+        $orderItem->image = $item->image;
+        $orderItem->save();
+        return redirect()->back()->with("success", "Updated Item successfully!");
+    }
+
 
 
 

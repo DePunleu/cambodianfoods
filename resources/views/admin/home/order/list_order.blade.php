@@ -175,15 +175,21 @@
                                 
                                 <!-- Start Action --> 
                                 <td>
-                                     <select class="form-control order-status-select small-width " data-order-id="{{ $order->id }}" data-url="{{ route('admin.updateOrderStatus') }}">
+                                     <!-- <select class="form-control order-status-select small-width " data-order-id="{{ $order->id }}" data-url="{{ route('admin.updateOrderStatus') }}">
                                     @foreach ($orderStatuses as $orderStatus)
                                         <option  value="{{ $orderStatus }}" {{ $order->delivery_status == $orderStatus ? 'selected' : '' }}>
                                             {{ $orderStatus }}                                               
                                         </option>                                       
                                     @endforeach
-                                    </select>
-
-                                    
+                                    </select> -->
+                                
+                                    <a href="{{ url('/admin/detail_order/'.$order->id) }}">
+                                    <button type="button" class="btn btn-primary">
+                                        <i class="fa fa-fw fa-lg fa-check-circle"></i>
+                                        Order Detail
+                                    </button>
+                                    </a>
+                              
 
                                 </td>
                                 <!-- End Action --> 
