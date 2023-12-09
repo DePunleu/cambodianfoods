@@ -139,9 +139,9 @@
                             </tr>
                         </thead>
                         <tbody >
-                            @foreach ($orders as $order)
+                            @foreach ($orders->reverse() as $order)
                             <tr  data-order-id="{{ $order->id }}">
-                                <td>{{$count++}}</td>   
+                                <td>{{$count++}}</td> 
                                 {{-- <td>{{ $loop->iteration }}</td>                                                               --}}
                                 <td>{{ $order->name }}</td>
                                 <td>{{ $order->orderItems->sum(function ($orderItem) { return $orderItem->price * $orderItem->quantity; }) }}$</td>

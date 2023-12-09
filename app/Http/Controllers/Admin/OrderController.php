@@ -18,7 +18,7 @@ class OrderController extends Controller
 {
      //==================Show All Order=======================//
     public function order() {
-        $count = 1;
+        $count =1; 
         $orders = Order::with('orderItems')->get();
         $orderStatuses = ['Order Received','In-Progress', 'Shipped', 'Completed','Canceled'];
         return view('admin.home.order.list_order',compact('count','orders','orderStatuses'));
