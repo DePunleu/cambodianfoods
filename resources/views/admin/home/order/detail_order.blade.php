@@ -109,7 +109,7 @@
             <ul class="app-breadcrumb breadcrumb side">
                 <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
                 <li class="breadcrumb-item">Orders</li>
-                <li class="breadcrumb-item active"><a href="#">Invoice</a></li>
+                <li class="breadcrumb-item active"><a href="#">Order Detail</a></li>
             </ul>
         </div>
         <div class="row">
@@ -120,22 +120,13 @@
                             <div class="row">                
                                 <div class="col-sm-10">
                                     
-                                </div>
-                                <div class="d-print-none col-sm-2">
-                                    <div class="float-right">
-                                        <a href="javascript:window.print()" class="btn btn-success waves-effect waves-light">
-                                            <i class="fa fa-print"></i>PRINT
-                                        </a>
-                                    
-                                    </div>
-                                </div>
-                            </div><br>
+                                
                         </div>
                         <div class="container">
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="invoice-title">
-                                        <h2>Invoice</h2>
+                                        <h2>Order Detail</h2>
                                         <h3 class="float-right">Order # {{$order->order_id}}</h3>
                                     </div>
                                     <hr>
@@ -193,7 +184,8 @@
                                                             <td><strong>#</strong></td>
                                                             <td><strong>Item</strong></td>
                                                             <td class="text-center"><strong>Price</strong></td>
-                                                            <td class="text-center"><strong>Quantity</strong></td>
+                                                            <td class="text-center"><strong>Order Quantity</strong></td>
+                                                            <td class="text-center"><strong>Store Quantity</strong></td>
                                                             <td class="text-right"><strong>Totals</strong></td>
                                                         </tr>
                                                     </thead>
@@ -205,11 +197,13 @@
                                                             <td>{{ $orderItem->items->title }}</td>
                                                             <td class="text-center">${{ $orderItem->price }}</td>
                                                             <td class="text-center">{{ $orderItem->quantity }}</td>
+                                                            <td class="text-center">{{ $orderItem->quantity }}</td>
                                                             <td class="text-right">${{ $orderItem->price * $orderItem->quantity }}</td>
                                                         </tr>
                                                         <?php $totalprice=$totalprice + ($orderItem->price*$orderItem->quantity); ?>
                                                         @endforeach                             
                                                         <tr>
+                                                            <td class="thick-line"></td>
                                                             <td class="thick-line"></td>
                                                             <td class="thick-line"></td>
                                                             <td class="thick-line"></td>
@@ -220,11 +214,13 @@
                                                             <td class="no-line"></td>
                                                             <td class="no-line"></td>
                                                             <td class="no-line"></td>
+                                                            <td class="no-line"></td>
 
                                                             <td class="no-line text-center"><strong>Shipping</strong></td>
                                                             <td class="no-line text-right">0$</td>
                                                         </tr>
                                                         <tr>
+                                                            <td class="no-line"></td>
                                                             <td class="no-line"></td>
                                                             <td class="no-line"></td>
                                                             <td class="no-line"></td>

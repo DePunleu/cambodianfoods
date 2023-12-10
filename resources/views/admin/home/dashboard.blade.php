@@ -165,7 +165,7 @@
                   <h5><span>Total Orders: {{ $orders_count }}</span></h5>
                 </div>
                 <div class="col-md-6">
-                  <h5><span>Total Sales: {{ $completedOrdersTotalPrice }}$</span></h5>
+                  <h5><span>Total Revenue: {{ $completedOrdersTotalPrice }}$</span></h5>
                 </div>
                 
               </div>

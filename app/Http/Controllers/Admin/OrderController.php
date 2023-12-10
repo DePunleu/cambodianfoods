@@ -19,9 +19,10 @@ class OrderController extends Controller
      //==================Show All Order=======================//
     public function order() {
         $count =1; 
+        $items = Item::all();
         $orders = Order::with('orderItems')->get();
         $orderStatuses = ['Order Received','In-Progress', 'Shipped', 'Completed','Canceled'];
-        return view('admin.home.order.list_order',compact('count','orders','orderStatuses'));
+        return view('admin.home.order.list_order',compact('count','orders','orderStatuses','items'));
     }
 
     //==================Update Order Status=======================//
@@ -52,7 +53,8 @@ class OrderController extends Controller
     //==================Invoice=======================//
     public function invoice($orderId)
     {
-        $order = Order::with('orderItems')->find($orderId);   
+        $order = Order::with('orderItems')->find($orderId);
+      
         return view('admin.home.order.invoice', compact('order'));
     }
     //==================End Method=======================//

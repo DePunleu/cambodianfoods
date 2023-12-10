@@ -188,7 +188,7 @@
                                                             <td><strong>#</strong></td>
                                                             <td><strong>Item</strong></td>
                                                             <td class="text-center"><strong>Price</strong></td>
-                                                            <td class="text-center"><strong>Quantity</strong></td>
+                                                            <td class="text-center"><strong>Order Quantity</strong></td>
                                                             <td class="text-right"><strong>Totals</strong></td>
                                                         </tr>
                                                     </thead>
@@ -199,12 +199,13 @@
                                                             <td>{{ $index + 1 }}</td>
                                                             <td>{{ $orderItem->items->title }}</td>
                                                             <td class="text-center">${{ $orderItem->price }}</td>
-                                                            <td class="text-center">{{ $orderItem->quantity }}</td>
+                                                            <td class="text-center">{{ $orderItem->quantity }}</td>   
                                                             <td class="text-right">${{ $orderItem->price * $orderItem->quantity }}</td>
                                                         </tr>
                                                         <?php $totalprice=$totalprice + ($orderItem->price*$orderItem->quantity); ?>
                                                         @endforeach                             
                                                         <tr>
+                                                            
                                                             <td class="thick-line"></td>
                                                             <td class="thick-line"></td>
                                                             <td class="thick-line"></td>
@@ -212,6 +213,7 @@
                                                             <td class="thick-line text-right">{{$totalprice}}$</td>
                                                         </tr>
                                                         <tr>
+                                                            
                                                             <td class="no-line"></td>
                                                             <td class="no-line"></td>
                                                             <td class="no-line"></td>
@@ -220,6 +222,7 @@
                                                             <td class="no-line text-right">0$</td>
                                                         </tr>
                                                         <tr>
+                                                            
                                                             <td class="no-line"></td>
                                                             <td class="no-line"></td>
                                                             <td class="no-line"></td>

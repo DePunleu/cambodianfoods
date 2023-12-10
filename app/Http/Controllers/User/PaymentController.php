@@ -125,8 +125,11 @@ class PaymentController extends Controller
             }
             Alert::success('Order successful!', 'Thanks for your order!');
             
+            
             return redirect()->back();
+            
         }
+        
     }
 
     //================Show Card Form==================//
@@ -173,7 +176,10 @@ class PaymentController extends Controller
         foreach ($cartItems as $cartItem) {
             $cartItem->delete();
         }
-        return back()->with('success', 'Payment successful!');
+        Alert::success('Order successful!', 'Thanks for your order!');
+        // return back()->with('success', 'Payment successful!');
+        return redirect()->back();
+         
     }
 
     
