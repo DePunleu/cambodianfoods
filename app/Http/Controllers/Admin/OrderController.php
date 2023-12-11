@@ -27,21 +27,71 @@ class OrderController extends Controller
     //==================End Method=======================//
 
     //==================Update Order Status=======================//
-     public function updateOrderStatus(Request $request)
-     {
-         $orderId = $request->input('orderId');
-         $status = $request->input('status');
-         // Find the order by ID
-         $order = Order::find($orderId);
-         if ($order) {
-             // Update the delivery status
-             $order->delivery_status = $status;
-             $order->save();
-             return response()->json(['success' => true]);
-         }
-         return response()->json(['success' => false, 'message' => 'Order not found']);
-     }
+    public function updateOrderStatus(Request $request)
+{
+    $orderId = $request->input('orderId');
+    $status = $request->input('status');
+    
+    // Find the order by ID
+    $order = Order::find($orderId);
+    
+    if ($order) {
+        if ($order->delivery_status === 'Completed') {
+            // If the order status is already 'Completed', prevent further changes
+            return response()->json(['success' => false, 'message' => 'Order status is already Completed and cannot be changed.']);
+        }
+
+        if ($order->delivery_status === 'Shipped' && $status === 'Completed') {
+            // Check if the store quantity is sufficient for the order
+            foreach ($order->orderItems as $orderItem) {
+                $item = Item::find($orderItem->item_id);
+                if ($item) {
+                    if ($orderItem->quantity > $item->store_quantity) {
+                        return response()->json(['success' => false, 'message' => 'Insufficient store quantity']);
+                    }
+                }
+            }
+
+            // If store quantity is sufficient, update delivery status and subtract quantities
+            foreach ($order->orderItems as $orderItem) {
+                $item = Item::find($orderItem->item_id);
+                if ($item) {
+                    // Subtract order quantity from store quantity
+                    $item->store_quantity -= $orderItem->quantity;
+                    // Ensure the store quantity doesn't go negative
+                    $item->store_quantity = max(0, $item->store_quantity);
+                    $item->save();
+                }
+            }
+
+            // Update the delivery status to 'Completed'
+            $order->delivery_status = $status;
+        } elseif ($status !== 'Completed') {
+            // If not transitioning to 'Completed', update the delivery status
+            $order->delivery_status = $status;
+        }
+
+        $order->save();
+
+        return response()->json(['success' => true]);
+    }
+
+    return response()->json(['success' => false, 'message' => 'Order not found']);
+}
+
+
+
+    
+    
+    
     //==================End Method=======================//
+    //==================Update Store Quantity=======================//
+   
+
+    //==================End Method=======================//
+
+
+
 
     //==================Show Detail Order Form=======================//
       public function detail_order($id)
@@ -49,8 +99,8 @@ class OrderController extends Controller
         //   $store_quantity = Item::where('store_quantity',$store_quantity)-get();
           $order = Order::with('orderItems')->find($id);
           $items = Item::with('orderItems')->find($id);
-          $orderStatuses = ['Order Received','In-Progress', 'Shipped', 'Completed','Canceled'];
-          return view('admin.home.order.detail_order',compact('items','order','orderStatuses'));
+    
+          return view('admin.home.order.detail_order',compact('items','order'));
       }
     //==================End Method=======================//
 

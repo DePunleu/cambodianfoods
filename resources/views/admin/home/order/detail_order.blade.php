@@ -229,7 +229,49 @@
                                                             <td class="no-line text-center"><strong>Total</strong></td>
                                                             <td class="no-line text-right"><strong>{{$totalprice}}$</strong></td>
                                                         </tr>
-
+                                                        {{-- <tr>
+                                                            <td colspan="12">
+                                                                @foreach($order as $key => $or)
+                                                                    @if($or->delivery-status)
+                                                                <form class="form-control order-status-select small-width">
+                                                                    <option value="Order Received">Order Received</option>
+                                                                    <option value="In-Progress" >In-Progress</option>
+                                                                    <option value="Shipped">Shipped</option>
+                                                                    <option value="Completed">Completed</option>
+                                                                    <option value="Canceled">Canceled</option>
+                                                                </form>
+                                                            </td>
+                                                        </tr> --}}
+                                                     
+                                                        
+                                                        <td colspan="5">
+                                    
+                                                            <span id="delivery-status-{{ $order->id }}">
+                                                                @if ($order->delivery_status === 'Order Received')
+                                                                    <span class="badge badge-primary">{{ $order->delivery_status }}</span>
+                                                                @elseif ($order->delivery_status === 'In-Progress')
+                                                                    <span class="badge badge-secondary">{{ $order->delivery_status }}</span>
+                                                                @elseif ($order->delivery_status === 'Shipped')
+                                                                    <span class="badge badge-warning">{{ $order->delivery_status }}</span>
+                                                                @elseif ($order->delivery_status === 'Delivered')
+                                                                    <span class="badge badge-info">{{ $order->delivery_status }}</span>
+                                                                @elseif ($order->delivery_status === 'Completed')
+                                                                    <span class="badge badge-success">{{ $order->delivery_status }}</span>
+                                                                @else
+                                                                <span class="badge badge-danger">{{ $order->delivery_status }}</span>
+                                                                @endif
+                                                            </span>
+                                                        </td>
+                                                        
+                                                        <td>
+                                                        <a class="badge badge-danger delete" href="{{url('/admin/order/'.$order->id)}}" onclick="return confirm('Are you sure?')" title="Delete" data-toggle="tooltip">
+                                                                <i class="fa fa-trash"></i>
+                                                            </a>
+                                                            &nbsp;
+                                                            <a class="badge badge-success view" href="{{url('/admin/invoice/'.$order->id)}}" title="View" data-toggle="tooltip">
+                                                                <i class="fa fa-eye"></i>
+                                                            </a>
+                                                        </td>
                                                                                         
                                                     </tbody>
                
@@ -249,5 +291,8 @@
     </main>
     <!-- Essential javascripts for application to work-->
     @include('admin.js.script') 
+
+   
+
 </body>
 </html>

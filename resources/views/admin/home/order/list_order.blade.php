@@ -44,6 +44,8 @@
                     <span class="app-menu__label">Dashboard</span>
                 </a>
             </li>
+            
+            
             <li >
                 <a class="app-menu__item" href="{{url('/admin/users')}}" >
                     <i class="fa fa-users"></i>&nbsp;&nbsp;&nbsp;
@@ -116,7 +118,11 @@
                             <div class="col-sm-10">
                                 <h2>All Orders</h2>
                             </div>
-                            
+                            {{-- <div class="col-sm-2">
+                                <a href="{{ route('admin.create_order') }}">
+                                <button type="button" class="btn btn-info add-new"><i class="fa fa-plus"></i> Add New</button>
+                                </a>
+                            </div> --}}
                         </div><br>
                     </div>
                     <table class="table table-hover table-bordered" id="sampleTable">
@@ -137,7 +143,6 @@
                             @foreach ($orders->reverse() as $order)
                             <tr  data-order-id="{{ $order->id }}">
                                 <td>{{$count++}}</td>   
-                                {{-- <td>{{ $loop->iteration }}</td>                                                               --}}
                                 <td>{{ $order->name }}</td>
                                 <td>{{ $order->orderItems->sum(function ($orderItem) { return $orderItem->price * $orderItem->quantity; }) }}$</td>
                                 <td>{{ $order->payment_status }}</td>
@@ -146,7 +151,7 @@
                                     
                                         <span id="delivery-status-{{ $order->id }}">
                                             @if ($order->delivery_status === 'Order Received')
-                                                <span class="badge badge-primary">{{ $order->delivery_status }}</span>                           
+                                                <span class="badge badge-primary">{{ $order->delivery_status }}</span>
                                             @elseif ($order->delivery_status === 'In-Progress')
                                                 <span class="badge badge-secondary">{{ $order->delivery_status }}</span>
                                             @elseif ($order->delivery_status === 'Shipped')
@@ -163,9 +168,8 @@
                                     
                                     
                                 </td>
-                                <!-- Start Action -->
                                 <td>
-                                    <select class="form-control order-status-select small-width" data-order-id="{{ $order->id }}" data-url="{{ route('admin.updateOrderStatus')  }}">
+                                    <select class="form-control order-status-select small-width" data-order-id="{{ $order->id }}" data-url="{{ route('admin.updateOrderStatus') }}">
                                         @foreach ($orderStatuses as $orderStatus)
                                             <option value="{{ $orderStatus }}" {{ $order->delivery_status == $orderStatus ? 'selected' : '' }}>
                                                 {{ $orderStatus }}
@@ -173,7 +177,7 @@
                                         @endforeach
                                     </select>
                                     
-                                <!-- End Action -->
+                                </td>
                                 <td>
                                     <a href="{{ url('/admin/detail_order/'.$order->id) }}">
                                         <button type="button" class="btn btn-primary center-text" >
@@ -182,17 +186,19 @@
                                         </button>
                                         </a>
                                     </td>
-
-                                <td class="text-center">                   
+                                <td class="text-center">
+                                    {{-- <a class="badge badge-warning edit " href="{{url('/admin/update_order/'.$order->id)}}" title="Update" data-toggle="tooltip">
+                                        <i class="fa fa-edit"></i>
+                                    </a>                         --}}
                                     &nbsp;
                                     <a class="badge badge-danger delete" href="{{url('/admin/order/'.$order->id)}}" onclick="return confirm('Are you sure?')" title="Delete" data-toggle="tooltip">
                                         <i class="fa fa-trash"></i>
                                     </a>
                                     &nbsp;
-                                    
+                                    {{--
                                     <a class="badge badge-success view" href="{{url('/admin/invoice/'.$order->id)}}" title="View" data-toggle="tooltip">
                                         <i class="fa fa-eye"></i>
-                                    </a>
+                                    </a>--}}
                                     
                                     
                                                             
@@ -205,13 +211,6 @@
                     
                     </div>
                 </div>
-                
-                <div class="d-print-none">
-                    <div class="float-right">
-                        <a href="javascript:window.print()" class="btn btn-success waves-effect waves-light"><i class="fa fa-print"></i></a>
-                    
-                    </div>
-                </div>                
             </div>
         </div>
             
@@ -254,7 +253,35 @@
         });
     });
 });
-</script>
 
+</script>
+<script>
+    $(document).ready(function () {
+        // Update status column color when select option changes
+        $('#sampleTable').on('.order-status-select').change(function () {
+            var statusBadge = $(this).closest('tr').find('.delivery-status-badge');
+            var selectedStatus = $(this).val();
+            
+            if (selectedStatus === 'Order Received') {
+                statusBadge.html('<span class="badge badge-primary">' + selectedStatus + '</span>');
+            } else if (selectedStatus === 'In-Progress') {
+                statusBadge.html('<span class="badge badge-secondary">' + selectedStatus + '</span>');
+            } else if (selectedStatus === 'Shipped') {
+                statusBadge.html('<span class="badge badge-warning">' + selectedStatus + '</span>');
+            } else if (selectedStatus === 'Delivered') {
+                statusBadge.html('<span class="badge badge-info">' + selectedStatus + '</span>');
+            } else if (selectedStatus === 'Completed') {
+                statusBadge.html('<span class="badge badge-success">' + selectedStatus + '</span>');
+            } 
+            else if (selectedStatus === 'Canceled') {
+                statusBadge.html('<span class="badge badge-danger">' + selectedStatus + '</span>');
+            }
+            else {
+                statusBadge.text(selectedStatus);
+            }
+            location.reload();
+        });
+    });
+</script>
 </body>
 </html>
