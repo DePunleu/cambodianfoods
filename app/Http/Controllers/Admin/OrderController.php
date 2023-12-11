@@ -27,8 +27,7 @@ class OrderController extends Controller
     //==================End Method=======================//
 
     //==================Update Order Status=======================//
-    public function updateOrderStatus(Request $request)
-{
+    public function updateOrderStatus(Request $request){
     $orderId = $request->input('orderId');
     $status = $request->input('status');
     
@@ -113,18 +112,27 @@ class OrderController extends Controller
     }
     //==================End Method=======================//
     //==================Delete Order=======================//
-     public function delete_order($id_order) {
+    public function delete_order($id_order) {
         $order = Order::find($id_order);
+    
         if ($order) {
+            // Check if the delivery status is 'Completed'
+            if ($order->delivery_status === 'Completed') {
+                return redirect('/admin/order')->with("error", "Order has already been Completed and cannot be deleted.");
+            }
+    
             // Delete associated order items
             $order->orderItems()->delete();
+            
             // Delete the order itself
             $order->delete();
+    
             return redirect('/admin/order')->with("success", "Order deleted successfully!");
         }
+        
         return redirect('/admin/order')->with("error", "Order not found.");
     }
-
+    
     //==================End Method=======================//
     //==================Show Form=======================//
     // public function create_order() {

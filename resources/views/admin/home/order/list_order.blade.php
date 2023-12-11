@@ -113,6 +113,18 @@
                         {{session('success')}}
                     </div>
                     @endif
+                    @if(session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+
+                    @if(session('error'))
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
+                        </div>
+                    @endif
+
                     <div class="table-title">
                         <div class="row">                
                             <div class="col-sm-10">
@@ -195,10 +207,10 @@
                                         <i class="fa fa-trash"></i>
                                     </a>
                                     &nbsp;
-                                    {{--
+                                    
                                     <a class="badge badge-success view" href="{{url('/admin/invoice/'.$order->id)}}" title="View" data-toggle="tooltip">
                                         <i class="fa fa-eye"></i>
-                                    </a>--}}
+                                    </a>
                                     
                                     
                                                             
