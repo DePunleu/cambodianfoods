@@ -136,9 +136,9 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="control-label col-md-3">Quantity</label>
+                                <label class="control-label col-md-3">Store qauntity</label>
                                 <div class="col-md-8">
-                                    <input class="form-control" name="item_quantity" type="float" placeholder="Enter quantity">
+                                    <input class="form-control" name="item_store_quantity" type="float" placeholder="Enter store quantity">
                                 </div>
                             </div>
                             <div class="form-group row">

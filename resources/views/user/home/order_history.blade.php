@@ -58,6 +58,11 @@
                 <div class="card shadow">
                     <div class="card-header border-0">
                         <h3 class="mb-0 py-2">Order History</h3>
+                        @if(session('success'))
+                            <div class="alert alert-success">
+                                {{ session('success') }}
+                            </div>
+                        @endif
                     </div>
                     <div class="table-responsive">
                         <table class="table mb-0 align-items-center">
@@ -78,7 +83,7 @@
                                 {{-- @php
                                 $counts = 1;
                                 @endphp --}}
-                                @foreach ($order as $order)
+                                @foreach ($order->reverse() as $order)
                                     @foreach ($order->orderItems as $index => $item)
                                         <tr>
                                             @if ($index === 0)

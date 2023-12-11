@@ -163,7 +163,7 @@
                                 <td>{{$row->title}}</td>
                                 <!-- <td>{{$row->origin_price}}$</td> -->
                                 <td>{{$row->price}}$</td>
-                                <td>{{$row->quantity}}</td>
+                                <td>{{$row->store_quantity}}</td>
                                 <td>{{$row->menus->name_menu}}</td>
                                 <td>{{$row->description}}</td> 
                                 <td>{{$row->suppliers->description}}</td>

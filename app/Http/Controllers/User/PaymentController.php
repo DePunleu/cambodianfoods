@@ -123,10 +123,11 @@ class PaymentController extends Controller
                 ]);
                 $cartItem->delete();
             }
-            Alert::success('Order successful!', 'Thanks for your order!');
+            // Alert::success('Order successful!', 'Thanks for your order!');
             
+            return redirect('/order_history')->with('success', 'Order successful! Thanks for your order!');
             
-            return redirect()->back();
+            // return redirect(/menu)->back();
             
         }
         

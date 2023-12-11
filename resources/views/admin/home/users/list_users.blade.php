@@ -131,7 +131,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    @foreach($users as $row)
+                    @foreach($users->reverse() as $row)
                     <tr>
                       <td>{{$count++}}</td>
                       <td>

@@ -197,9 +197,10 @@
                                                             <td>{{ $orderItem->items->title }}</td>
                                                             <td class="text-center">${{ $orderItem->price }}</td>
                                                             <td class="text-center">{{ $orderItem->quantity }}</td>
-                                                            <td class="text-center">{{ $orderItem->quantity }}</td>
+                                                            <td class="text-center">{{ $orderItem->items->store_quantity }}</td>
                                                             <td class="text-right">${{ $orderItem->price * $orderItem->quantity }}</td>
                                                         </tr>
+                                                        
                                                         <?php $totalprice=$totalprice + ($orderItem->price*$orderItem->quantity); ?>
                                                         @endforeach                             
                                                         <tr>
@@ -229,43 +230,6 @@
                                                             <td class="no-line text-right"><strong>{{$totalprice}}$</strong></td>
                                                         </tr>
 
-
-                                                        
-                                                       
-
-                                                        <td >
-                                                            
-                                                            <select class="form-control order-status-select small-width " data-order-id="{{ $order->id }}" data-update-url="{{ route('admin.detail_order.updateOrderStatus') }}">
-                                                                @foreach ($orderStatuses as $orderStatus)
-                                                                    <option  value="{{ $orderStatus }}" {{ $order->delivery_status == $orderStatus ? 'selected' : '' }}>
-                                                                        {{ $orderStatus }}                                               
-                                                                    </option>                                       
-                                                                @endforeach
-                                                            </select>            
-                                                            <br>
-
-                                                            <a href="{{ url('admin/order') }}" id="redirectLink"> <button class="btn btn-primary center-text" >Submit</button> </a>
-                                                        </td>
-                                                        <td class="form-control order-status-select small-width">
-                                    
-                                                            <span id="delivery-status-{{ $order->id }}">
-                                                                @if ($order->delivery_status === 'Order Received')
-                                                                    <span class="badge badge-primary">{{ $order->delivery_status }}</span>                           
-                                                                @elseif ($order->delivery_status === 'In-Progress')
-                                                                    <span class="badge badge-secondary">{{ $order->delivery_status }}</span>
-                                                                @elseif ($order->delivery_status === 'Shipped')
-                                                                    <span class="badge badge-warning">{{ $order->delivery_status }}</span>
-                                                                @elseif ($order->delivery_status === 'Delivered')
-                                                                    <span class="badge badge-info">{{ $order->delivery_status }}</span>
-                                                                @elseif ($order->delivery_status === 'Completed')
-                                                                    <span class="badge badge-success">{{ $order->delivery_status }}</span>
-                                                                @else
-                                                                <span class="badge badge-danger">{{ $order->delivery_status }}</span>
-                                                                @endif
-                                                            </span>
-                                                        </td>
-                                                        
-
                                                                                         
                                                     </tbody>
                
@@ -285,105 +249,5 @@
     </main>
     <!-- Essential javascripts for application to work-->
     @include('admin.js.script') 
-
-<!-- Include jQuery library -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.2/html2canvas.min.js"></script>
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.10.2/jspdf.umd.min.js"></script> -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-  // Function to generate and download the PDF
-    function downloadPDF() {
-        // Get the invoice section element
-        var element = document.getElementById('invoice-details');
-        // Create a new canvas element to capture the section
-        html2canvas(element).then(function(canvas) {
-        // Convert the canvas to an image data URL
-        var imgData = canvas.toDataURL('image/png');
-        // Create a new jsPDF instance
-        var pdf = new jsPDF();
-        // Set the document size based on the captured section
-        var width = canvas.width * 0.75;
-        var height = canvas.height * 0.75;
-        // Add the image to the PDF
-        pdf.addImage(imgData, 'PNG', 15, 15, width, height);
-        // Generate a filename for the PDF
-        var filename = 'invoice.pdf';
-        // Download the PDF file
-        pdf.save(filename);
-        });
-    }
-  // Attach click event listener to the "Download PDF" button
-    var downloadBtn = document.getElementById('download-pdf');
-    downloadBtn.addEventListener('click', downloadPDF);
-</script>
-
-<!-- Link update status to list order -->
-<!-- Include jQuery library -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-    $(document).ready(function() {
-        $('#sampleTable').on('change', '.order-status-select', function() {
-        var select = $(this);
-        var orderId = select.data('order-id');
-        var status = select.val();
-        var url = select.data('url');
-        // Send an AJAX request to update the status
-        $.ajax({
-            url: url,
-            type: 'POST',
-            data: {
-                _token: '{{ csrf_token() }}',
-                orderId: orderId,
-                status: status
-            },
-            success: function(response) {
-                console.log('AJAX request successful');
-                console.log(response); // Debug: Check the response object
-                if (response.success) {
-                    // Update the delivery status text
-                    $('#delivery-status-' + orderId).text(status);
-                } else {
-                    console.log(response.message);
-                }
-            },
-            error: function(xhr, status, error) {
-                console.log('AJAX request failed');
-                console.log(error); // Debug: Check the error message
-            }
-        });
-    });
-});
-
-</script>
-<script>
-    $(document).ready(function () {
-        // Update status column color when select option changes
-        $('#sampleTable').on('.order-status-select').change(function () {
-            var statusBadge = $(this).closest('tr').find('.delivery-status-badge');
-            var selectedStatus = $(this).val();
-            
-            if (selectedStatus === 'Order Received') {
-                statusBadge.html('<span class="badge badge-primary">' + selectedStatus + '</span>');
-            } else if (selectedStatus === 'In-Progress') {
-                statusBadge.html('<span class="badge badge-secondary">' + selectedStatus + '</span>');
-            } else if (selectedStatus === 'Shipped') {
-                statusBadge.html('<span class="badge badge-warning">' + selectedStatus + '</span>');
-            } else if (selectedStatus === 'Delivered') {
-                statusBadge.html('<span class="badge badge-info">' + selectedStatus + '</span>');
-            } else if (selectedStatus === 'Completed') {
-                statusBadge.html('<span class="badge badge-success">' + selectedStatus + '</span>');
-            } 
-            else if (selectedStatus === 'Canceled') {
-                statusBadge.html('<span class="badge badge-danger">' + selectedStatus + '</span>');
-            }
-            else {
-                statusBadge.text(selectedStatus);
-            }
-            location.reload();
-        });
-    });
-</script>
 </body>
 </html>

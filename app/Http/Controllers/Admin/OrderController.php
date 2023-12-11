@@ -24,6 +24,7 @@ class OrderController extends Controller
         $orderStatuses = ['Order Received','In-Progress', 'Shipped', 'Completed','Canceled'];
         return view('admin.home.order.list_order',compact('count','orders','orderStatuses','items'));
     }
+    //==================End Method=======================//
 
     //==================Update Order Status=======================//
      public function updateOrderStatus(Request $request)
@@ -41,15 +42,18 @@ class OrderController extends Controller
          return response()->json(['success' => false, 'message' => 'Order not found']);
      }
     //==================End Method=======================//
+
     //==================Show Detail Order Form=======================//
       public function detail_order($id)
       {
+        //   $store_quantity = Item::where('store_quantity',$store_quantity)-get();
           $order = Order::with('orderItems')->find($id);
-          $items = Item::all();
+          $items = Item::with('orderItems')->find($id);
           $orderStatuses = ['Order Received','In-Progress', 'Shipped', 'Completed','Canceled'];
           return view('admin.home.order.detail_order',compact('items','order','orderStatuses'));
       }
     //==================End Method=======================//
+
     //==================Invoice=======================//
     public function invoice($orderId)
     {
@@ -73,11 +77,14 @@ class OrderController extends Controller
 
     //==================End Method=======================//
     //==================Show Form=======================//
-    public function create_order() {
-        $item = Item::all();
-        return view('admin.home.order.create_order',compact('item'));
-    }
+    // public function create_order() {
+    //     $item = Item::all();
+    //     return view('admin.home.order.create_order',compact('item'));
+    // }
     
+    //===================== Filter Method==========================//
+    
+    //=====================End Method==========================//
     
     
     

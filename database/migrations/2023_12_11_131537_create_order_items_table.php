@@ -17,12 +17,15 @@ return new class extends Migration
             $table->unsignedInteger('item_id')->nullable();
             $table->string('item_title')->nullable();
             $table->string('quantity')->nullable();
+            $table->string('store_quantity')->nullable();
             $table->string('price')->nullable();
             $table->string('origin_price')->nullable();
             $table->string('image')->nullable();
             $table->timestamps();
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
             $table->foreign('item_id')->references('id')->on('items')->onDelete('cascade');
+            $table->foreign('store_quantity')->references('store_quantity')->on('items')->onDelete('cascade');
+
 
         });
     }

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->increments('id');
             $table->string('title');
             $table->string('price');
-            $table->string('origin_price');
+            $table->string('store_quantity')->nullable();
             $table->unsignedInteger('supplier_id');
             $table->unsignedInteger('menu_id');
             $table->string('description')->nullable();
@@ -25,6 +25,7 @@ return new class extends Migration
             $table->timestamps();
             $table->foreign('menu_id')->references('id')->on('menus')->onDelete('cascade');
             $table->foreign('supplier_id')->references('id')->on('suppliers')->onDelete('cascade');
+            
         });
     }
 

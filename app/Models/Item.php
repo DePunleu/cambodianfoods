@@ -19,7 +19,7 @@ class Item extends Model
     protected $fillable = [
         'title',
         'price',
-        'quantity',
+        'store_quantity',
         'supplier_id',
         'menu_id',
         'description',

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Item;
 use App\Models\Menu;
 use App\Models\Supplier;
+use Illuminate\Support\Facades\DB;
 
 
 class ItemController extends Controller
@@ -43,7 +44,14 @@ class ItemController extends Controller
         //$data['origin_price'] = $request->item_origin_price;
         $data['price'] = $request->item_price;
         $data['description'] = $request->item_description;
-        $data['quantity'] = $request->item_quantity;
+        $data['store_quantity'] = $request->item_store_quantity;
+        // Update store_quantity in order_items table
+        // Get the newly created item's store_quantity
+
+        
+
+
+        
         // Retrieve the selected menu
         $menu = Menu::where('name_menu', $request->item_menu)->firstOrFail();
         if ($request->file('item_image')) {
@@ -76,7 +84,7 @@ class ItemController extends Controller
         $item = Item::find($id);
         $item->title = $request->item_title;
         $item->price = $request->item_price;
-        $item->quantity = $request->item_quantity;
+        $item->store_quantity = $request->item_store_quantity;
         // $item->origin_price = $request->item_origin_price;
        
        
