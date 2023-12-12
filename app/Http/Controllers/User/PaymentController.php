@@ -179,7 +179,7 @@ class PaymentController extends Controller
         }
         Alert::success('Order successful!', 'Thanks for your order!');
         // return back()->with('success', 'Payment successful!');
-        return redirect()->back();
+        return redirect('/order_history')->with('success', 'Order successful! Thanks for your order!');
          
     }
 
