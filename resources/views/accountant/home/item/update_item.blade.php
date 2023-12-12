@@ -27,6 +27,13 @@
             </div>
         </div>
         <ul class="app-menu">
+            <li>
+              <a class="app-menu__item active" href="{{url('accountant/dashboard')}}">
+                  <i class="app-menu__icon fa fa-dashboard"></i>
+                  <span class="app-menu__label">Dashboard</span>
+              </a>
+            </li>
+
             <li >
                 <a class="app-menu__item active" href="{{url('/accountant/item')}}" >
                     <i class="fas fa-hamburger"></i>
@@ -43,8 +50,7 @@
                     &nbsp;&nbsp;&nbsp;
                     <span class="app-menu__label">Orders</span>
                     
-                </a>
-            </li>
+                </a>  
         </ul>
     </aside>
     <!-- Body-->
@@ -104,9 +110,9 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="control-label col-md-3">Quantity</label>
+                                <label class="control-label col-md-3">Store qauntity</label>
                                 <div class="col-md-8">
-                                    <input class="form-control" name="item_quantity" type="float" placeholder="Enter quantity" value="{{$item->quantity}}">
+                                    <input class="form-control" name="item_store_quantity" type="float" placeholder="Enter store quantity" value="{{$item->store_quantity}}">
                                 </div>
                             </div>
                             <div class="form-group row">

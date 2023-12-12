@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Item;
 use App\Models\Menu;
 use App\Models\Supplier;
+use Illuminate\Support\Facades\DB;
 
 
 class SellerItemController extends Controller
@@ -15,14 +16,20 @@ class SellerItemController extends Controller
     public function item()
     {
         $item = Item::with('menus')->orderByDesc('id')->get(); // Include the menu relationship
+        $menus = Menu::all();
         $count = 1;
+       
         return view(
             'seller.home.item.list_item',
-            compact('count', 'item')
+            compact('count', 'item', 'menus')
         );
     }
+  
+
+
     //==================End Method=======================//
-    //==================Show Create Item Form=======================//
+
+    //==================Create_item=======================//
     public function create_item() {
         $menu = Menu::all();
         $supplier = Supplier::all();
@@ -34,9 +41,17 @@ class SellerItemController extends Controller
     public function create_itemPost(Request $request)
     {
         $data['title'] = $request->item_title;
+        //$data['origin_price'] = $request->item_origin_price;
         $data['price'] = $request->item_price;
-        $data['quantity'] = $request->item_quantity;
         $data['description'] = $request->item_description;
+        $data['store_quantity'] = $request->item_store_quantity;
+        // Update store_quantity in order_items table
+        // Get the newly created item's store_quantity
+
+        
+
+
+        
         // Retrieve the selected menu
         $menu = Menu::where('name_menu', $request->item_menu)->firstOrFail();
         if ($request->file('item_image')) {
@@ -46,8 +61,10 @@ class SellerItemController extends Controller
             $data['image'] = $filename;
         }
         $data['menu_id'] = $menu->id; // Store the menu ID in the items table
+        //Retrieve the selected supplier
         $supplier = Supplier::where('name_supplier', $request->item_supplier)->firstOrFail();
         $data['supplier_id'] = $supplier->id; // Store the supplier ID in the items table
+
         Item::create($data);
         return redirect()->back()->with("success", "Item Created successfully!");
     }
@@ -66,8 +83,11 @@ class SellerItemController extends Controller
     {
         $item = Item::find($id);
         $item->title = $request->item_title;
-        // $item->origin_price = $request->item_origin_price;
         $item->price = $request->item_price;
+        $item->store_quantity = $request->item_store_quantity;
+        // $item->origin_price = $request->item_origin_price;
+       
+       
         $menu = Menu::where('name_menu', $request->item_menu)->firstOrFail();
         $item->menu_id = $menu->id; // Assign the menu ID to the menu_id attribute
         $item->description = $request->item_description;
@@ -91,26 +111,28 @@ class SellerItemController extends Controller
         ->with("success","Item deleted successfully!");
     }
     //=====================End Method==========================//
-     //===================== Filter Method==========================//
-     public function filter_item(Request $request)
-     {
-         $filter = $request->query('filter');
-         $count = 1;
-         $menu = Menu::all();
-         $item = Item::all();
-         $query = Item::query(); // Create a base query
-         $item = Item::where('title', 'LIKE', "%$filter%")
-             ->orWhereHas('menus', function ($query) use ($filter) {
-                 $query->where('name_menu', 'LIKE', "%$filter%");
-             })
-             ->orWhere('menu_id', $filter)
-             ->paginate(20);
-         return view('seller.home.item.list_item')
-         ->with('count', $count)
-         ->with('menu', $menu)
-         ->with('item', $item)
-         ->with('filter', $filter);
-     
-     }
-     //=====================End Method==========================//
+
+    //===================== Filter Method==========================//
+    public function filter_item(Request $request)
+    {
+        $filter = $request->query('filter');
+        $count = 1;
+        $menu = Menu::all();
+        $item = Item::all();
+        $query = Item::query(); // Create a base query
+        $item = Item::where('title', 'LIKE', "%$filter%")
+            ->orWhereHas('menus', function ($query) use ($filter) {
+                $query->where('name_menu', 'LIKE', "%$filter%");
+            })
+            ->orWhere('menu_id', $filter)
+            ->paginate(20);
+        return view('seller.home.item.list_item')
+        ->with('count', $count)
+        ->with('menu', $menu)
+        ->with('item', $item)
+        ->with('filter', $filter);
+    
+    }
+    //=====================End Method==========================//
+  
 }

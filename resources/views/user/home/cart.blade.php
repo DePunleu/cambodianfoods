@@ -60,6 +60,7 @@
                     <th scope="col" class="border-0 bg-light">
                       <div class="py-2 text-uppercase">Remove</div>
                     </th>
+                    
                   </tr>
                 </thead>
                 <tbody>
@@ -80,22 +81,35 @@
                     <td class="border-0 align-middle text-center">{{$row->price*$row->quantity}}$</td>
                     
                     <td class="border-0 align-middle text-center"><a href="{{url('/cart/'.$row->id)}}" onclick="confirmation(event)" class="btn btn-danger delete "><i class="fa fa-trash"></i></a></td>
+                   
                   </tr>
+                 
+                    
                   <?php $totalprice=$totalprice + ($row->price*$row->quantity); ?>
                   @endforeach
-                                  
+              
                 </tbody>
               </table>
             </div>
             <!-- End -->
-            <hr class="my-3">
+            <hr class="my-12">
+           
             <div class="col-lg-12">
+            <div class="d-flex justify-content-between py-3 float-right">
+                    <!-- New button to direct to menu -->
+                    <div class="p-4">
+                      <!-- Your existing content here -->
+
+                      <!-- New button -->
+                      <a href="{{url('/menu')}}" class="btn btn-primary rounded-pill py-2 btn-block">Add new order</a>
+                    </div>
+            </div>
               
               <div class="p-4">
                 
                 <ul class="list-unstyled mb-4">
                   
-                  <li class="d-flex justify-content-between py-3 "><h5><strong>Total</strong></h5>
+                  <li class="d-flex justify-content-between py-3"><h5><strong>Total</strong></h5>
                     <h5 class="font-weight-bold">{{$totalprice}}$</h5>
                   </li>
                   

@@ -209,6 +209,8 @@ Route::controller(OrderController::class)->middleware('authadmin')->group(functi
     Route::get('/admin/invoice/{id}', 'invoice')->name('admin.invoice');
     Route::get('/admin/order/{id}', 'delete_order')->name('admin.delete_order');   
     Route::get('/admin/invoice_pdf/{id}', 'invoice_pdf')->name('admin.invoice_pdf');
+   
+
     
 
     // Route::post('admin.performAction', 'order')->name('admin.order');
@@ -275,14 +277,18 @@ Route::controller(SellerItemController::class)->middleware('authseller')->group(
 //================Seller Orders Management Route=========================//
 Route::controller(SellerOrderController::class)->middleware('authseller')->group(function () {
     Route::get('/seller/order', 'order')->name('seller.order');
-    Route::get('/seller/create_order', 'create_order')->name('seller.create_order');
-    Route::post('/seller/create_order', 'create_orderPost')->name('seller.create_order.post');
-    Route::get('/seller/update_order/{id}', 'update_order')->name('seller.update_order');
+
+    Route::get('/seller/detail_order/{id}', 'detail_order')->name('seller.detail_order');
+    Route::post('/seller/detail_order/{id}', 'detail_orderPost')->name('seller.detail_order.post');
+    // Route::post('/admin/detail_order/update-order-status', 'updateOrderStatus')->name('admin.detail_order.updateOrderStatus');
+    
     Route::post('/seller/update_order/{id}', 'update_orderPost')->name('seller.update_order.post');
     Route::post('/seller/update-order-status', 'updateOrderStatus')->name('seller.updateOrderStatus');
+    
     Route::get('/seller/invoice/{id}', 'invoice')->name('seller.invoice');
     Route::get('/seller/order/{id}', 'delete_order')->name('seller.delete_order');   
     Route::get('/seller/invoice_pdf/{id}', 'invoice_pdf')->name('seller.invoice_pdf');
+   
 })->middleware('cache');
 
 
@@ -323,21 +329,25 @@ Route::controller(AccountantItemController::class)->middleware('authaccountant')
     Route::get('/accountant/update_item/{id}', 'update_item')->name('accountant.update_item');
     Route::post('/accountant/update_item/{id}', 'update_itemPost')->name('accountant.update_item.post');
     Route::get('/accountant/item/{id}', 'delete_item')->name('accountant.delete_item');
-    Route::get('/accountant/item', 'filter_item')->name('accountant.filter_item');   
+    Route::get('/accountant/item', 'filter_item')->name('accountant.filter_item');
 })->middleware('cache');
 
 
 //================Accountant Orders Management Route=========================//
 Route::controller(AccountantOrderController::class)->middleware('authaccountant')->group(function () {
     Route::get('/accountant/order', 'order')->name('accountant.order');
-    Route::get('/accountant/create_order', 'create_order')->name('accountant.create_order');
-    Route::post('/accountant/create_order', 'create_orderPost')->name('accountant.create_order.post');
-    Route::get('/accountant/update_order/{id}', 'update_order')->name('accountant.update_order');
+
+    Route::get('/accountant/detail_order/{id}', 'detail_order')->name('accountant.detail_order');
+    Route::post('/accountant/detail_order/{id}', 'detail_orderPost')->name('accountant.detail_order.post');
+    // Route::post('/admin/detail_order/update-order-status', 'updateOrderStatus')->name('admin.detail_order.updateOrderStatus');
+    
     Route::post('/accountant/update_order/{id}', 'update_orderPost')->name('accountant.update_order.post');
     Route::post('/accountant/update-order-status', 'updateOrderStatus')->name('accountant.updateOrderStatus');
+    
     Route::get('/accountant/invoice/{id}', 'invoice')->name('accountant.invoice');
     Route::get('/accountant/order/{id}', 'delete_order')->name('accountant.delete_order');   
     Route::get('/accountant/invoice_pdf/{id}', 'invoice_pdf')->name('accountant.invoice_pdf');
+   
 })->middleware('cache');
 
 

@@ -40,16 +40,17 @@
             @endif
             <div>
             <a href="#" class="d-block">{{Auth::guard('web')->user()->name}}</a>
-            <p class="app-sidebar__user-designation">Accountant</p>
+            <p class="app-sidebar__user-designation">accountant</p>
             </div>
         </div>
         <ul class="app-menu">
             <li>
-                <a class="app-menu__item" href="{{url('/dashboard')}}">
-                    <i class="app-menu__icon fa fa-dashboard"></i>
-                    <span class="app-menu__label">Dashboard</span>
-                </a>
+              <a class="app-menu__item active" href="{{url('accountant/dashboard')}}">
+                  <i class="app-menu__icon fa fa-dashboard"></i>
+                  <span class="app-menu__label">Dashboard</span>
+              </a>
             </li>
+ 
             <li >
                 <a class="app-menu__item" href="{{url('/accountant/item')}}" >
                     <i class="fas fa-hamburger"></i>
@@ -68,6 +69,7 @@
                 </a>
                 
             </li>
+       
         </ul>
     </aside>
     <!-- Body-->
@@ -163,7 +165,7 @@
                                                             <td><strong>#</strong></td>
                                                             <td><strong>Item</strong></td>
                                                             <td class="text-center"><strong>Price</strong></td>
-                                                            <td class="text-center"><strong>Quantity</strong></td>
+                                                            <td class="text-center"><strong>Order Quantity</strong></td>
                                                             <td class="text-right"><strong>Totals</strong></td>
                                                         </tr>
                                                     </thead>
@@ -174,12 +176,13 @@
                                                             <td>{{ $index + 1 }}</td>
                                                             <td>{{ $orderItem->items->title }}</td>
                                                             <td class="text-center">${{ $orderItem->price }}</td>
-                                                            <td class="text-center">{{ $orderItem->quantity }}</td>
+                                                            <td class="text-center">{{ $orderItem->quantity }}</td>   
                                                             <td class="text-right">${{ $orderItem->price * $orderItem->quantity }}</td>
                                                         </tr>
                                                         <?php $totalprice=$totalprice + ($orderItem->price*$orderItem->quantity); ?>
                                                         @endforeach                             
                                                         <tr>
+                                                            
                                                             <td class="thick-line"></td>
                                                             <td class="thick-line"></td>
                                                             <td class="thick-line"></td>
@@ -187,6 +190,7 @@
                                                             <td class="thick-line text-right">{{$totalprice}}$</td>
                                                         </tr>
                                                         <tr>
+                                                            
                                                             <td class="no-line"></td>
                                                             <td class="no-line"></td>
                                                             <td class="no-line"></td>
@@ -195,13 +199,14 @@
                                                             <td class="no-line text-right">0$</td>
                                                         </tr>
                                                         <tr>
+                                                            
                                                             <td class="no-line"></td>
                                                             <td class="no-line"></td>
                                                             <td class="no-line"></td>
 
                                                             <td class="no-line text-center"><strong>Total</strong></td>
                                                             <td class="no-line text-right"><strong>{{$totalprice}}$</strong></td>
-                                                        </tr>
+                                                        </tr>                                
                                                     </tbody>
                                                 </table>
                                             </div>

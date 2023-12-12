@@ -28,13 +28,11 @@
         </div>
         <ul class="app-menu">
             <li>
-                <a class="app-menu__item" href="{{url('accountant/dashboard')}}">
-                    <i class="app-menu__icon fa fa-dashboard"></i>
-                    <span class="app-menu__label">Dashboard</span>
-                </a>
+              <a class="app-menu__item active" href="{{url('accountant/dashboard')}}">
+                  <i class="app-menu__icon fa fa-dashboard"></i>
+                  <span class="app-menu__label">Dashboard</span>
+              </a>
             </li>
-            <li >
-           
             <li >
                 <a class="app-menu__item active" href="{{url('/accountant/item')}}" >
                     <i class="fas fa-hamburger"></i>
@@ -132,13 +130,13 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($item as $row)
+                            @foreach($item->reverse() as $row)
                             <tr>
                                 <td>{{$count++}}</td>                              
                                 <td>{{$row->title}}</td>
                                 <!-- <td>{{$row->origin_price}}$</td> -->
                                 <td>{{$row->price}}$</td>
-                                <td>{{$row->quantity}}</td>
+                                <td>{{$row->store_quantity}}</td>
                                 <td>{{$row->menus->name_menu}}</td>
                                 <td>{{$row->description}}</td> 
                                 <td>{{$row->suppliers->description}}</td>

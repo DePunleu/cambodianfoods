@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    @include('admin.css.style')
+    @include('accountant.css.style')
     <!-- Main CSS-->
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <!-- Font-icon css-->
@@ -28,49 +28,32 @@
 </head>
 <body class="app sidebar-mini rtl">
     <!-- Navbar-->
-    @include('admin.layout.header')
+    @include('accountant.layout.header')
     <!-- Sidebar menu-->
-    @include('admin.layout.sidebar')
+    @include('accountant.layout.sidebar')
     <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
     <aside class="app-sidebar">
         <div class="app-sidebar__user">
             @if(!empty(Auth::guard('web')->user()->image))
             <img class="app-sidebar__user-avatar" src="{{asset('backend/images/'.Auth::guard('web')->user()->image)}}" width="70px" alt="User Image">
             @else
-            <img src="{{asset('backend/images/admin.png')}}" width="70px" class="img-circle elevation-2" alt="User Image">
+            <img src="{{asset('backend/images/accountant.png')}}" width="70px" class="img-circle elevation-2" alt="User Image">
             @endif
             <div>
             <a href="#" class="d-block">{{Auth::guard('web')->user()->name}}</a>
-            <p class="app-sidebar__user-designation">Admin</p>
+            <p class="app-sidebar__user-designation">Accountant</p>
             </div>
         </div>
         <ul class="app-menu">
             <li>
-                <a class="app-menu__item" href="{{url('admin/dashboard')}}">
-                    <i class="app-menu__icon fa fa-dashboard"></i>
-                    <span class="app-menu__label">Dashboard</span>
-                </a>
+              <a class="app-menu__item active" href="{{url('accountant/dashboard')}}">
+                  <i class="app-menu__icon fa fa-dashboard"></i>
+                  <span class="app-menu__label">Dashboard</span>
+              </a>
             </li>
-            
-            
+
             <li >
-                <a class="app-menu__item" href="{{url('/admin/users')}}" >
-                    <i class="fa fa-users"></i>&nbsp;&nbsp;&nbsp;
-                    <span class="app-menu__label">Users</span>         
-                </a>
-                
-            </li>
-            <li>
-                <a class="app-menu__item " href="{{url('/admin/menu')}}" >
-                    <i class="fas fa-utensils"></i>
-                    &nbsp;&nbsp;&nbsp;
-                    <span class="app-menu__label">Menus</span>
-                    
-                </a>
-                
-            </li>
-            <li >
-                <a class="app-menu__item" href="{{url('/admin/item')}}" >
+                <a class="app-menu__item" href="{{url('/accountant/item')}}" >
                     <i class="fas fa-hamburger"></i>
                     &nbsp;&nbsp;&nbsp;
                     <span class="app-menu__label">Items</span>
@@ -79,23 +62,13 @@
                 
             </li>
             <li >
-                <a class="app-menu__item active" href="{{url('/admin/order')}}" >
+                <a class="app-menu__item active" href="{{url('/accountant/order')}}" >
                     <i class="fa fa-shopping-cart"></i>
                     &nbsp;&nbsp;&nbsp;
                     <span class="app-menu__label">Orders</span>
                     
                 </a>
-                
-            </li>
-            <li >
-                <a class="app-menu__item" href="{{url('/admin/supplier')}}" >
-                    <i class="fas fa-users"></i>
-                    &nbsp;&nbsp;&nbsp;
-                    <span class="app-menu__label">Suppliers</span>
-                    
-                </a>
-                
-            </li>
+
         </ul>
     </aside>
     
@@ -264,7 +237,7 @@
                                                      
                                                         
                                                         <td>
-                                                        <a class="badge badge-danger delete" href="{{url('/admin/order/'.$order->id)}}" onclick="return confirm('Are you sure?')" title="Delete" data-toggle="tooltip">
+                                                        <a class="badge badge-danger delete" href="{{url('/accountant/order/'.$order->id)}}" onclick="return confirm('Are you sure?')" title="Delete" data-toggle="tooltip">
                                                                 <i class="fa fa-trash"></i>
                                                             </a>
                                                             &nbsp;   
@@ -293,11 +266,11 @@
             
     </main>
     <!-- Essential javascripts for application to work-->
-    @include('admin.js.script') 
+    @include('accountant.js.script') 
    
     <script>
     function printInvoice() {
-        var printWindow = window.open("{{ route('admin.invoice', ['id' => $order->id]) }}", "_blank");
+        var printWindow = window.open("{{ route('accountant.invoice', ['id' => $order->id]) }}", "_blank");
         printWindow.onload = function() {
             printWindow.print();
         };
@@ -314,7 +287,7 @@
         var iframe = document.getElementById('invoiceFrame');
 
         // Set the iframe content to the content of the invoice.blade.php file
-        iframe.src = "{{ route('admin.invoice', ['id' => $order->id]) }}";
+        iframe.src = "{{ route('accountant.invoice', ['id' => $order->id]) }}";
 
         // Wait for the iframe to load the content
         iframe.onload = function () {
@@ -332,7 +305,7 @@
 
         // Send an AJAX request to update the order status
         $.ajax({
-            url: "{{ route('admin.updateOrderStatus') }}",
+            url: "{{ route('accountant.updateOrderStatus') }}",
             type: "POST",
             data: {
                 _token: '{{ csrf_token() }}',

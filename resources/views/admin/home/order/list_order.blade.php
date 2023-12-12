@@ -147,7 +147,6 @@
                                 <th>Order Date</th>
                                 <th>Status</th>
                                 <th class="text-center">Action</th>
-                                <th class="text-center">Action</th>
                                 <th class="text-center"></th>
                             </tr>
                         </thead>
@@ -166,9 +165,10 @@
                                                 <span class="badge badge-primary">{{ $order->delivery_status }}</span>
                                             @elseif ($order->delivery_status === 'In-Progress')
                                                 <span class="badge badge-secondary">{{ $order->delivery_status }}</span>
-                                            @elseif ($order->delivery_status === 'Shipped')
+                                            {{--@elseif ($order->delivery_status === 'Shipped')
                                                 <span class="badge badge-warning">{{ $order->delivery_status }}</span>
-                                            @elseif ($order->delivery_status === 'Delivered')
+                                            --}}
+                                            @elseif ($order->delivery_status === 'Delivering')
                                                 <span class="badge badge-info">{{ $order->delivery_status }}</span>
                                             @elseif ($order->delivery_status === 'Completed')
                                                 <span class="badge badge-success">{{ $order->delivery_status }}</span>
@@ -180,7 +180,7 @@
                                     
                                     
                                 </td>
-                                <td>
+                                {{--<td>
                                     <select class="form-control order-status-select small-width" data-order-id="{{ $order->id }}" data-url="{{ route('admin.updateOrderStatus') }}">
                                         @foreach ($orderStatuses as $orderStatus)
                                             <option value="{{ $orderStatus }}" {{ $order->delivery_status == $orderStatus ? 'selected' : '' }}>
@@ -188,13 +188,14 @@
                                             </option>
                                         @endforeach
                                     </select>
+                                --}}
                                     
                                 </td>
                                 <td>
                                     <a href="{{ url('/admin/detail_order/'.$order->id) }}">
                                         <button type="button" class="btn btn-primary center-text" >
                                             <i class="fa fa-fw fa-lg fa-check-circle"></i>
-                                            Order Detail
+                                            View
                                         </button>
                                         </a>
                                     </td>
@@ -208,9 +209,9 @@
                                     </a>
                                     &nbsp;
                                     
-                                    <a class="badge badge-success view" href="{{url('/admin/invoice/'.$order->id)}}" title="View" data-toggle="tooltip">
+                                    {{--<a class="badge badge-success view" href="{{url('/admin/invoice/'.$order->id)}}" title="View" data-toggle="tooltip">
                                         <i class="fa fa-eye"></i>
-                                    </a>
+                                    </a>--}}
                                     
                                     
                                                             
@@ -231,7 +232,7 @@
     @include('admin.js.script') 
 
 <!-- Include jQuery library -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function() {
         $('#sampleTable').on('change', '.order-status-select', function() {
@@ -266,7 +267,7 @@
     });
 });
 
-</script>
+</script> -->
 <script>
     $(document).ready(function () {
         // Update status column color when select option changes

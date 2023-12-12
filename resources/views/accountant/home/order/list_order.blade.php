@@ -39,10 +39,10 @@
         </div>
         <ul class="app-menu">
             <li>
-                <a class="app-menu__item" href="{{url('accountant/dashboard')}}">
-                    <i class="app-menu__icon fa fa-dashboard"></i>
-                    <span class="app-menu__label">Dashboard</span>
-                </a>
+              <a class="app-menu__item active" href="{{url('accountant/dashboard')}}">
+                  <i class="app-menu__icon fa fa-dashboard"></i>
+                  <span class="app-menu__label">Dashboard</span>
+              </a>
             </li>
             <li >
                 <a class="app-menu__item" href="{{url('/accountant/item')}}" >
@@ -86,16 +86,28 @@
                         {{session('success')}}
                     </div>
                     @endif
+                    @if(session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+
+                    @if(session('error'))
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
+                        </div>
+                    @endif
+
                     <div class="table-title">
                         <div class="row">                
                             <div class="col-sm-10">
                                 <h2>All Orders</h2>
                             </div>
-                            <div class="col-sm-2">
-                                {{-- <a href="{{ route('accountant.create_order') }}">
+                            {{-- <div class="col-sm-2">
+                                <a href="{{ route('accountant.create_order') }}">
                                 <button type="button" class="btn btn-info add-new"><i class="fa fa-plus"></i> Add New</button>
-                                </a> --}}
-                            </div>
+                                </a>
+                            </div> --}}
                         </div><br>
                     </div>
                     <table class="table table-hover table-bordered" id="sampleTable">
@@ -112,10 +124,9 @@
                             </tr>
                         </thead>
                         <tbody >
-                            @foreach ($orders as $order)
+                            @foreach ($orders->reverse() as $order)
                             <tr  data-order-id="{{ $order->id }}">
                                 <td>{{$count++}}</td>   
-                                {{-- <td>{{ $loop->iteration }}</td>                                                               --}}
                                 <td>{{ $order->name }}</td>
                                 <td>{{ $order->orderItems->sum(function ($orderItem) { return $orderItem->price * $orderItem->quantity; }) }}$</td>
                                 <td>{{ $order->payment_status }}</td>
@@ -127,9 +138,10 @@
                                                 <span class="badge badge-primary">{{ $order->delivery_status }}</span>
                                             @elseif ($order->delivery_status === 'In-Progress')
                                                 <span class="badge badge-secondary">{{ $order->delivery_status }}</span>
-                                            @elseif ($order->delivery_status === 'Shipped')
+                                            {{--@elseif ($order->delivery_status === 'Shipped')
                                                 <span class="badge badge-warning">{{ $order->delivery_status }}</span>
-                                            @elseif ($order->delivery_status === 'Delivered')
+                                            --}}
+                                            @elseif ($order->delivery_status === 'Delivering')
                                                 <span class="badge badge-info">{{ $order->delivery_status }}</span>
                                             @elseif ($order->delivery_status === 'Completed')
                                                 <span class="badge badge-success">{{ $order->delivery_status }}</span>
@@ -141,7 +153,7 @@
                                     
                                     
                                 </td>
-                                <td>
+                                {{--<td>
                                     <select class="form-control order-status-select small-width" data-order-id="{{ $order->id }}" data-url="{{ route('accountant.updateOrderStatus') }}">
                                         @foreach ($orderStatuses as $orderStatus)
                                             <option value="{{ $orderStatus }}" {{ $order->delivery_status == $orderStatus ? 'selected' : '' }}>
@@ -149,8 +161,17 @@
                                             </option>
                                         @endforeach
                                     </select>
+                                --}}
                                     
                                 </td>
+                                <td>
+                                    <a href="{{ url('/accountant/detail_order/'.$order->id) }}">
+                                        <button type="button" class="btn btn-primary center-text" >
+                                            <i class="fa fa-fw fa-lg fa-check-circle"></i>
+                                            View
+                                        </button>
+                                        </a>
+                                    </td>
                                 <td class="text-center">
                                     {{-- <a class="badge badge-warning edit " href="{{url('/accountant/update_order/'.$order->id)}}" title="Update" data-toggle="tooltip">
                                         <i class="fa fa-edit"></i>
@@ -161,9 +182,9 @@
                                     </a>
                                     &nbsp;
                                     
-                                    <a class="badge badge-success view" href="{{url('/accountant/invoice/'.$order->id)}}" title="View" data-toggle="tooltip">
+                                    {{--<a class="badge badge-success view" href="{{url('/accountant/invoice/'.$order->id)}}" title="View" data-toggle="tooltip">
                                         <i class="fa fa-eye"></i>
-                                    </a>
+                                    </a>--}}
                                     
                                     
                                                             
@@ -176,13 +197,6 @@
                     
                     </div>
                 </div>
-                
-                <div class="d-print-none">
-                    <div class="float-right">
-                        <a href="javascript:window.print()" class="btn btn-success waves-effect waves-light"><i class="fa fa-print"></i></a>
-                    
-                    </div>
-                </div>                
             </div>
         </div>
             
@@ -191,7 +205,7 @@
     @include('accountant.js.script') 
 
 <!-- Include jQuery library -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function() {
         $('#sampleTable').on('change', '.order-status-select', function() {
@@ -226,7 +240,7 @@
     });
 });
 
-</script>
+</script> -->
 <script>
     $(document).ready(function () {
         // Update status column color when select option changes

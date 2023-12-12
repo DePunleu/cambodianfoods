@@ -27,7 +27,6 @@
             </div>
         </div>
         <ul class="app-menu">
-           
             <li >
                 <a class="app-menu__item active" href="{{url('/seller/item')}}" >
                     <i class="fas fa-hamburger"></i>
@@ -125,13 +124,13 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($item as $row)
+                            @foreach($item->reverse() as $row)
                             <tr>
                                 <td>{{$count++}}</td>                              
                                 <td>{{$row->title}}</td>
                                 <!-- <td>{{$row->origin_price}}$</td> -->
                                 <td>{{$row->price}}$</td>
-                                <td>{{$row->quantity}}</td>
+                                <td>{{$row->store_quantity}}</td>
                                 <td>{{$row->menus->name_menu}}</td>
                                 <td>{{$row->description}}</td> 
                                 <td>{{$row->suppliers->description}}</td>
