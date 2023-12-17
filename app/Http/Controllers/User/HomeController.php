@@ -12,6 +12,7 @@ use App\Models\User;
 use App\Models\Item;
 use App\Models\Cart;
 use App\Models\Menu;
+use App\Models\Submenu;
 
 
 
@@ -39,7 +40,8 @@ class HomeController extends Controller
         $user_id = Auth::id();
         $count = Cart::where('user_id',$user_id)->count();
         $menu = Menu::all();
-        return view('user.home.subpages.menu',compact('item','count','menu'));
+        $submenu = Submenu::all();
+        return view('user.home.subpages.menu',compact('item','count','menu','submenu'));
     }
     //================End Method==================//
     public function showMenuItems($menuId)
@@ -49,8 +51,32 @@ class HomeController extends Controller
         $item = Item::where('menu_id', $menuId)->paginate(9);
         //$item = Item::paginate(9);
         $menu = Menu::all();
-        return view('user.home.subpages.menu_items', compact('count','item','menu'));
+        $submenu = Submenu::all();
+        return view('user.home.subpages.menu_items', compact('count','item','menu','submenu'));
     }
+
+      //================Submenu==================//
+      public function submenu()
+      {
+         // $item = Item::all();
+          $item = Item::paginate(9);
+          $user_id = Auth::id();
+          $count = Cart::where('user_id',$user_id)->count();
+          $submenu = Submenu::all();
+          $menu = Menu::all();
+          return view('user.home.subpages.submenu',compact('item','count','submenu','menu'));
+      }
+      //================End Method==================//
+      public function showSubmenuItems($submenuId)
+      {
+          $user_id = Auth::id();
+          $count = Cart::where('user_id',$user_id)->count();
+          $item = Item::where('submenu_id', $submenuId)->paginate(9);
+          //$item = Item::paginate(9);
+          $submenu = Submenu::all();
+          $menu = Menu::all();
+          return view('user.home.subpages.submenu_items', compact('count','item','submenu','menu'));
+      }
 
     //================About==================//
     public function about()

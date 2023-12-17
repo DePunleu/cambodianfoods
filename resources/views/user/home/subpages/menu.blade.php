@@ -186,7 +186,6 @@
   </div>
 
   <!-- food section -->
-
   <section class="food_section layout_padding">
     <div class="container">
       <div class="heading_container heading_center">
@@ -195,16 +194,32 @@
         </h2>
       </div>
       <div class="d-flex justify-content-center">
-        <ul class="filters_menu custom rounded-pill">
-          <li class="active text-warning" data-filter="*">All</li>
-          @foreach ($menu as $row)
-          <li data-filter=".{{ $row->name_menu }}">
-            <a href="{{ route('user.menu_items', ['menuId' => $row->id]) }}" class="menu-link text-dark" data-menu="{{ $row->name_menu }}">{{ $row->name_menu }}</a>
-          </li>
-          @endforeach
-        
-        </ul>
-      </div>
+    <ul class="filters_menu custom rounded-pill">
+      <li class="{{ Request::route('menuId') ? '' : 'active' }}" data-filter="*">
+          <a href="{{ url('/menu') }}" class="menu-link {{ Request::route('menuId') ? 'text-dark' : 'text-white' }}">All</a>
+      </li>
+        @foreach ($menu as $row)
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="menuDropdown{{$row->id}}" data-bs-toggle="dropdown" aria-expanded="false">
+                    {{$row->name_menu}}
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="menuDropdown{{$row->id}}">
+                    <!-- Loop through submenus related to the current menu -->
+                    @foreach ($row->submenus as $submenu)
+                        <li>
+                            <a href="{{ route('user.submenu_items', ['submenuId' => $submenu->id]) }}" class="submenu-link text-dark" data-submenu="{{ $submenu->submenu_name}}">
+                                {{$submenu->submenu_name}}
+                            </a>
+                        </li>
+                    @endforeach
+                    <!-- Add more submenu items or actions as needed -->
+                </ul>
+            </div>
+        @endforeach
+    </ul>
+</div>
+
+
       <div class="filters-content">
         <div class="row grid">
           @foreach ($item as $data)
@@ -346,4 +361,3 @@
   
 </body>
 </html>
-

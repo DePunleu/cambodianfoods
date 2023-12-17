@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Cart;
 use App\Models\Item;
 
-
 class ItemDetailController extends Controller
 {
     //================Show Item Detail==================//
@@ -28,10 +27,21 @@ class ItemDetailController extends Controller
             $user_id = Auth::id();
             $item_id = $id;
             $quantity = $request->input('item_quantity');
+            
+            // Retrieve the item's store quantity
+            $item = Item::find($item_id);
+            $storeQuantity = $item->store_quantity;
+
+            // Check if the requested quantity exceeds the available store quantity or is less than 1
+            if ($quantity > $storeQuantity || $quantity < 1) {
+                return redirect()->back()->with('error', 'Invalid quantity.');
+            }
+
             // Check if the item already exists in the cart for the user
             $existingCartItem = Cart::where('user_id', $user_id)
                 ->where('item_id', $item_id)
                 ->first();
+
             if ($existingCartItem) {
                 // Item already exists in the cart, increase the quantity
                 $existingCartItem->quantity += $quantity != null && is_numeric($quantity) ? $quantity : 1;

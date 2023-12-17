@@ -22,6 +22,7 @@ class Item extends Model
         'store_quantity',
         'supplier_id',
         'menu_id',
+        'submenu_id',
         'description',
         'image',
         'num_review',
@@ -36,6 +37,10 @@ class Item extends Model
     public function menus()
     {
         return $this->belongsTo(Menu::class, 'menu_id');
+    }
+    public function submenus()
+    {
+        return $this->belongsTo(Submenu::class, 'submenu_id');
     }
 
     public function reviews()

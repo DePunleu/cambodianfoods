@@ -69,6 +69,24 @@
                 </a>
                 
             </li>
+            <li>
+                <a class="app-menu__item" href="{{url('/admin/submenu')}}" >
+                    <i class="fas fa-utensils"></i>
+                    &nbsp;&nbsp;&nbsp;
+                    <span class="app-menu__label">Sub Menus</span>
+                    
+                </a>
+                
+            </li>
+            <li>
+                <a class="app-menu__item" href="{{url('/admin/menu')}}" >
+                    <i class="fas fa-utensils"></i>
+                    &nbsp;&nbsp;&nbsp;
+                    <span class="app-menu__label">Sub Menus</span>
+                    
+                </a>
+                
+            </li>
             <li >
                 <a class="app-menu__item" href="{{url('/admin/item')}}" >
                     <i class="fas fa-hamburger"></i>

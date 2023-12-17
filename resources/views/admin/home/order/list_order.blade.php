@@ -62,6 +62,15 @@
                 </a>
                 
             </li>
+            <li>
+                <a class="app-menu__item" href="{{url('/admin/submenu')}}" >
+                    <i class="fas fa-utensils"></i>
+                    &nbsp;&nbsp;&nbsp;
+                    <span class="app-menu__label">Sub Menus</span>
+                    
+                </a>
+                
+            </li>
             <li >
                 <a class="app-menu__item" href="{{url('/admin/item')}}" >
                     <i class="fas fa-hamburger"></i>
@@ -232,42 +241,8 @@
     @include('admin.js.script') 
 
 <!-- Include jQuery library -->
-<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-    $(document).ready(function() {
-        $('#sampleTable').on('change', '.order-status-select', function() {
-        var select = $(this);
-        var orderId = select.data('order-id');
-        var status = select.val();
-        var url = select.data('url');
-        // Send an AJAX request to update the status
-        $.ajax({
-            url: url,
-            type: 'POST',
-            data: {
-                _token: '{{ csrf_token() }}',
-                orderId: orderId,
-                status: status
-            },
-            success: function(response) {
-                console.log('AJAX request successful');
-                console.log(response); // Debug: Check the response object
-                if (response.success) {
-                    // Update the delivery status text
-                    $('#delivery-status-' + orderId).text(status);
-                } else {
-                    console.log(response.message);
-                }
-            },
-            error: function(xhr, status, error) {
-                console.log('AJAX request failed');
-                console.log(error); // Debug: Check the error message
-            }
-        });
-    });
-});
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-</script> -->
 <script>
     $(document).ready(function () {
         // Update status column color when select option changes

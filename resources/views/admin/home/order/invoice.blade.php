@@ -66,6 +66,15 @@
                 </a>
                 
             </li>
+            <li>
+                <a class="app-menu__item" href="{{url('/admin/submenu')}}" >
+                    <i class="fas fa-utensils"></i>
+                    &nbsp;&nbsp;&nbsp;
+                    <span class="app-menu__label">Sub Menus</span>
+                    
+                </a>
+                
+            </li>
             <li >
                 <a class="app-menu__item" href="{{url('/admin/item')}}" >
                     <i class="fas fa-hamburger"></i>
@@ -75,20 +84,12 @@
                 </a>
                 
             </li>
+        
             <li >
                 <a class="app-menu__item active" href="{{url('/admin/order')}}" >
                     <i class="fa fa-shopping-cart"></i>
                     &nbsp;&nbsp;&nbsp;
                     <span class="app-menu__label">Orders</span>
-                    
-                </a>
-                
-            </li>
-            <li >
-                <a class="app-menu__item" href="{{url('/admin/supplier')}}" >
-                    <i class="fas fa-users"></i>
-                    &nbsp;&nbsp;&nbsp;
-                    <span class="app-menu__label">Suppliers</span>
                     
                 </a>
                 
@@ -138,10 +139,10 @@
                                         <div class="col-md-6">
                                             <address>
                                             <strong>Billed From:</strong><br>
-                                                Cambodian Foods<br>
-                                                +84 879274961<br>
-                                                cambodianfoods@gmail.com<br>
-                                                Phnom Penh Cambodia
+                                                Khmer Foods<br>
+                                                +84 888255118<br>
+                                                khmerfoods@gmail.com<br>
+                                                Ngo 74, Truong Chinh, Phuong Mai, Dong Da, Hanoi
                                                 
                                             </address>
                                         </div>
@@ -188,7 +189,7 @@
                                                             <td><strong>#</strong></td>
                                                             <td><strong>Item</strong></td>
                                                             <td class="text-center"><strong>Price</strong></td>
-                                                            <td class="text-center"><strong>Order Quantity</strong></td>
+                                                            <td class="text-center"><strong>Quantity</strong></td>
                                                             <td class="text-right"><strong>Totals</strong></td>
                                                         </tr>
                                                     </thead>
@@ -199,13 +200,12 @@
                                                             <td>{{ $index + 1 }}</td>
                                                             <td>{{ $orderItem->items->title }}</td>
                                                             <td class="text-center">${{ $orderItem->price }}</td>
-                                                            <td class="text-center">{{ $orderItem->quantity }}</td>   
+                                                            <td class="text-center">{{ $orderItem->quantity }}</td>
                                                             <td class="text-right">${{ $orderItem->price * $orderItem->quantity }}</td>
                                                         </tr>
                                                         <?php $totalprice=$totalprice + ($orderItem->price*$orderItem->quantity); ?>
                                                         @endforeach                             
                                                         <tr>
-                                                            
                                                             <td class="thick-line"></td>
                                                             <td class="thick-line"></td>
                                                             <td class="thick-line"></td>
@@ -213,7 +213,6 @@
                                                             <td class="thick-line text-right">{{$totalprice}}$</td>
                                                         </tr>
                                                         <tr>
-                                                            
                                                             <td class="no-line"></td>
                                                             <td class="no-line"></td>
                                                             <td class="no-line"></td>
@@ -222,14 +221,13 @@
                                                             <td class="no-line text-right">0$</td>
                                                         </tr>
                                                         <tr>
-                                                            
                                                             <td class="no-line"></td>
                                                             <td class="no-line"></td>
                                                             <td class="no-line"></td>
 
                                                             <td class="no-line text-center"><strong>Total</strong></td>
                                                             <td class="no-line text-right"><strong>{{$totalprice}}$</strong></td>
-                                                        </tr>                                
+                                                        </tr>
                                                     </tbody>
                                                 </table>
                                             </div>

@@ -51,6 +51,15 @@
                 </a>
                 
             </li>
+            <li>
+                <a class="app-menu__item" href="{{url('/admin/submenu')}}" >
+                    <i class="fas fa-utensils"></i>
+                    &nbsp;&nbsp;&nbsp;
+                    <span class="app-menu__label">Sub Menus</span>
+                    
+                </a>
+                
+            </li>
             <li >
                 <a class="app-menu__item active" href="{{url('/admin/item')}}" >
                     <i class="fas fa-hamburger"></i>
@@ -149,6 +158,17 @@
                                         <option value="{{$item->menus->name_menu}}" selected="">{{$item->menus->name_menu}} </option>
                                         @foreach($menu as $menu)
                                         <option value="{{$menu->name_menu}}">{{$menu->name_menu}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="control-label col-md-3">Submenu</label>
+                                <div class="col-md-8">
+                                    <select class="form-control" name="item_submenu" required="">
+                                        <option value="{{$item->submenus->submenu_name}}" selected="">{{$item->submenus->submenu_name}} </option>
+                                        @foreach($submenu as $submenu)
+                                        <option value="{{$submenu->submenu_name}}">{{$submenu->submenu_name}}</option>
                                         @endforeach
                                     </select>
                                 </div>

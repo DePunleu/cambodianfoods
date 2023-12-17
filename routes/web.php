@@ -21,6 +21,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ItemController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\SupplierController;
+use App\Http\Controllers\Admin\SubmenuController;
 
 
 
@@ -91,6 +92,8 @@ Route::controller(ProfileController::class)->middleware('authuser')->group(funct
 Route::controller(HomeController::class)->group(function () {
     Route::get('/menu', 'menu')->name('user.menu');
     Route::get('/menu/{menuId}', 'showMenuItems')->name('user.menu_items');
+    Route::get('/submenu', 'submenu')->name('user.submenu');
+    Route::get('/submenu/{submenuId}', 'showSubmenuItems')->name('user.submenu_items');
     Route::get('/about', 'about')->name('user.about'); 
     Route::get('/search', 'search')->name('user.search'); 
 })->middleware('cache');
@@ -181,6 +184,15 @@ Route::controller(MenuController::class)->middleware('authadmin')->group(functio
     Route::post('/admin/update_menu/{id}', 'update_menuPost')->name('admin.update_menu.post');
     Route::get('/admin/menu/{id}', 'delete_menu')->name('admin.delete_menu');   
 })->middleware('cache');
+//================Admin Sub-Menus Management Route=========================//
+Route::controller(SubmenuController::class)->middleware('authadmin')->group(function () {
+    Route::get('/admin/submenu', 'submenu')->name('admin.submenu');
+    Route::get('/admin/create_submenu', 'create_submenu')->name('admin.create_submenu');
+    Route::post('/admin/create_submenu', 'create_submenuPost')->name('admin.create_submenu.post');
+    Route::get('/admin/update_submenu/{id}', 'update_submenu')->name('admin.update_submenu');
+    Route::post('/admin/update_submenu/{id}', 'update_submenuPost')->name('admin.update_submenu.post');
+    Route::get('/admin/submenu/{id}', 'delete_submenu')->name('admin.delete_submenu');   
+})->middleware('cache');
 
 //================Admin Items Management Route=========================//
 Route::controller(ItemController::class)->middleware('authadmin')->group(function () {
@@ -191,6 +203,9 @@ Route::controller(ItemController::class)->middleware('authadmin')->group(functio
     Route::post('/admin/update_item/{id}', 'update_itemPost')->name('admin.update_item.post');
     Route::get('/admin/item/{id}', 'delete_item')->name('admin.delete_item');
     Route::get('/admin/item', 'filter_item')->name('admin.filter_item');
+    //Route::get('/get-submenus/{menuId}', 'getSubmenus')->name('submenus');
+    Route::get('/get-submenus/{menuId}', 'getSubmenus')->name('admin.getSubmenus');
+    
 })->middleware('cache');
 
 

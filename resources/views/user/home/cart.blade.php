@@ -55,6 +55,9 @@
                       <div class="py-2 text-uppercase">Quantity</div>
                     </th>
                     <th scope="col" class="border-0 bg-light">
+                      <div class="py-2 text-uppercase">Remaining</div>
+                    </th>
+                    <th scope="col" class="border-0 bg-light">
                       <div class="py-2 text-uppercase">Subtotal</div>
                     </th>
                     <th scope="col" class="border-0 bg-light">
@@ -78,6 +81,7 @@
                     <td class="border-0 align-middle p-4 text-center ">
                       <input type="number" min="1" name="cart_quantity" value="{{$row->quantity}}" class="form-control form-control-sm custom-input text-center quantity cart_update">
                     </td>
+                    <td class="border-0 align-middle text-center">{{$row->store_quantity}}</td>
                     <td class="border-0 align-middle text-center">{{$row->price*$row->quantity}}$</td>
                     
                     <td class="border-0 align-middle text-center"><a href="{{url('/cart/'.$row->id)}}" onclick="confirmation(event)" class="btn btn-danger delete "><i class="fa fa-trash"></i></a></td>
@@ -183,7 +187,6 @@
       });
     }
   </script>
-
 </body>
 </html>
 

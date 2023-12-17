@@ -32,12 +32,21 @@
     <section class="py-10 item_detail min-vh-100">
         <div class="container px-4 px-lg-5 my-5">
             <div class="row gx-4 gx-lg-5 align-items-center">
+            <!-- Display error message if user order exceeds available stock -->
+                @if(session()->has('error'))
+                    <div class="alert alert-danger" role="alert">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        {{session('error')}}
+                    </div>
+                @endif
                 <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="upload/item_images/{{$item->image}}" alt="..." /></div>
                 <div class="col-md-6">
                     <h4 class=" fw-bolder">{{ $item->title }}</h4>
                     <div class="fs-5 ">
                         <h4 class="item_price"><strong>${{ $item->price }}</strong></h4>
                         <span> {{ $item->orderItems->count() }} sold</span>
+                        <br>
+                        <span>{{ $item->store_quantity }} remaining</span>
                         <div class="stars">
                             @php
                                 $rating = $item->reviews->count() > 0 ? $item->reviews->avg('stars_rated') : 0;
@@ -59,7 +68,7 @@
                         <span class="review-no">{{ $item->reviews->count() }} reviews</span>
                     </div>
                     <p class="lead">{{ $item->description }}</p>
-                    <form action="{{url('add_cart', ['id' => $item->id])}}" method="POST">
+                    {{--<form action="{{url('add_cart', ['id' => $item->id])}}" method="POST">
                         @csrf
                         <div class="d-flex">
                             <input class="form-control text-center me-3" name="item_quantity" id="inputQuantity" type="number" min="1" value="1" style="max-width: 3rem" />
@@ -69,7 +78,17 @@
                             </button>
                         </div>
                     </form>
-                
+                    --}}
+                    <form action="{{ url('add_cart', ['id' => $item->id]) }}" method="POST">
+                        @csrf
+                        <div class="d-flex">
+                            <input class="form-control text-center me-3" name="item_quantity" id="inputQuantity" type="number" min="1" max="{{ $item->store_quantity }}" value="1" style="max-width: 3rem" />
+                            <button class="btn btn-yellow bg-dark text-white flex-shrink-0" type="submit">
+                                <i class="fa fa-shopping-cart"></i>
+                                Add to cart
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
             <hr>

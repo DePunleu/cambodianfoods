@@ -51,6 +51,15 @@
                 </a>
                 
             </li>
+            <li>
+                <a class="app-menu__item" href="{{url('/admin/submenu')}}" >
+                    <i class="fas fa-utensils"></i>
+                    &nbsp;&nbsp;&nbsp;
+                    <span class="app-menu__label">Sub Menus</span>
+                    
+                </a>
+                
+            </li>
             <li >
                 <a class="app-menu__item active" href="{{url('/admin/item')}}" >
                     <i class="fas fa-hamburger"></i>
@@ -144,15 +153,26 @@
                             <div class="form-group row">
                                 <label class="control-label col-md-3">Menu</label>
                                 <div class="col-md-8">
-                                    <select class="form-control" name="item_menu" required="">
-                                        <option value="" selected="">Add a menu here </option>
-                                        @foreach($menu as $menu)
-                                        <option value="{{$menu->name_menu}}">{{$menu->name_menu}}</option>
+                                    <select class="form-control" name="item_menu" id="item_menu" required="">
+                                        <option value="" selected="">Add a menu here</option>
+                                        @foreach($menu as $m)
+                                        <option value="{{$m->id}}">{{$m->name_menu}}</option>
                                         @endforeach
                                     </select>
                                 </div>
-                                
                             </div>
+                            <div class="form-group row">
+                                <label class="control-label col-md-3">Sub Menu</label>
+                                <div class="col-md-8">
+                                    <select class="form-control" name="item_submenu" id="item_submenu" required="">
+                                        <option value="" selected="">Add a sub menu here</option>
+                                        @foreach($submenus as $submenu)
+                                        <option value="{{$submenu->id}}">{{$submenu->submenu_name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
                             <div class="form-group row">
                                 <label class="control-label col-md-3">Supplier</label>
                                 <div class="col-md-8">
@@ -196,6 +216,38 @@
     </main>
     <!-- Essential javascripts for application to work-->
     @include('admin.js.script') 
+    <!-- Modify the JavaScript section in create_item.blade.php -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('#item_menu').change(function() {
+            var menuId = $(this).val();
+            if (menuId) {
+                $.ajax({
+                    type: 'GET',
+                    url: '{{ route("admin.getSubmenus", ["menuId" => "__menuId"]) }}'.replace('__menuId', menuId),
+                    success: function(response) {
+                        $('#item_submenu').empty();
+                        if (response && response.submenus) {
+                            $.each(response.submenus, function(key, value) {
+                                $('#item_submenu').append('<option value="' + value.id + '">' + value.submenu_name + '</option>');
+                            });
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(xhr.responseText);
+                    }
+                });
+            } else {
+                $('#item_submenu').empty();
+            }
+        });
+    });
+    </script>
+
+
+
+
     
 </body>
 </html>

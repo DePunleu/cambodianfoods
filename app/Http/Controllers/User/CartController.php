@@ -51,7 +51,7 @@ class CartController extends Controller
             $counts = 1;
             $count = Cart::where('user_id',$user_id)->count();
             $cart = DB::table('carts')->where('user_id',$user_id)->join('items','carts.item_id','=','items.id')
-            ->select('carts.*','items.title','items.price','items.image')->orderBy('carts.id','desc')->get();
+            ->select('carts.*','items.title','items.price','items.image','items.store_quantity')->orderBy('carts.id','desc')->get();
             return view('user.home.cart',compact('count','cart','counts'));
         }
         else
