@@ -116,6 +116,7 @@
                             <th>Price</th>
                             <th>Quantity</th>
                             <th>Menu</th>
+                            <th>SubMenu</th>
                             <th>Description</th>
                             <th>Supplier</th>
                             <th>Image</th>
@@ -132,6 +133,7 @@
                                 <td>{{$row->price}}$</td>
                                 <td>{{$row->store_quantity}}</td>
                                 <td>{{$row->menus->name_menu}}</td>
+                                <td>{{$row->submenus->submenu_name}}</td>
                                 <td>{{$row->description}}</td> 
                                 <td>{{$row->suppliers->description}}</td>
                                 

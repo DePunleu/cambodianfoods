@@ -117,8 +117,18 @@
                                         <option value="{{$menu->name_menu}}">{{$menu->name_menu}}</option>
                                         @endforeach
                                     </select>
+                                </div> 
+                            </div>
+                            <div class="form-group row">
+                                <label class="control-label col-md-3">Sub Menu</label>
+                                <div class="col-md-8">
+                                    <select class="form-control" name="item_submenu" id="item_submenu" required="">
+                                        <option value="" selected="">Add a sub menu here</option>
+                                        @foreach($submenus as $submenu)
+                                        <option value="{{$submenu->id}}">{{$submenu->submenu_name}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
-                                
                             </div>
                             <div class="form-group row">
                                 <label class="control-label col-md-3">Supplier</label>

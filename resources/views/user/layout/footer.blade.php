@@ -75,8 +75,6 @@
         <p>
           &copy; <span id="displayYear"></span> All Rights Reserved By
           <a href="https://html.design/">De Punleu</a><br><br>
-          {{-- &copy; <span id="displayYear"></span> Distributed By --}}
-          {{-- <a href="https://themewagon.com/" target="_blank">ChatGPT</a> --}}
         </p>
       </div>
     </div>

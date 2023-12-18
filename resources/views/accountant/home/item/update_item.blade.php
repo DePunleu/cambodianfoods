@@ -28,7 +28,7 @@
         </div>
         <ul class="app-menu">
             <li>
-              <a class="app-menu__item active" href="{{url('accountant/dashboard')}}">
+              <a class="app-menu__item" href="{{url('accountant/dashboard')}}">
                   <i class="app-menu__icon fa fa-dashboard"></i>
                   <span class="app-menu__label">Dashboard</span>
               </a>
@@ -122,6 +122,17 @@
                                         <option value="{{$item->menus->name_menu}}" selected="">{{$item->menus->name_menu}} </option>
                                         @foreach($menu as $menu)
                                         <option value="{{$menu->name_menu}}">{{$menu->name_menu}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="control-label col-md-3">Submenu</label>
+                                <div class="col-md-8">
+                                    <select class="form-control" name="item_submenu" required="">
+                                        <option value="{{$item->submenus->submenu_name}}" selected="">{{$item->submenus->submenu_name}} </option>
+                                        @foreach($submenu as $submenu)
+                                        <option value="{{$submenu->submenu_name}}">{{$submenu->submenu_name}}</option>
                                         @endforeach
                                     </select>
                                 </div>

@@ -125,7 +125,7 @@ class SellerItemController extends Controller
                 $query->where('name_menu', 'LIKE', "%$filter%");
             })
             ->orWhere('menu_id', $filter)
-            ->paginate(20);
+            ->get();
         return view('seller.home.item.list_item')
         ->with('count', $count)
         ->with('menu', $menu)

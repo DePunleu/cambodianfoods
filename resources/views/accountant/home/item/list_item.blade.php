@@ -28,7 +28,7 @@
         </div>
         <ul class="app-menu">
             <li>
-              <a class="app-menu__item active" href="{{url('accountant/dashboard')}}">
+              <a class="app-menu__item" href="{{url('accountant/dashboard')}}">
                   <i class="app-menu__icon fa fa-dashboard"></i>
                   <span class="app-menu__label">Dashboard</span>
               </a>
@@ -122,6 +122,7 @@
                             <th>Price</th>
                             <th>Quantity</th>
                             <th>Menu</th>
+                            <th>SubMenu</th>
                             <th>Description</th>
                             <th>Supplier</th>
                             <th>Image</th>
@@ -138,6 +139,7 @@
                                 <td>{{$row->price}}$</td>
                                 <td>{{$row->store_quantity}}</td>
                                 <td>{{$row->menus->name_menu}}</td>
+                                <td>{{$row->submenus->submenu_name}}</td>
                                 <td>{{$row->description}}</td> 
                                 <td>{{$row->suppliers->description}}</td>
                                 

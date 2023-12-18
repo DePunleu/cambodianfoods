@@ -153,7 +153,7 @@ class ItemController extends Controller
             $item->where('submenu_id', $submenuId);
         }
         
-        $item = $item->paginate(20);
+        $item = $item->get();
     
         return view('admin.home.item.list_item')
         ->with('count', $count)

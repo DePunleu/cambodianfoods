@@ -121,6 +121,17 @@
                                 </div>
                             </div>
                             <div class="form-group row">
+                                <label class="control-label col-md-3">Submenu</label>
+                                <div class="col-md-8">
+                                    <select class="form-control" name="item_submenu" required="">
+                                        <option value="{{$item->submenus->submenu_name}}" selected="">{{$item->submenus->submenu_name}} </option>
+                                        @foreach($submenu as $submenu)
+                                        <option value="{{$submenu->submenu_name}}">{{$submenu->submenu_name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label class="control-label col-md-3">Description</label>
                                 <div class="col-md-8">
                                     <input class="form-control" name="item_description" type="text" value="{{$item->description}}" placeholder="Enter Description">

@@ -125,7 +125,7 @@ class AccountantItemController extends Controller
                 $query->where('name_menu', 'LIKE', "%$filter%");
             })
             ->orWhere('menu_id', $filter)
-            ->paginate(20);
+            ->get();
         return view('accountant.home.item.list_item')
         ->with('count', $count)
         ->with('menu', $menu)

@@ -217,8 +217,7 @@
   <!-- end food section -->
   <!-- about section -->
   <!-- end about section -->
-  <!-- book section -->
-  <!-- end book section -->
+ 
 
   <!-- client section -->
 
@@ -232,8 +231,8 @@
             <div class="testimonial-item bg-dark text-light border rounded p-4  ">
                 <i class="fa fa-quote-left fa-2x text-warning mb-3"></i>
                 <p>
-                  I have been to this place many times with friends,family as well as solo.
-                  A very friendly atmosphere with polite staff.
+                At first sip, the Passion Fruit Smoothie from "Fruit Haven Smoothie Bar" was an immediate transport to a tropical paradise.
+                Radiating with a vibrant golden hue, this concoction of fresh passion fruit, creamy yogurt, and a hint of honey was nothing short of bliss in a cup.
                 <div class="d-flex align-items-center">
                     <img class="img-fluid flex-shrink-0 rounded-circle" src="frontend/user_images/202305050814IMG_8904.jpg" style="width: 50px; height: 50px;">
                     <div class="ps-3">
@@ -245,8 +244,7 @@
             <div class="testimonial-item bg-dark text-light border rounded p-4">
                 <i class="fa fa-quote-left fa-2x text-warning mb-3"></i>
                 <p>
-                  This place is customer friendly, ambience is amazing and food is mouth watering ❤️loved the concept of their infrastructure..!!
-                </p>
+                Bobor Chicken, The dish's consistency was beautifully thick, with the rice blending seamlessly into the flavorful broth. The chicken, cooked to perfection, effortlessly fell apart, adding a velvety touch to each spoonful.
                 <div class="d-flex align-items-center">
                     <img class="img-fluid flex-shrink-0 rounded-circle" src="frontend/user_images/202330051149bunny-155674_1280.png" style="width: 50px; height: 50px;">
                     <div class="ps-3">
@@ -258,7 +256,7 @@
             <div class="testimonial-item bg-dark text-light border rounded p-4">
                 <i class="fa fa-quote-left fa-2x text-warning mb-3"></i>
                 <p>
-                  The location is good for a break on highway. Food choice average. Food preparation good.
+                Iced-coffee, The coffee's texture was impeccably smooth, even with the presence of ice, maintaining its velvety consistency. The chill of the ice didn't compromise the rich essence of the brew, allowing it to retain its robust flavor.
                 </p>
                 <div class="d-flex align-items-center">
                     <img class="img-fluid flex-shrink-0 rounded-circle" src="frontend/user_images/202309050921penguin-158551_1280.png" style="width: 50px; height: 50px;">
@@ -271,7 +269,7 @@
             <div class="testimonial-item bg-dark text-light border rounded p-4">
                 <i class="fa fa-quote-left fa-2x text-warning mb-3"></i>
                 <p>
-                  Ambience is quite good of this place .While we reach there, A guitarist was playing very melodious tune.
+                Jek Ktis, The glutinous rice cakes were perfectly soft and chewy, offering a comforting texture with each bite. The coconut cream topping provided a velvety contrast, adding a creamy element to the overall experience.
                 </p>
                 <div class="d-flex align-items-center">
                     <img class="img-fluid flex-shrink-0 rounded-circle" src="frontend/user_images/202330051151doctor-2027768_1280.png" style="width: 50px; height: 50px;">

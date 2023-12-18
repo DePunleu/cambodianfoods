@@ -261,7 +261,7 @@ a:focus {
 .header_section {
   padding: 10px 0;
   /* background-color: #0c0c0c !important; */
-  background-color: rgb(53, 30, 30) !important;
+  background-color: rgb(42, 2, 2) !important;
   z-index: 9999;
   position: fixed;
   width: 100%;
@@ -1038,7 +1038,7 @@ a:focus {
 
 /* footer section*/
 .footer_section {
-  background-color: #222831;
+  background-color: #222831 !important;
   color: #ffffff;
   padding: 75px 0 40px 0;
   text-align: center;

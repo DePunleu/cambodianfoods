@@ -161,7 +161,7 @@
                             <th>Price</th>
                             <th>Store Quantity</th>
                             <th>Menu</th>
-                            <th>Sub-Menu</th>
+                            <th>SubMenu</th>
                             <th>Description</th>
                             <th>Image</th>
                             <th>Created</th>
@@ -193,10 +193,7 @@
                                     <a class="badge badge-danger delete" href="{{url('/admin/item/'.$row->id)}}" onclick="return confirm('Are you sure?')" title="Delete" data-toggle="tooltip">
                                     <i class="fa fa-trash "></i>
                                     </a>
-                                    {{-- &nbsp;
-                                    <a class="badge badge-success view" title="View" data-toggle="tooltip">
-                                    <i class="fa fa-eye "></i>
-                                    </a>   --}}
+                                   
                                 </td>
                             </tr>
                             @endforeach() 
