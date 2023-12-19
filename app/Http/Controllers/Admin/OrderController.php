@@ -150,7 +150,6 @@ class OrderController extends Controller
         return view('admin.home.order.list_order',compact('count','orders','orderStatuses','items'));       
     }
         
-    
     //==================End Method=======================//
 
 }

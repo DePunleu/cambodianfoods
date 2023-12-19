@@ -251,7 +251,13 @@
                     </div>
                 </div>
             </div>
+                
         </div>
+        <div class="d-print-none">
+            <div class="float-right">
+                <a href="javascript:window.print()" class="btn btn-success waves-effect waves-light"><i class="fa fa-print"></i></a>
+            </div>
+        </div> 
             
     </main>
     <!-- Essential javascripts for application to work-->
