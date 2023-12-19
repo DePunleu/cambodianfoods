@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Accountant;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 use Barryvdh\DomPDF\Facade\PDF;
+use Illuminate\Support\Carbon;
 
 use App\Models\Menu;
 use App\Models\Item;
@@ -133,4 +135,27 @@ class AccountantOrderController extends Controller
         
         return redirect('/accountant/order')->with("error", "Order not found.");
     }
+
+    //==================End Method=======================//
+    //==================filterOrdersByDate=======================//
+
+     public function filterOrdersByDate(Request $request){
+        $count =1; 
+        $items = Item::all();
+        $orders = Order::with('orderItems')->get();
+        $orderStatuses = ['Order Received','In-Progress', 'Delivering', 'Completed','Canceled'];
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
+
+        $orders = Order::with('orderItems')
+            ->whereDate('created_at', '>=', $startDate)
+            ->whereDate('created_at', '<=', $endDate)
+            ->get();
+
+        // You can then pass $orders to a view to display the filtered orders
+        return view('accountant.home.order.list_order',compact('count','orders','orderStatuses','items'));       
+    }
+        
+    //==================End Method=======================//
+
 }

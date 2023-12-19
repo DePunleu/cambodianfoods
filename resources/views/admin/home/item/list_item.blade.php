@@ -124,7 +124,7 @@
                         </div><br>
                     </div>
                   
-                     <!-- Add a dropdown for filtering by menu -->
+                    <!-- Add a dropdown for filtering by menu -->
                     <form action="{{ route('admin.filter_item') }}" method="GET">
                         <div class="form-group mb-2">
                             <label for="filter_menu">Menu:</label>
@@ -148,6 +148,7 @@
                             </select>
                         </div>
                         @endif
+                        
 
                         <button type="submit">Find</button>
                     </form>

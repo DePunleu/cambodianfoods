@@ -163,8 +163,8 @@ class ItemController extends Controller
             ->with('menuId', $menuId)
             ->with('submenuId', $submenuId);
     }
-    //=====================End Method==========================//
-    //=====================End Method==========================//
+    //===================== End Method ==========================//
+    //===================== getSubmenus Method ==========================//
 
     public function getSubmenus($menuId)
     {
@@ -173,9 +173,6 @@ class ItemController extends Controller
         return response()->json(['submenus' => $submenus]);
     }
     
-
-  
-
-    //=====================End Method==========================//
+    //===================== End Method ==========================//
   
 }

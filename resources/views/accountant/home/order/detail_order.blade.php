@@ -46,7 +46,7 @@
         </div>
         <ul class="app-menu">
             <li>
-              <a class="app-menu__item active" href="{{url('accountant/dashboard')}}">
+              <a class="app-menu__item" href="{{url('accountant/dashboard')}}">
                   <i class="app-menu__icon fa fa-dashboard"></i>
                   <span class="app-menu__label">Dashboard</span>
               </a>

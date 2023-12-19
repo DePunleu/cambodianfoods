@@ -136,9 +136,26 @@
 
                     <div class="table-title">
                         <div class="row">                
-                            <div class="col-sm-10">
-                                <h2>All Orders</h2>
+                            <div class="col-sm-12">
+                                    <div><h2>All Orders</h2></div>
+                                    <form method="POST" action="{{ route('admin.orders.filter') }}">
+                                        @csrf <!-- CSRF protection -->
+
+                                        <!-- Start Date Input -->
+                                        <label for="start_date">Start Date:</label>
+                                        <input type="date" id="start_date" name="start_date">
+
+                                        <!-- End Date Input -->
+                                        <label for="end_date">End Date:</label>
+                                        <input type="date" id="end_date" name="end_date">
+
+                                        <!-- Submit Button -->
+                                        <button type="submit">Filter Orders</button>
+                                    </form>
                             </div>
+
+                          
+
                             {{-- <div class="col-sm-2">
                                 <a href="{{ route('admin.create_order') }}">
                                 <button type="button" class="btn btn-info add-new"><i class="fa fa-plus"></i> Add New</button>

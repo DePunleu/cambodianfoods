@@ -5,7 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 use Barryvdh\DomPDF\Facade\PDF;
+use Illuminate\Support\Carbon;
+
 
 use App\Models\Menu;
 use App\Models\Item;
@@ -16,7 +19,7 @@ use App\Models\OrderItem;
 
 class OrderController extends Controller
 {
-     //==================Show All Order=======================//
+    // ==================Show All Order=======================//
     public function order() {
         $count =1; 
         $items = Item::all();
@@ -24,6 +27,7 @@ class OrderController extends Controller
         $orderStatuses = ['Order Received','In-Progress', 'Delivering', 'Completed','Canceled'];
         return view('admin.home.order.list_order',compact('count','orders','orderStatuses','items'));
     }
+
     //==================End Method=======================//
 
     //==================Update Order Status=======================//
@@ -77,16 +81,6 @@ class OrderController extends Controller
 
     return response()->json(['success' => false, 'message' => 'Order not found']);
 }
-
-
-
-    
-    
-    
-    //==================End Method=======================//
-    //==================Update Store Quantity=======================//
-   
-
     //==================End Method=======================//
 
 
@@ -133,4 +127,30 @@ class OrderController extends Controller
         
         return redirect('/admin/order')->with("error", "Order not found.");
     }
+    //==================End Method=======================//
+   
+    
+
+    //==================filterOrdersByDate=======================//
+
+    public function filterOrdersByDate(Request $request){
+        $count =1; 
+        $items = Item::all();
+        $orders = Order::with('orderItems')->get();
+        $orderStatuses = ['Order Received','In-Progress', 'Delivering', 'Completed','Canceled'];
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
+
+        $orders = Order::with('orderItems')
+            ->whereDate('created_at', '>=', $startDate)
+            ->whereDate('created_at', '<=', $endDate)
+            ->get();
+
+        // You can then pass $orders to a view to display the filtered orders
+        return view('admin.home.order.list_order',compact('count','orders','orderStatuses','items'));       
+    }
+        
+    
+    //==================End Method=======================//
+
 }

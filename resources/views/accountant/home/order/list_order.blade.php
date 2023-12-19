@@ -102,6 +102,20 @@
                         <div class="row">                
                             <div class="col-sm-10">
                                 <h2>All Orders</h2>
+                                <form method="POST" action="{{ route('accountant.orders.filter') }}">
+                                        @csrf <!-- CSRF protection -->
+
+                                        <!-- Start Date Input -->
+                                        <label for="start_date">Start Date:</label>
+                                        <input type="date" id="start_date" name="start_date">
+
+                                        <!-- End Date Input -->
+                                        <label for="end_date">End Date:</label>
+                                        <input type="date" id="end_date" name="end_date">
+
+                                        <!-- Submit Button -->
+                                        <button type="submit">Filter Orders</button>
+                                    </form>
                             </div>
                             {{-- <div class="col-sm-2">
                                 <a href="{{ route('accountant.create_order') }}">
@@ -199,7 +213,11 @@
                 </div>
             </div>
         </div>
-            
+        <div class="d-print-none">
+            <div class="float-right">
+                <a href="javascript:window.print()" class="btn btn-success waves-effect waves-light"><i class="fa fa-print"></i></a>
+            </div>
+        </div>
     </main>
     <!-- Essential javascripts for application to work-->
     @include('accountant.js.script') 
