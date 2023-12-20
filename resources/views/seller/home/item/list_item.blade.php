@@ -36,13 +36,12 @@
                 </a>
                 
             </li>
-            <li >
                 <a class="app-menu__item" href="{{url('/seller/order')}}" >
                     <i class="fa fa-shopping-cart"></i>
                     &nbsp;&nbsp;&nbsp;
                     <span class="app-menu__label">Orders</span>
                     
-                </a>
+                </a>  
             </li>
         </ul>
     </aside>
@@ -75,68 +74,71 @@
                             </div>
                             <div class="col-sm-2">
                                 <a href="{{ route('seller.create_item') }}">
-                                <button type="button" class="btn btn-info add-new"><i class="fa fa-plus"></i> Add New</button>
+                                <button type="button" class="btn btn-info add-new">
+                                    <i class="fa fa-plus"></i> Add New
+                                </button>
                                 </a>
                             </div>
                         </div><br>
                     </div>
-
-                    {{-- <form class="form-inline" method="GET">
-                        <div class="form-group mb-2">
-                            <label for="filter" class="col-sm-2 col-form-label">Filter</label>
-                            <input type="text" class="form-control" id="filter" name="filter" placeholder="Name..." value="">
-                        </div>
-                        <button type="submit" class="btn btn-default mb-2">Filter</button>
-                    </form> --}}
+                  
+                    <!-- Add a dropdown for filtering by menu -->
                     <form action="{{ route('seller.filter_item') }}" method="GET">
                         <div class="form-group mb-2">
-                            {{-- <label for="filter" class="col-sm-2 col-form-label">Filter</label> --}}
-                            <select name="filter" id="filter">
+                            <label for="filter_menu">Menu:</label>
+                            <select name="menu_id" id="filter_menu">
                                 <option value="">All</option>
-                                @foreach($menu as $menu)
-                                        <option value="{{$menu->name_menu}}">{{$menu->name_menu}}</option>
-                                    @endforeach
-                            </select>
-                            {{-- <select name="filter" id="filter">
-                                @foreach($item as $row)
-                                        <option value="{{$row->title}}">{{$row->title}}</option>
+                                @foreach($menu as $m)
+                                    <option value="{{$m->id}}" @if($menuId == $m->id) selected @endif>{{$m->name_menu}}</option>
                                 @endforeach
-                            </select> --}}
+                            </select>
                         </div>
-                        <button type="submit">Filter</button>
+
+                        <!-- Add a dropdown for filtering by submenu -->
+                        @if ($menuId)
+                        <div class="form-group mb-6">
+                            <label for="filter_submenu">Submenu:</label>
+                            <select name="submenu_id" id="filter_submenu">
+                                <option value="">Select Submenu</option>
+                                @foreach($submenu as $s)
+                                    <option value="{{$s->id}}" @if($submenuId == $s->id) selected @endif>{{$s->submenu_name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        @endif
+                        
+
+                        <button type="submit">Find</button>
+                    </form>
                         
                     </form>
-          
                     <table class="table table-hover table-bordered" id="sampleTable">
                         <thead class="bg-light text-dark p-3 text-center">
                             <tr>
                             <th>#</th>
                             <th>Title</th>
-                            <!-- <th>Origin_Price</th> -->
                             <th>Price</th>
-                            <th>Quantity</th>
+                            <th>Store Quantity</th>
                             <th>Menu</th>
                             <th>SubMenu</th>
+                            <th>supplier</th>
                             <th>Description</th>
-                            <th>Supplier</th>
                             <th>Image</th>
                             <th>Created</th>
                             <th class="text-center">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($item->reverse() as $row)
+                            @foreach($item-> reverse() as $row)
                             <tr>
                                 <td>{{$count++}}</td>                              
                                 <td>{{$row->title}}</td>
-                                <!-- <td>{{$row->origin_price}}$</td> -->
                                 <td>{{$row->price}}$</td>
                                 <td>{{$row->store_quantity}}</td>
                                 <td>{{$row->menus->name_menu}}</td>
                                 <td>{{$row->submenus->submenu_name}}</td>
-                                <td>{{$row->description}}</td> 
                                 <td>{{$row->suppliers->description}}</td>
-                                
+                                <td>{{$row->description}}</td> 
                                 <td>
                                     <img class="" src="{{(!empty($row->image))
                                     ? url('upload/item_images/'.$row->image):url('frontend/user_images/no_image.jpg')}}" 
@@ -152,10 +154,7 @@
                                     <a class="badge badge-danger delete" href="{{url('/seller/item/'.$row->id)}}" onclick="return confirm('Are you sure?')" title="Delete" data-toggle="tooltip">
                                     <i class="fa fa-trash "></i>
                                     </a>
-                                    {{-- &nbsp;
-                                    <a class="badge badge-success view" title="View" data-toggle="tooltip">
-                                    <i class="fa fa-eye "></i>
-                                    </a>   --}}
+                                   
                                 </td>
                             </tr>
                             @endforeach() 
@@ -164,11 +163,12 @@
                     </div>
                 </div>
                 
-                <div class="d-print-none">
+                 <div class="d-print-none">
                     <div class="float-right">
                         <a href="javascript:window.print()" class="btn btn-success waves-effect waves-light"><i class="fa fa-print"></i></a>
+                        
                     </div>
-                </div>                
+                </div>                 
             </div>
 
             
@@ -177,6 +177,38 @@
     </main>
     <!-- Essential javascripts for application to work-->
     @include('seller.js.script') 
+    <script>
+    $(document).ready(function() {
+        $('#filter_menu').change(function() {
+            var menuId = $(this).val();
+            if (menuId) {
+                $.ajax({
+                    type: "GET",
+                    url: "{{ route('seller.getSubmenus', ['menuId' => ':menuId']) }}".replace(':menuId', menuId),
+                    dataType: "json",
+                    success: function(response) {
+                        if (response.submenus && response.submenus.length > 0) {
+                            $('#filter_submenu').empty();
+                            $('#filter_submenu').append('<option value="">Select Submenu</option>');
+                            $.each(response.submenus, function(key, value) {
+                                $('#filter_submenu').append('<option value="' + value.id + '">' + value.submenu_name + '</option>');
+                            });
+                            $('#submenu_dropdown').show(); // Show the submenu dropdown
+                        } else {
+                            $('#filter_submenu').empty();
+                            $('#submenu_dropdown').hide(); // Hide the submenu dropdown if no submenus found
+                        }
+                    }
+                });
+            } else {
+                $('#filter_submenu').empty();
+                $('#submenu_dropdown').hide(); // Hide the submenu dropdown if no menu selected
+            }
+        });
+    });
+</script>
+
+
     
 </body>
 </html>

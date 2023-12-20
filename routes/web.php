@@ -203,7 +203,6 @@ Route::controller(ItemController::class)->middleware('authadmin')->group(functio
     Route::post('/admin/update_item/{id}', 'update_itemPost')->name('admin.update_item.post');
     Route::get('/admin/item/{id}', 'delete_item')->name('admin.delete_item');
     Route::get('/admin/item', 'filter_item')->name('admin.filter_item');
-    //Route::get('/get-submenus/{menuId}', 'getSubmenus')->name('submenus');
     Route::get('/get-submenus/{menuId}', 'getSubmenus')->name('admin.getSubmenus');
     
 })->middleware('cache');
@@ -271,7 +270,9 @@ Route::controller(SellerItemController::class)->middleware('authseller')->group(
     Route::get('/seller/update_item/{id}', 'update_item')->name('seller.update_item');
     Route::post('/seller/update_item/{id}', 'update_itemPost')->name('seller.update_item.post');
     Route::get('/seller/item/{id}', 'delete_item')->name('seller.delete_item');
-    Route::get('/seller/item', 'filter_item')->name('seller.filter_item'); 
+    Route::get('/seller/item', 'filter_item')->name('seller.filter_item');
+    Route::get('/seller/get-submenus/{menuId}', 'getSubmenus')->name('seller.getSubmenus');
+   
 })->middleware('cache');
 
 
@@ -332,6 +333,7 @@ Route::controller(AccountantItemController::class)->middleware('authaccountant')
     Route::post('/accountant/update_item/{id}', 'update_itemPost')->name('accountant.update_item.post');
     Route::get('/accountant/item/{id}', 'delete_item')->name('accountant.delete_item');
     Route::get('/accountant/item', 'filter_item')->name('accountant.filter_item');
+    Route::get('/accountant/get-submenus/{menuId}', 'getSubmenus')->name('accountant.getSubmenus');
 })->middleware('cache');
 
 

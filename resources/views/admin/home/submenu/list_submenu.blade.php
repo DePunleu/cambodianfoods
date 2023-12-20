@@ -157,11 +157,7 @@
                                     &nbsp;
                                     <a class="badge badge-danger delete" href="{{url('/admin/submenu/'.$row->id)}}" onclick="return confirm('Are you sure?')" title="Delete" data-toggle="tooltip">
                                     <i class="fa fa-trash "></i>
-                                    </a>
-                                    {{-- &nbsp;
-                                    <a class="badge badge-success view" title="View" data-toggle="tooltip">
-                                    <i class="fa fa-eye "></i>
-                                    </a>   --}}
+                                    </a>  
                                 </td>
                             </tr>
                             @endforeach() 

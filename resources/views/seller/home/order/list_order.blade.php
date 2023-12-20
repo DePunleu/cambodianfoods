@@ -107,6 +107,14 @@
                                         <label for="end_date">End Date:</label>
                                         <input type="date" id="end_date" name="end_date">
 
+                                         <!-- Status selection -->
+                                        <label for="status">Status:</label>
+                                        <select id="status" name="status">
+                                            <option value="">Select Status</option>
+                                            @foreach ($orderStatuses as $status)
+                                                <option value="{{ $status }}" @if ($selectedStatus === $status) selected @endif>{{ $status }}</option>
+                                            @endforeach
+                                        </select>
                                         <!-- Submit Button -->
                                         <button type="submit">Filter Orders</button>
                                     </form>

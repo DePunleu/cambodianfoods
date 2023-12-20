@@ -25,7 +25,8 @@ class OrderController extends Controller
         $items = Item::all();
         $orders = Order::with('orderItems')->get();
         $orderStatuses = ['Order Received','In-Progress', 'Delivering', 'Completed','Canceled'];
-        return view('admin.home.order.list_order',compact('count','orders','orderStatuses','items'));
+        $selectedStatus = Order::all();
+        return view('admin.home.order.list_order',compact('count','orders','orderStatuses','items','selectedStatus'));
     }
 
     //==================End Method=======================//
@@ -134,21 +135,27 @@ class OrderController extends Controller
     //==================filterOrdersByDate=======================//
 
     public function filterOrdersByDate(Request $request){
-        $count =1; 
+        $count = 1; 
         $items = Item::all();
-        $orders = Order::with('orderItems')->get();
         $orderStatuses = ['Order Received','In-Progress', 'Delivering', 'Completed','Canceled'];
         $startDate = $request->input('start_date');
         $endDate = $request->input('end_date');
-
-        $orders = Order::with('orderItems')
+        $selectedStatus = $request->input('status'); // Assuming 'status' is the field name for status filtering
+    
+        $ordersQuery = Order::with('orderItems')
             ->whereDate('created_at', '>=', $startDate)
-            ->whereDate('created_at', '<=', $endDate)
-            ->get();
-
+            ->whereDate('created_at', '<=', $endDate);
+    
+        if ($selectedStatus && in_array($selectedStatus, $orderStatuses)) {
+            $ordersQuery->where('delivery_status', $selectedStatus);
+        }
+    
+        $orders = $ordersQuery->get();
+    
         // You can then pass $orders to a view to display the filtered orders
-        return view('admin.home.order.list_order',compact('count','orders','orderStatuses','items'));       
+        return view('admin.home.order.list_order', compact('count', 'orders', 'orderStatuses', 'items', 'selectedStatus'));       
     }
+    
         
     //==================End Method=======================//
 

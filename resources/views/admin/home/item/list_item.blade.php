@@ -163,6 +163,7 @@
                             <th>Store Quantity</th>
                             <th>Menu</th>
                             <th>SubMenu</th>
+                            <th>supplier</th>
                             <th>Description</th>
                             <th>Image</th>
                             <th>Created</th>
@@ -178,6 +179,7 @@
                                 <td>{{$row->store_quantity}}</td>
                                 <td>{{$row->menus->name_menu}}</td>
                                 <td>{{$row->submenus->submenu_name}}</td>
+                                <td>{{$row->suppliers->description}}</td>
                                 <td>{{$row->description}}</td> 
                                 <td>
                                     <img class="" src="{{(!empty($row->image))

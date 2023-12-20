@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Models\Submenu;
+use App\Models\Menu;
 
 class SubmenuController extends Controller
 {
@@ -67,6 +68,7 @@ class SubmenuController extends Controller
         $submenu = Submenu::find($id);
         $submenu->submenu_name=$request->submenu_name;
         $submenu->save();
+
         return redirect()->back()->with("success","Updated Submenu successfully!");
     }
     //==================End Method=======================//

@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\DB;
 
 class ItemController extends Controller
 {
-    //==================Show All Item=======================//
+        //==================Show All Item=======================//
         public function item()
         {
             $item = Item::with('menus')->orderByDesc('id')->get(); // Include the menu relationship
@@ -120,6 +120,8 @@ class ItemController extends Controller
          $item->menu_id = $menu->id; // Assign the menu ID to the menu_id attribute
          $submenu = Submenu::where('submenu_name', $request->item_submenu)->firstOrFail();
          $item->submenu_id = $submenu->id; // Assign the submenu ID to the submenu_id attribute
+         $supplier = Supplier::where('name_supplier', $request->item_supplier)->firstOrFail();
+         $item->supplier_id = $supplier->id; // Assign the supplier ID to the menu_id attribute
 
          $item->description = $request->item_description;
          if ($request->file('item_image')) {

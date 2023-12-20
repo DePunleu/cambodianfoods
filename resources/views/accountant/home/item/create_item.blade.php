@@ -28,11 +28,12 @@
         </div>
         <ul class="app-menu">
             <li>
-              <a class="app-menu__item" href="{{url('accountant/dashboard')}}">
-                  <i class="app-menu__icon fa fa-dashboard"></i>
-                  <span class="app-menu__label">Dashboard</span>
-              </a>
+                <a class="app-menu__item" href="{{url('accountant/dashboard')}}">
+                    <i class="app-menu__icon fa fa-dashboard"></i>
+                    <span class="app-menu__label">Dashboard</span>
+                </a>
             </li>
+
             <li >
                 <a class="app-menu__item active" href="{{url('/accountant/item')}}" >
                     <i class="fas fa-hamburger"></i>
@@ -117,14 +118,13 @@
                             <div class="form-group row">
                                 <label class="control-label col-md-3">Menu</label>
                                 <div class="col-md-8">
-                                    <select class="form-control" name="item_menu" required="">
-                                        <option value="" selected="">Add a menu here </option>
-                                        @foreach($menu as $menu)
-                                        <option value="{{$menu->name_menu}}">{{$menu->name_menu}}</option>
+                                    <select class="form-control" name="item_menu" id="item_menu" required="">
+                                        <option value="" selected="">Add a menu here</option>
+                                        @foreach($menu as $m)
+                                        <option value="{{$m->id}}">{{$m->name_menu}}</option>
                                         @endforeach
                                     </select>
                                 </div>
-                                
                             </div>
                             <div class="form-group row">
                                 <label class="control-label col-md-3">Sub Menu</label>
@@ -137,6 +137,7 @@
                                     </select>
                                 </div>
                             </div>
+
                             <div class="form-group row">
                                 <label class="control-label col-md-3">Supplier</label>
                                 <div class="col-md-8">
@@ -180,6 +181,38 @@
     </main>
     <!-- Essential javascripts for application to work-->
     @include('accountant.js.script') 
+    <!-- Modify the JavaScript section in create_item.blade.php -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('#item_menu').change(function() {
+            var menuId = $(this).val();
+            if (menuId) {
+                $.ajax({
+                    type: 'GET',
+                    url: '{{ route("accountant.getSubmenus", ["menuId" => "__menuId"]) }}'.replace('__menuId', menuId),
+                    success: function(response) {
+                        $('#item_submenu').empty();
+                        if (response && response.submenus) {
+                            $.each(response.submenus, function(key, value) {
+                                $('#item_submenu').append('<option value="' + value.id + '">' + value.submenu_name + '</option>');
+                            });
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(xhr.responseText);
+                    }
+                });
+            } else {
+                $('#item_submenu').empty();
+            }
+        });
+    });
+    </script>
+
+
+
+
     
 </body>
 </html>

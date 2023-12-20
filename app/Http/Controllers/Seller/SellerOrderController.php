@@ -24,7 +24,8 @@ class SellerOrderController extends Controller
         $items = Item::all();
         $orders = Order::with('orderItems')->get();
         $orderStatuses = ['Order Received','In-Progress', 'Delivering', 'Completed','Canceled'];
-        return view('seller.home.order.list_order',compact('count','orders','orderStatuses','items'));
+        $selectedStatus = Order::all();
+        return view('seller.home.order.list_order',compact('count','orders','orderStatuses','items','selectedStatus'));
     }
     //==================End Method=======================//
 
@@ -140,23 +141,29 @@ class SellerOrderController extends Controller
     
     //==================filterOrdersByDate=======================//
 
-        public function filterOrdersByDate(Request $request){
-            $count =1; 
-            $items = Item::all();
-            $orders = Order::with('orderItems')->get();
-            $orderStatuses = ['Order Received','In-Progress', 'Delivering', 'Completed','Canceled'];
-            $startDate = $request->input('start_date');
-            $endDate = $request->input('end_date');
+    public function filterOrdersByDate(Request $request){
+        $count = 1; 
+        $items = Item::all();
+        $orderStatuses = ['Order Received','In-Progress', 'Delivering', 'Completed','Canceled'];
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
+        $selectedStatus = $request->input('status'); // Assuming 'status' is the field name for status filtering
     
-            $orders = Order::with('orderItems')
-                ->whereDate('created_at', '>=', $startDate)
-                ->whereDate('created_at', '<=', $endDate)
-                ->get();
+        $ordersQuery = Order::with('orderItems')
+            ->whereDate('created_at', '>=', $startDate)
+            ->whereDate('created_at', '<=', $endDate);
     
-            // You can then pass $orders to a view to display the filtered orders
-            return view('seller.home.order.list_order',compact('count','orders','orderStatuses','items'));       
+        if ($selectedStatus && in_array($selectedStatus, $orderStatuses)) {
+            $ordersQuery->where('delivery_status', $selectedStatus);
         }
-            
-        //==================End Method=======================//
+    
+        $orders = $ordersQuery->get();
+    
+        // You can then pass $orders to a view to display the filtered orders
+        return view('seller.home.order.list_order', compact('count', 'orders', 'orderStatuses', 'items', 'selectedStatus'));       
+    }
+    
+        
+    //==================End Method=======================//
     
 }
