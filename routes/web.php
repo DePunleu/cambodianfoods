@@ -212,6 +212,8 @@ Route::controller(ItemController::class)->middleware('authadmin')->group(functio
 //================Admin Orders Management Route=========================//
 Route::controller(OrderController::class)->middleware('authadmin')->group(function () {
     Route::get('/admin/order', 'order')->name('admin.order');
+    Route::get('/admin/order_report', 'orderReport')->name('admin.order_report');
+    Route::get('/admin/export-orders', 'exportOrders')->name('admin.export_orders');
     Route::post('/admin/orders/filter', 'filterOrdersByDate')->name('admin.orders.filter');
     Route::get('/admin/detail_order/{id}', 'detail_order')->name('admin.detail_order');
     Route::post('/admin/detail_order/{id}', 'detail_orderPost')->name('admin.detail_order.post');

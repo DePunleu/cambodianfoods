@@ -97,13 +97,37 @@ class DashboardController extends Controller
             ]   
         ];
 
+        $ordersByDay = Order::selectRaw('DATE(created_at) as date, COUNT(*) as count')
+        ->groupBy('date')
+        ->orderBy('date')
+        ->get();
+
+        // Fetch orders grouped by week
+        $ordersByWeek = Order::selectRaw('YEARWEEK(created_at) as week, COUNT(*) as count')
+            ->groupBy('week')
+            ->orderBy('week')
+            ->get();
+
+        // Fetch orders grouped by month
+        $ordersByMonth = Order::selectRaw('YEAR(created_at) as year, MONTH(created_at) as month, COUNT(*) as count')
+            ->groupBy('year', 'month')
+            ->orderBy('year')
+            ->orderBy('month')
+            ->get();
+
+        // Fetch orders grouped by year
+        $ordersByYear = Order::selectRaw('YEAR(created_at) as year, COUNT(*) as count')
+            ->groupBy('year')
+            ->orderBy('year')
+            ->get();
+
        
         return view('admin.home.dashboard', compact('menus_count','items_count',
         'users_count', 'orders_count','completedOrdersTotalPrice',
-        'datasets', 'labels', 'orderDataset', 'orderLabels', 'foods_count', 'combo_count', 'dessert_count', 'drink_count'));
+        'datasets', 'labels', 'orderDataset', 'orderLabels', 'foods_count', 'combo_count', 'dessert_count', 'drink_count',
+        'ordersByDay','ordersByWeek','ordersByMonth','ordersByYear'));
     }
-    //=========================End Method============================//   
-
-
 
 }
+    //=========================End Method============================//  
+    

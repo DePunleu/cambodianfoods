@@ -61,22 +61,7 @@
             </a>
             
         </li>
-        <!-- <li >
-            <a class="app-menu__item " href="{{url('/admin/table')}}" >
-                <i class="fas fa-chair"></i>
-                &nbsp;&nbsp;&nbsp;
-                <span class="app-menu__label">Tables</span>
-                
-            </a>
-            
-        </li>
-        <li>
-            <a class="app-menu__item " href="{{url('admin/booking')}}">
-                <i class="fas fa-calendar-alt"></i>
-                &nbsp;&nbsp;&nbsp;
-                <span class="app-menu__label">Reservations</span>
-            </a>
-        </li> -->
+        
         <li >
             <a class="app-menu__item" href="{{url('/admin/order')}}" >
                 <i class="fa fa-shopping-cart"></i>

@@ -17,6 +17,20 @@
         .small-width {
             width:150px; 
         }
+        /* Adjustments for positioning the button */
+        .float-right {
+            float: right !important;
+        }
+
+        /* Margins for spacing */
+        .mt-3 {
+            margin-top: 1rem !important;
+        }
+
+        .mr-3 {
+            margin-right: 1rem !important;
+        }
+
     </style>
 </head>
 <body class="app sidebar-mini rtl">
@@ -95,8 +109,7 @@
                     &nbsp;&nbsp;&nbsp;
                     <span class="app-menu__label">Suppliers</span>
                     
-                </a>
-                
+                </a>     
             </li>
         </ul>
     </aside>
@@ -110,6 +123,7 @@
                 <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
                 <li class="breadcrumb-item">Orders</li>
                 <li class="breadcrumb-item active"><a href="#">All Orders</a></li>
+               
             </ul>
         </div>
         <div class="row">
@@ -136,8 +150,8 @@
 
                     <div class="table-title">
                         <div class="row">                
-                            <div class="col-sm-12">
-                                    <div><h2>All Orders</h2></div>
+                            <div class="col-sm-10">
+                                <div><h2>All Orders</h2></div>    
                                     <form method="POST" action="{{ route('admin.orders.filter') }}">
                                         @csrf <!-- CSRF protection -->
 
@@ -161,18 +175,19 @@
                                         </select>
                                         <!-- Submit Button -->
                                         <button type="submit">Filter Orders</button>
-                                    </form>
-                            </div>
-
-                          
-
-                            {{-- <div class="col-sm-2">
-                                <a href="{{ route('admin.create_order') }}">
-                                <button type="button" class="btn btn-info add-new"><i class="fa fa-plus"></i> Add New</button>
-                                </a>
-                            </div> --}}
-                        </div><br>
+                                    </form> 
+                            </div> 
+                            <div class="col-sm-2 text-right mt-3">
+                            <!-- Move the button to the right within the same row -->
+                            <a href="{{ route('admin.order_report') }}" class="btn btn-info">
+                                <i class="fas fa-chart-bar"></i> Order Report
+                            </a>               
+                        </div>
+                        </div>
+                        
+                        
                     </div>
+                    
                     <table class="table table-hover table-bordered" id="sampleTable">
                         <thead class="bg-light text-dark p-3 text-center">
                             <tr>
