@@ -162,8 +162,7 @@ class OrderController extends Controller
 
     //==================Order Report=======================//
 
-    public function orderReport()
-    {
+    public function orderReport(){
         $todayOrdersCount = Order::whereDate('created_at', Carbon::today())->count();
 
         // For a week
@@ -180,6 +179,7 @@ class OrderController extends Controller
         $startOfYear = Carbon::now()->startOfYear();
         $endOfYear = Carbon::now()->endOfYear();
         $yearOrdersCount = Order::whereBetween('created_at', [$startOfYear, $endOfYear])->count();
+
 
         return view('admin.home.order.order_report')->with([
             'todayOrdersCount' => $todayOrdersCount,
@@ -220,6 +220,7 @@ class OrderController extends Controller
 
     return Response::stream($callback, 200, $headers);
     }
+    //==================End Method=======================//
 
 
 }

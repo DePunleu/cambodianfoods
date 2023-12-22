@@ -145,6 +145,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-3">
+                            <p>Today's Date: <?php echo date('Y-m-d'); ?></p>
                             <h5>Today's Orders: {{ $todayOrdersCount }}</h5>
                             <!-- Display other date range orders count similarly -->
                             <h5>This Week's Orders: {{ $weekOrdersCount }}</h5>
@@ -155,7 +156,7 @@
                             <canvas id="orderChart" width="400" height="400"></canvas>
                         </div>
                         <div class="col-md-12">
-                            <a href="{{ route('admin.export_orders') }}" class="btn btn-primary">Export Orders as CSV</a>
+                            <a href="{{ route('admin.export_orders') }}" class="btn btn-primary">Export Orders</a>
                         </div>
                     </div>
                 </div>
