@@ -179,10 +179,10 @@
                             </div> 
                             <div class="col-sm-2 text-right mt-3">
                             <!-- Move the button to the right within the same row -->
-                            <a href="{{ route('admin.order_report') }}" class="btn btn-info">
-                                <i class="fas fa-chart-bar"></i> Order Report
-                            </a>               
-                        </div>
+                                <a href="{{ route('admin.order_report') }}" class="btn btn-info">
+                                    <i class="fas fa-chart-bar"></i> Order Report
+                                </a>               
+                            </div>
                         </div>
                         
                         

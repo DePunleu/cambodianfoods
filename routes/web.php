@@ -282,6 +282,8 @@ Route::controller(SellerItemController::class)->middleware('authseller')->group(
 Route::controller(SellerOrderController::class)->middleware('authseller')->group(function () {
     Route::get('/seller/order', 'order')->name('seller.order');
     Route::post('/seller/orders/filter', 'filterOrdersByDate')->name('seller.orders.filter');
+    Route::get('/seller/order_report', 'orderReport')->name('seller.order_report');
+    Route::get('/seller/export-orders', 'exportOrders')->name('seller.export_orders');
 
     Route::get('/seller/detail_order/{id}', 'detail_order')->name('seller.detail_order');
     Route::post('/seller/detail_order/{id}', 'detail_orderPost')->name('seller.detail_order.post');
@@ -343,7 +345,8 @@ Route::controller(AccountantItemController::class)->middleware('authaccountant')
 Route::controller(AccountantOrderController::class)->middleware('authaccountant')->group(function () {
     Route::get('/accountant/order', 'order')->name('accountant.order');
     Route::post('/accountant/orders/filter', 'filterOrdersByDate')->name('accountant.orders.filter');
-
+    Route::get('/accountant/order_report', 'orderReport')->name('accountant.order_report');
+    Route::get('/accountant/export-orders', 'exportOrders')->name('accountant.export_orders');
     Route::get('/accountant/detail_order/{id}', 'detail_order')->name('accountant.detail_order');
     Route::post('/accountant/detail_order/{id}', 'detail_orderPost')->name('accountant.detail_order.post');
     // Route::post('/admin/detail_order/update-order-status', 'updateOrderStatus')->name('admin.detail_order.updateOrderStatus');

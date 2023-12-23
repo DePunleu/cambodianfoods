@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Barryvdh\DomPDF\Facade\PDF;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\CSV;
 use Illuminate\Support\Carbon;
 
 use App\Models\Menu;
@@ -159,5 +161,68 @@ class AccountantOrderController extends Controller
         // You can then pass $orders to a view to display the filtered orders
         return view('accountant.home.order.list_order', compact('count', 'orders', 'orderStatuses', 'items', 'selectedStatus'));       
     }
+    //==================Order Report=======================//
+
+    public function orderReport(){
+        $todayOrdersCount = Order::whereDate('created_at', Carbon::today())->count();
+
+        // For a week
+        $startOfWeek = Carbon::now()->startOfWeek();
+        $endOfWeek = Carbon::now()->endOfWeek();
+        $weekOrdersCount = Order::whereBetween('created_at', [$startOfWeek, $endOfWeek])->count();
+
+        // For a month
+        $startOfMonth = Carbon::now()->startOfMonth();
+        $endOfMonth = Carbon::now()->endOfMonth();
+        $monthOrdersCount = Order::whereBetween('created_at', [$startOfMonth, $endOfMonth])->count();
+
+        // For a year
+        $startOfYear = Carbon::now()->startOfYear();
+        $endOfYear = Carbon::now()->endOfYear();
+        $yearOrdersCount = Order::whereBetween('created_at', [$startOfYear, $endOfYear])->count();
+
+
+        return view('accountant.home.order.order_report')->with([
+            'todayOrdersCount' => $todayOrdersCount,
+            'weekOrdersCount' => $weekOrdersCount,
+            'monthOrdersCount' => $monthOrdersCount,
+            'yearOrdersCount' => $yearOrdersCount,
+        ]);
+    }
+    public function exportOrders(){
+    $orders = Order::all(); // Fetch all orders
+
+    $headers = [
+        'Content-Type' => 'text/csv',
+        'Content-Disposition' => 'attachment; filename="orders.csv"',
+    ];
+
+    $callback = function () use ($orders) {
+        $file = fopen('php://output', 'w');
+
+        // Add headers to the CSV file
+        fputcsv($file, ['Order ID', 'Customer Name', 'Total', 'Order Date', 'Status']);
+
+        // Add orders data to the CSV file
+        foreach ($orders as $order) {
+            fputcsv($file, [
+                $order->id,
+                $order->name,
+                $order->orderItems->sum(function ($orderItem) {
+                    return $orderItem->price * $orderItem->quantity;
+                }),
+                $order->created_at,
+                $order->delivery_status,
+            ]);
+        }
+
+        fclose($file);
+    };
+
+    return Response::stream($callback, 200, $headers);
+    }
+    //==================End Method=======================//
+
+
 
 }
