@@ -79,7 +79,7 @@ class CartController extends Controller
         $delete = Cart::where('id', $id_cart)->first();
         $delete->delete();
         return redirect()->back()
-        ->with("success","User deleted successfully!");
+        ->with("success","Item deleted successfully!");
     }
     //================End Method==================//
 

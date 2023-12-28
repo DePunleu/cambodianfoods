@@ -89,6 +89,14 @@
                 </a>
                 
             </li>
+            <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">Report</span><i></i></a>
+            <ul class="treeview-menu">
+              <li><a class="treeview-item" href="/admin/order_report"><i class="icon fa fa-circle-o"></i>Order Report</a></li>
+              <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i>Item Report</a></li>
+          
+            </ul>
+          </li>
+       
     </ul>
     </aside>
     <!-- Body-->
@@ -124,6 +132,22 @@
                         </a>
                       </div>
                   </div><br>
+                  <div class="col-sm-6">
+                    <form action="{{ route('admin.users') }}" method="GET" class="form-inline">
+                        <div class="form-group mr-2">
+                            <label for="role" class="mr-2">Filter by Role:</label>
+                            <select name="role" id="role" class="form-control">
+                                <option value="">All Roles</option>
+                                <option value="user">User</option>
+                                <option value="seller">Seller</option>
+                                <option value="accountant">Accountant</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Filter</button>
+                    </form>
+                  </div>
+                  <br>
+
                 </div>
                 <table class="table table-hover table-bordered" id="sampleTable">
                   <thead class="bg-light text-dark p-3 text-center">
@@ -135,7 +159,7 @@
                       <th>Email</th>
                       <th>Phone</th>
                       <th>Address</th>
-                      {{-- <th>Created</th> --}}
+                      <th>Created</th>
                       <th class="text-center">Action</th>
                     </tr>
                   </thead>
@@ -154,7 +178,7 @@
                       <td>{{$row->email}}</td>
                       <td>{{$row->phone}}</td>
                       <td>{{$row->address}}</td>
-                      {{-- <td>{{$row->created_at}}</td> --}}
+                      <td>{{$row->created_at}}</td>
                       <td class="text-center">
                         <a class="badge badge-warning edit" href="{{url('/admin/update_users/'.$row->id)}}" title="Update" data-toggle="tooltip">
                           <i class="fa fa-edit"></i>

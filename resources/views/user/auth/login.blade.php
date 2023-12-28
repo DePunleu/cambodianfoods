@@ -90,39 +90,7 @@
           </div>
           @endif                   
         <form method="POST" action="{{url('/login')}}">
-            @csrf
-            {{-- <div class="form-group">
-              <label >
-                <i class="fa fa-envelope" aria-hidden="true"></i>
-                Email
-              </label>
-              <input type="email" class="form-control" name="email" required="">
-            </div>
-            <div class="form-group">
-              <label>
-                <i class="fa fa-lock" aria-hidden="true"></i>
-                Password
-              </label>
-              <input type="password" class="form-control" name="password" required="">
-            </div>
-            <div class="animated-checkbox">
-              <label>
-                <input type="checkbox" id="show-password" class="show-password"><span class="label-text"> Show Password</span>
-              </label>
-            </div>
-            <div class="text-center mt-2">
-              <button type="submit" class="btn btn-primary btn-circle btn-block">
-                LOGIN
-              </button>
-            </div>
-            <div class="text-center">
-              
-              <label>
-                <span>Don't have an account?</span>
-                <a href="{{ route('register.post') }}" class="">Register</a>
-            </label>
-            </div> --}}
-            
+            @csrf        
             <div class="input-group form-group">
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="fa fa-envelope"></i></span>

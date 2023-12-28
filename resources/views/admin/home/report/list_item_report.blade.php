@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     @include('admin.css.style')
     <!-- Main CSS-->
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
+
 <body class="app sidebar-mini rtl">
     <!-- Navbar-->
     @include('admin.layout.header')
@@ -22,8 +24,8 @@
             <img src="{{asset('backend/images/admin.png')}}" width="70px" class="img-circle elevation-2" alt="User Image">
             @endif
             <div>
-            <a href="#" class="d-block">{{Auth::guard('web')->user()->name}}</a>
-            <p class="app-sidebar__user-designation">Admin</p>
+                <a href="#" class="d-block">{{Auth::guard('web')->user()->name}}</a>
+                <p class="app-sidebar__user-designation">Admin</p>
             </div>
         </div>
         <ul class="app-menu">
@@ -33,8 +35,6 @@
                     <span class="app-menu__label">Dashboard</span>
                 </a>
             </li>
-            
-            
             <li >
                 <a class="app-menu__item" href="{{url('/admin/users')}}" >
                     <i class="fa fa-users"></i>&nbsp;&nbsp;&nbsp;
@@ -43,7 +43,7 @@
                 
             </li>
             <li>
-                <a class="app-menu__item" href="{{url('/admin/menu')}}" >
+                <a class="app-menu__item " href="{{url('/admin/menu')}}" >
                     <i class="fas fa-utensils"></i>
                     &nbsp;&nbsp;&nbsp;
                     <span class="app-menu__label">Menus</span>
@@ -69,17 +69,17 @@
                 </a>
                 
             </li>
-
             <li >
                 <a class="app-menu__item" href="{{url('/admin/order')}}" >
                     <i class="fa fa-shopping-cart"></i>
                     &nbsp;&nbsp;&nbsp;
                     <span class="app-menu__label">Orders</span>
                     
-                </a>    
+                </a>
+                
             </li>
             <li >
-                <a class="app-menu__item active" href="{{url('/admin/supplier')}}" >
+                <a class="app-menu__item" href="{{url('/admin/supplier')}}" >
                     <i class="fas fa-users"></i>
                     &nbsp;&nbsp;&nbsp;
                     <span class="app-menu__label">Suppliers</span>
@@ -87,92 +87,94 @@
                 </a>
                 
             </li>
-
-            <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">Report</span><i></i></a>
+            <li class="treeview is-expanded"><a class="app-menu__item " href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">Report</span><i></i></a>
                 <ul class="treeview-menu">
                     <li><a class="treeview-item" href="/admin/order_report"><i class="icon fa fa-circle-o"></i>Order Report</a></li>
-                    <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i>Item Report</a></li>
+                    <li><a class="treeview-item" href="/admin/item_report"><i class="icon fa fa-circle-o"></i>Item Report</a></li>
           
                 </ul>
             </li>
-       
         </ul>
     </aside>
     <!-- Body-->
     <main class="app-content">
         <div class="app-title">
             <div>
-                <h1><i class="fa fa-th-list"></i>Suppliers</h1>          
+                <h1><i class="fa fa-th-list"></i>Report</h1>
             </div>
             <ul class="app-breadcrumb breadcrumb side">
                 <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-                <li class="breadcrumb-item">Suppliers</li>
-                <li class="breadcrumb-item active"><a href="#">All Suppliers</a></li>
+                <li class="breadcrumb-item">Report</li>
+                <li class="breadcrumb-item active"><a href="#">Item Report</a></li>
             </ul>
         </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="tile">
-                <div class="tile-body">
-                    @if(session()->has('success'))
-                    <div class="alert alert-success" role="alert">
-                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                        {{session('success')}}
-                    </div>
-                    @endif
-                    <div class="table-title">
-                        <div class="row">                
-                            <div class="col-sm-10">
-                                <h2>All Suppliers</h2>
+                    <div class="tile-body">
+                        @if(session()->has('success'))
+                        <div class="alert alert-success" role="alert">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            {{session('success')}}
+                        </div>
+                        @endif
+                        @if(session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                        @endif
+
+                        @if(session('error'))
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
+                        </div>
+                        @endif
+
+                        <div class="table-title">
+                            <div class="row">
+                                <div class="col-sm-10">
+                                    <div><h2>Order Report</h2></div>
+                                </div>
                             </div>
-                            <div class="col-sm-2">
-                                <a href="{{ route('admin.create_supplier') }}">
-                                <button type="button" class="btn btn-info add-new"><i class="fa fa-plus"></i> Add New</button>
-                                </a>
-                            </div>
-                        </div><br>
-                    </div>
-                    <table class="table table-hover table-bordered" id="sampleTable">
+                        </div>
+                        <br>
+                        <!-- Table or content related to report -->
+                        <table class="table table-hover table-bordered" id="sampleTable">
                         <thead class="bg-light text-dark p-3 text-center">
                             <tr>
-                            <th>#</th>
-                            <th>Name</th>
-                            <th>Description</th>
-                            <th>Created</th>
-                            <th class="text-center">Action</th>
+                                <th>#</th>                          
+                                <th>Title</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Order Date</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($supplier as $row)
+                            @php
+                            $count = 1; // Counter variable for row numbers
+                            @endphp
+                            @foreach ($orders -> reverse() as $order)
+                            @foreach ($order->orderItems as $orderItem)
                             <tr>
-                                <td>{{$count++}}</td>                              
-                                <td>{{$row->name_supplier}}</td>
-                                <td>{{$row->description}}</td>                             
-                                <td>{{$row->created_at}}</td>
-                                <td class="text-center">
-                                    <a class="badge badge-warning edit" href="{{url('/admin/update_supplier/'.$row->id)}}" title="Update" data-toggle="tooltip">
-                                    <i class="fa fa-edit"></i>
-                                    </a>                        
-                                    &nbsp;
-                                    <a class="badge badge-danger delete" href="{{url('/admin/supplier/'.$row->id)}}" onclick="return confirm('Are you sure?')" title="Delete" data-toggle="tooltip">
-                                    <i class="fa fa-trash "></i>
-                                    </a>
-                                    {{-- &nbsp;
-                                    <a class="badge badge-success view" title="View" data-toggle="tooltip">
-                                    <i class="fa fa-eye "></i>
-                                    </a>   --}}
-                                </td>
+                                <td>{{ $count++ }}</td>
+                                <td>{{ $orderItem->item_title }}</td>
+                                <td>{{ $orderItem->price }}</td>
+                                <td>{{ $orderItem->quantity }}</td> 
+                                <td>{{ $order->created_at }}</td>
                             </tr>
-                            @endforeach() 
-                        </tbody>
-                    </table>        
+                            @endforeach
+                            @endforeach
+                        </tbody>              
+                    </table>
                     </div>
-                </div>                
+                </div>
             </div>
         </div>
     </main>
     <!-- Essential javascripts for application to work-->
-    @include('admin.js.script') 
-    
+    @include('admin.js.script')
+    <!-- Include jQuery library -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </body>
+
 </html>

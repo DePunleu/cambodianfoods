@@ -13570,7 +13570,7 @@ be a descendant of the grid when it is being dragged.
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  background-color: #009688;
+  background-color: #222d32;
   z-index: 1030;
   padding-right: 15px;
 }
@@ -13607,7 +13607,7 @@ be a descendant of the grid when it is being dragged.
             flex: 0 0 auto;
     display: block;
     width: 230px;
-    background-color: #007d71;
+    background-color: #222d32;
   }
 }
 
@@ -15250,3 +15250,19 @@ be a descendant of the grid when it is being dragged.
 .user .user-settings label {
   color: #666;
 }
+
+/* Additional CSS styles for the enhanced menu */
+.nav-pills .nav-item .nav-link {
+    font-size: 18px;
+    padding: 5px 10px;
+    margin-right: 10px;
+    border-radius: 5px;
+    color: #fff;
+    background-color: #007bff; /* Change the background color as needed */
+}
+
+.nav-pills .nav-item .nav-link:hover {
+    background-color: #0056b3; /* Change the hover background color as needed */
+    text-decoration: none;
+}
+

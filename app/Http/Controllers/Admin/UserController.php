@@ -15,15 +15,24 @@ use App\Models\User;
 class UserController extends Controller
 {
     //==================Show All Users=======================//
-    public function users(){
+    public function users(Request $request){
         $users = User::orderByDesc('id')
         ->where(function ($query) {
             $query->where('role', 'user')
                   ->orWhere('role', 'seller')
                   ->orWhere('role', 'accountant');
-        })
-        ->get();
+        });
+        $roleFilter = $request->input('role');
+        $usersQuery = User::orderByDesc('id')
+        ->whereNotIn('role', ['admin']); // Exclude 'admin' role from the query
+        
+        // Role Filtering
+        if ($roleFilter) {
+            $usersQuery->where('role', $roleFilter);
+        }
 
+        // Prepares data to be passed to the view.
+        $users = $usersQuery->get();
         $count = 1;
         return view(
             'admin.home.users.list_users',

@@ -119,12 +119,7 @@
                                         <button type="submit">Filter Orders</button>
                                     </form>
                             </div>
-                            <div class="col-sm-2 text-right mt-3">
-                            <!-- Move the button to the right within the same row -->
-                                <a href="{{ route('seller.order_report') }}" class="btn btn-info">
-                                    <i class="fas fa-chart-bar"></i> Order Report
-                                </a>               
-                            </div>
+                            
                             {{-- <div class="col-sm-2">
                                 <a href="{{ route('seller.create_order') }}">
                                 <button type="button" class="btn btn-info add-new"><i class="fa fa-plus"></i> Add New</button>

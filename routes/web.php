@@ -22,6 +22,7 @@ use App\Http\Controllers\Admin\ItemController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\SupplierController;
 use App\Http\Controllers\Admin\SubmenuController;
+use App\Http\Controllers\Admin\ReportController;
 
 
 
@@ -234,11 +235,17 @@ Route::controller(SupplierController::class)->middleware('authadmin')->group(fun
     Route::post('/admin/update_supplier/{id}', 'update_supplierPost')->name('admin.update_supplier.post');
     Route::get('/admin/supplier/{id}', 'delete_supplier')->name('admin.delete_supplier');   
 })->middleware('cache');
-
-
+//================Admin Report Route=========================//
+Route::controller(ReportController::class)->middleware('authadmin')->group(function () {
+    Route::get('/admin/order_report', 'showReport')->name('admin.order_report');
+    Route::post('/admin/orders_report/filter', 'filterOrders_reportByDate')->name('admin.Orders_report.filter');
+    Route::get('/admin/item_report', 'item_report')->name('admin.item_report');
+    //Route::get('/admin/export-exportOrderReport', 'exportOrderReport')->name('admin.exportOrderReport');
+})->middleware('cache');
 //=======================================================================//
 //==============================End Admin Route==========================//
 //=======================================================================//
+
 
 
 //=======================================================================//

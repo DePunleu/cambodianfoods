@@ -11,12 +11,18 @@
     <title>Login Seller</title>
   </head>
   <body>
-    <section class="material-half-bg">
+    <!-- <section class="material-half-bg">
       <div class="cover"></div>
+    </section> -->
+    <section class="material-half-bg">
+      <div class="bg-box">
+        <img src="backend/images/Prohok-Ktis.jpg" alt="">
+      </div>
     </section>
+
     <section class="login-content">
       <div class="logo">
-        <h1>SELLER</h1>
+        <h1>Seller</h1>
       </div>
       <div class="login-box">
         <form class="login-form" method="POST" action="{{ url('/seller') }}">
@@ -126,6 +132,30 @@
         alert.style.display = 'none';
       });
     </script>
+    <style>
+        /* Set full screen styles */
+        .material-half-bg {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          z-index: -1; /* adjust z-index if necessary */
+        }
+
+        /* Ensure the image fills the container */
+        .material-half-bg .bg-box {
+          width: 100%;
+          height: 100%;
+          overflow: hidden;
+        }
+
+        .material-half-bg .bg-box img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover; /* Maintain aspect ratio and cover the entire space */
+        }
+      </style>
     
   </body>
 </html>

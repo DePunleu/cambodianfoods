@@ -102,9 +102,6 @@
             <div class="d-flex justify-content-between py-3 float-right">
                     <!-- New button to direct to menu -->
                     <div class="p-4">
-                      <!-- Your existing content here -->
-
-                      <!-- New button -->
                       <a href="{{url('/menu')}}" class="btn btn-primary rounded-pill py-2 btn-block">Add new order</a>
                     </div>
             </div>
@@ -122,7 +119,6 @@
                 <a href="{{url('/checkout')}}" class="btn btn-dark rounded-pill py-2 btn-block">Checkout</a>
               </div>
             </div>
-            {{-- <hr class="my-3"> --}}
           </div>
         </div>
       </div>

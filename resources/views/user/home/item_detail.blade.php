@@ -43,7 +43,7 @@
                 <div class="col-md-6">
                     <h4 class=" fw-bolder">{{ $item->title }}</h4>
                     <div class="fs-5 ">
-                        <h4 class="item_price"><strong>${{ $item->price }}</strong></h4>
+                        <h4 class="item_price">Price <strong>${{ $item->price }}</strong></h4>
                         <span> {{ $item->orderItems->count() }} sold</span>
                         <br>
                         <span>{{ $item->store_quantity }} remaining</span>

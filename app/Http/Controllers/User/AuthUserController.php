@@ -30,6 +30,7 @@ class AuthUserController extends Controller
         $data['password'] = Hash::make($request -> password) ;
         $user = User::create($data);
         if(!$user){
+            // If the provided infomation is not meet the requird then inform erorr
             return redirect()->intended(route('register'))->with("error","Registration failed, please try again!");
         }
         return redirect()->intended(route('user_login'))->with("success","Registration success, Please Login to access the website!");
@@ -46,15 +47,18 @@ class AuthUserController extends Controller
     //=====================Login Post==========================//
     public function user_loginPost(Request $request)
     {
+        // check the incoming request data if the data is a valid format or not
         $this->validate($request, [
             'email' => ['required', 'email'],
             'password' => ['required'],
         ]);
+        // store the user input (email and password) from the request
         $arr = [
             'email' => $request->email,
             'password' => $request->password,
-            'role' => 'user', // add this line to ensure only users can login
+            'role' => 'user', // this line to ensure only users can login
         ];
+        // Authentication Attempt by checking $arr
         if (Auth::attempt($arr)) {
             return redirect('/');
         } else {
@@ -71,8 +75,4 @@ class AuthUserController extends Controller
     }
     //=====================End Method======================//
 
-    // public function signup()
-    // {
-    //     return view('user.auth.signup');
-    // }
 }

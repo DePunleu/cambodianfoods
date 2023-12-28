@@ -33,7 +33,7 @@
                   </h1>
                   <p style="font-size: 24px;">
                     
-                    Cambodian Foods is a high-end restaurant which boasts a ‘Living Cambodian Cuisine’. By researching, practicing and promoting Cambodian cuisine, we aim to safeguard the nation’s food heritage for years to come.
+                    Cambodian Foods is a high-end ordering online food which boasts a ‘Living Cambodian Cuisine’. By researching, practicing and promoting Cambodian cuisine, we aim to safeguard the nation’s food heritage for years to come.
                   </p>
                   <div class="btn-box">
                     <a href="" class="btn1">

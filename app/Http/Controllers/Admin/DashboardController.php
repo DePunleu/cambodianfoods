@@ -31,8 +31,6 @@ class DashboardController extends Controller
     //==========================Dashboard Admin======================//
     public function dashboard()
     {
-        $menus_count = Menu::all()->count();
-        $items_count = Item::all()->count();
         $foods_count = Item::where('menu_id', 1)->count();
         $combo_count = Item::where('menu_id', 2)->count();
         $dessert_count = Item::where('menu_id', 3)->count();
@@ -43,23 +41,19 @@ class DashboardController extends Controller
         ->join('order_items', 'orders.id', '=', 'order_items.order_id')
         ->sum(DB::raw('order_items.price * order_items.quantity'));
 
-
-        // Total origin price
-        // $origin_price = Order::where('delivery_status', 'Completed')
-        // ->join();
-        
-
-        // $users_count = User::where('role', 'user')->count();
-        $users_count = User::whereIn('role', ['user', 'accountant', 'seller'])->count();
+        // Chart User
+        $users_count = User::where('role', 'user')->count();
         $users = User::where('role', 'user')->selectRaw('MONTH(created_at) as month, COUNT(*) as count')
             ->whereYear('created_at', date('Y'))
             ->groupBy('month')
             ->orderBy('month')
             ->get();
-        $labels = [];
-        $data = [];
+        // Preparing Data for Charting
+        $labels = []; // array to hold month names
+        $data = []; // array to hold user counts
         $colors = ['#EEE418','#18EE22','#EE8D18','#18EEDE','#18A3EE','#18EEB7',
             '#8618EE','#C418EE','#EE18AD','#EE1818','#18EEBA','#EE7318'];
+        // Loops through the 12 months of a year
         for ($i=1; $i<13; $i++) {
             $month = date('F', mktime(0,0,0,$i,1));
             $count = 0;
@@ -79,6 +73,7 @@ class DashboardController extends Controller
                 'backgroundColor' => $colors
             ]   
         ];
+        
         // Pie chart for order delivery statuses
         $deliveryStatusCounts = Order::select('delivery_status', DB::raw('count(*) as count'))
         ->groupBy('delivery_status')
@@ -122,8 +117,7 @@ class DashboardController extends Controller
             ->get();
 
        
-        return view('admin.home.dashboard', compact('menus_count','items_count',
-        'users_count', 'orders_count','completedOrdersTotalPrice',
+        return view('admin.home.dashboard', compact('users_count', 'orders_count','completedOrdersTotalPrice',
         'datasets', 'labels', 'orderDataset', 'orderLabels', 'foods_count', 'combo_count', 'dessert_count', 'drink_count',
         'ordersByDay','ordersByWeek','ordersByMonth','ordersByYear'));
     }

@@ -90,6 +90,7 @@
                   </div>
                   @endif
                   {{-- error message --}}
+        <!-- Form register -->
         <form method="POST" action="{{ route('register.post') }}">
             @csrf
                 <div class="input-group form-group">
@@ -125,6 +126,7 @@
                   </label>
                 </div>
           </form>
+          <!-- End form register -->
         </div>     
     </div>
   </div>

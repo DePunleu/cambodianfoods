@@ -15,36 +15,8 @@ class MenuSeeder extends Seeder
     public function run(): void
     {
         DB::table('menus')->insert([
-            [
-                'id' => 1,
-                'name_menu' => 'Breakfast',
-                'description' => 'descriptions',
-                'created_at' => Carbon::now(),
-            ],
-            [
-                'id' => 2,
-                'name_menu' => 'Lunch',
-                'description' => 'descriptions',
-                'created_at' => Carbon::now(),
-            ],
-            [
-                'id' => 3,
-                'name_menu' => 'Dinner',
-                'description' => 'descriptions',
-                'created_at' => Carbon::now(),
-            ],
-            [
-                'id' => 4,
-                'name_menu' => 'Drinks',
-                'description' => 'descriptions',
-                'created_at' => Carbon::now(),
-            ],
-            [
-                'id' => 5,
-                'name_menu' => 'Dessert',
-                'description' => 'descriptions',
-                'created_at' => Carbon::now(),
-            ],
+            
+
         ]);
     }
 }

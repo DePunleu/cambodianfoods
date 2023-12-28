@@ -212,7 +212,7 @@
                                 </a>
                             </li>
                         @endforeach
-                        <!-- Add more submenu items or actions as needed -->
+                        <!-- End Loop submenu -->
                     </ul>
                 </div>
             @endforeach
@@ -256,6 +256,7 @@
                           <span> {{ $data->orderItems->count() }} sold</span>
                         </div>
                       </div>
+                      <!-- stars-and-reviews  -->
                         <div class="stars-and-reviews">
                           <div class="stars">
                             @php
@@ -278,6 +279,7 @@
                             <span class="review-no">{{ $data->reviews->count() }} reviews</span>
                           </div>
                         </div>
+                        <!-- End stars-and-reviews  -->
                         
                       
                       

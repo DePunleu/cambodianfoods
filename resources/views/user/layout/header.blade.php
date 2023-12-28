@@ -22,12 +22,7 @@
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="{{ url('/about') }}">About</a>
-              </li>
-              <!-- <li class="nav-item">
-                <a class="nav-link" href="{{ url('/booking') }}">Book Table</a>
-              </li> -->
-              <li>                
-              </li>                      
+              </li>                     
             </ul>
             <div class="user_option">
               <form class="form-inline" action="{{route('user.search')}}" method="GET">
@@ -112,6 +107,7 @@
                 <a class="dropdown-item" href="{{url('/profile')}}"><i class="fa fa-user"></i> Profile</a> 
                 <a class="dropdown-item" href="{{url('/change_password')}}"><i class="fa fa-lock" aria-hidden="true"></i> Change Password</a> 
                 <a class="dropdown-item" href="{{url('/order_history')}}"><i class="fa fa-history"></i> Order History</a>                 
+                  <!-- Logout code -->
                   <form action="{{route('user_logout')}}" method="POST">
                     @csrf
                     <a class="dropdown-item" href="{{ route('user_logout') }}"
@@ -120,6 +116,7 @@
                     Logout
                     </a>
                   </form>
+                  <!-- End Logout code -->
                 @else
                 <a class="dropdown-item" href="{{ route('user_login.post') }}">
                   <i class="fas fa-sign-in-alt"></i> 

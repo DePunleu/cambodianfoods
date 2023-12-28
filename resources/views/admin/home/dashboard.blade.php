@@ -38,7 +38,6 @@
               </a>
           </li>
           
-          
           <li >
               <a class="app-menu__item" href="{{url('/admin/users')}}" >
                   <i class="fa fa-users"></i>&nbsp;&nbsp;&nbsp;
@@ -91,10 +90,19 @@
                     &nbsp;&nbsp;&nbsp;
                     <span class="app-menu__label">Suppliers</span>
                     
-                </a>
-                
-            </li>
+                </a>             
+          </li>
+
+          <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">Report</span><i></i></a>
+            <ul class="treeview-menu">
+              <li><a class="treeview-item" href="/admin/order_report"><i class="icon fa fa-circle-o"></i>Order Report</a></li>
+              <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i>Item Report</a></li>
+          
+            </ul>
+          </li>
+       
       </ul>
+    
     </aside>
     <!-- Body-->
     <main class="app-content">
@@ -108,15 +116,6 @@
           </ul>
         </div>
         <div class="row">
-          <!-- <div class="col-md-6 col-lg-3">
-            <div class="widget-small info coloured-icon"><i class="icon fas fa-utensils fa-3x"></i>
-              <div class="info">
-                <h4>Menus</h4>
-                <p><b>{{ $menus_count }}</b></p>
-              </div>
-            </div>
-          </div> -->
-
           <div class="col-md-6 col-lg-3">
             <div class="widget-small info coloured-icon"><i class="icon fas fa-utensils fa-3x"></i>
               <div class="info">
