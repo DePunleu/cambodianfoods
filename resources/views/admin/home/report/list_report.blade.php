@@ -87,12 +87,13 @@
                 </a>
                 
             </li>
-            <li class="treeview is-expanded"><a class="app-menu__item " href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">Report</span><i></i></a>
-                <ul class="treeview-menu">
-                    <li><a class="treeview-item" href="/admin/order_report"><i class="icon fa fa-circle-o"></i>Order Report</a></li>
-                    <li><a class="treeview-item" href="/admin/item_report"><i class="icon fa fa-circle-o"></i>Item Report</a></li>
-          
-                </ul>
+            <li >
+                <a class="app-menu__item" href="{{url('/admin/report')}}" >
+                    <i class="app-menu__icon fa fa-edit"></i>
+                    &nbsp;&nbsp;&nbsp;
+                    <span class="app-menu__label">Report</span>
+                    
+                </a> 
             </li>
         </ul>
     </aside>
@@ -105,7 +106,7 @@
             <ul class="app-breadcrumb breadcrumb side">
                 <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
                 <li class="breadcrumb-item">Report</li>
-                <li class="breadcrumb-item active"><a href="#">Order Report</a></li>
+                <li class="breadcrumb-item active"><a href="#">All Report</a></li>
             </ul>
         </div>
         <div class="row">
@@ -133,9 +134,11 @@
                         <div class="table-title">
                             <div class="row">
                                 <div class="col-sm-10">
-                                    <div><h2>Order Report</h2></div>
+                                    <div><h2>Report</h2></div>
                                     <div>
-                                    <form method="POST" action="{{ route('admin.Orders_report.filter') }}">
+                                    <h3>Total Revenue: {{ $completedOrdersTotalPrice }}$</h3>
+
+                                    {{--<form method="POST" action="{{ route('admin.report.filter') }}">
                                         @csrf <!-- CSRF protection -->
 
                                         <!-- Start Date Input -->
@@ -146,22 +149,9 @@
                                         <label for="end_date">End Date:</label>
                                         <input type="date" id="end_date" name="end_date">
 
-                                      
-
-                                         <!-- Status selection -->
-                                        <label for="status">Status:</label>
-                                        <select id="status" name="status">
-                                            <option value="">Select Status</option>
-                                            @foreach ($orderStatuses as $status)
-                                                <option value="{{ $status }}" @if ($selectedStatus === $status) selected @endif>{{ $status }}</option>
-                                            @endforeach
-                                        </select>
                                         <!-- Submit Button -->
                                         <button type="submit">Filter Orders</button>
-                                    </form> 
-
-                                    
-                                    </div>
+                                    </div>--}}
                                 </div>
                             </div>
                         </div>
@@ -173,26 +163,41 @@
                                 <th>#</th>                          
                                 <th>Title</th>
                                 <th>Price</th>
-                                <th>Quantity</th>
-                                <th>Order Date</th>
-                            </tr>
+                                <th>Sale</th>
+                                <th>Revenue</th>
+                                <th>Created at</th>                      
+                        </tr>
                         </thead>
                         <tbody>
-                            @php
-                            $count = 1; // Counter variable for row numbers
-                            @endphp
-                            @foreach ($orders -> reverse() as $order)
-                            @foreach ($order->orderItems as $orderItem)
-                            <tr>
-                                <td>{{ $count++ }}</td>
-                                <td>{{ $orderItem->item_title }}</td>
-                                <td>{{ $orderItem->price }}</td>
-                                <td>{{ $orderItem->quantity }}</td> 
-                                <td>{{ $order->created_at }}</td>
-                            </tr>
+                            @foreach($items as $item)
+                                <tr> 
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $item->title }}</td>
+                                    <td>{{ $item->price }}$</td>
+                                    <td>@php
+                                            $totalOrders = $item->orderItems->sum('quantity');
+                                            echo $totalOrders;
+                                        @endphp
+                                    </td> 
+                                    <td>
+                                        @php
+                                            $revenue = 0;
+                                            // Loop through order items related to this item from completed orders
+                                            foreach($item->orderItems as $orderItem) {
+                                                if ($orderItem->orders->delivery_status === 'Completed') {
+                                                    $revenue += ($orderItem->quantity * $orderItem->price);
+                                                }
+                                            }
+                                            echo $revenue;
+                                        @endphp
+                                        $
+                                    </td> 
+                                    <td>{{$item->created_at}}</td>
+                                    
+                                </tr>
                             @endforeach
-                            @endforeach
-                        </tbody>              
+                           
+                        </tbody>
                     </table>
                     </div>
                 </div>
@@ -202,7 +207,7 @@
     <!-- Essential javascripts for application to work-->
     @include('admin.js.script')
     <!-- Include jQuery library -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
 </body>
 
 </html>

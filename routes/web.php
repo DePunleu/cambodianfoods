@@ -237,10 +237,8 @@ Route::controller(SupplierController::class)->middleware('authadmin')->group(fun
 })->middleware('cache');
 //================Admin Report Route=========================//
 Route::controller(ReportController::class)->middleware('authadmin')->group(function () {
-    Route::get('/admin/order_report', 'showReport')->name('admin.order_report');
-    Route::post('/admin/orders_report/filter', 'filterOrders_reportByDate')->name('admin.Orders_report.filter');
-    Route::get('/admin/item_report', 'item_report')->name('admin.item_report');
-    //Route::get('/admin/export-exportOrderReport', 'exportOrderReport')->name('admin.exportOrderReport');
+    Route::get('/admin/report', 'showReport')->name('admin.list_report');
+    Route::post('/admin/report/filter', 'filter_reportByDate')->name('admin.report.filter');
 })->middleware('cache');
 //=======================================================================//
 //==============================End Admin Route==========================//

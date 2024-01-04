@@ -95,6 +95,37 @@
 			},
 		});
 	</script>
+	<!-- Filter menu and submenu -->
+	<script>
+    $(document).ready(function() {
+        $('#filter_menu').change(function() {
+            var menuId = $(this).val();
+            if (menuId) {
+                $.ajax({
+                    type: "GET",
+                    url: "{{ route('admin.getSubmenus', ['menuId' => ':menuId']) }}".replace(':menuId', menuId),
+                    dataType: "json",
+                    success: function(response) {
+                        if (response.submenus && response.submenus.length > 0) {
+                            $('#filter_submenu').empty();
+                            $('#filter_submenu').append('<option value="">Select Submenu</option>');
+                            $.each(response.submenus, function(key, value) {
+                                $('#filter_submenu').append('<option value="' + value.id + '">' + value.submenu_name + '</option>');
+                            });
+                            $('#submenu_dropdown').show(); // Show the submenu dropdown
+                        } else {
+                            $('#filter_submenu').empty();
+                            $('#submenu_dropdown').hide(); // Hide the submenu dropdown if no submenus found
+                        }
+                    }
+                });
+            } else {
+                $('#filter_submenu').empty();
+                $('#submenu_dropdown').hide(); // Hide the submenu dropdown if no menu selected
+            }
+        });
+    });
+</script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.10.2/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.2/html2canvas.min.js"></script>

@@ -40,9 +40,9 @@
                     <address>
                     <strong>Billed From:</strong><br>
                     Cambodian Foods<br>
-                        +84 888255118<br>
+                    +84 879274961<br>
                         cambodianfoods@gmail.com<br>
-                        Ngo 74, Truong Chinh, Phuong Mai, Dong Da, Hanoi
+                        Hai Bà Trưng District, Hanoi
                         
                     </address>
                 </div>

@@ -31,43 +31,39 @@ class ReportController extends Controller
         $count =1; 
         // Fetching data from the models for the report
         $items = Item::all(); // Fetch all items
+        // Total price of completed orders
+        $completedOrdersTotalPrice = Order::where('delivery_status', 'Completed')
+        ->join('order_items', 'orders.id', '=', 'order_items.order_id')
+        ->sum(DB::raw('order_items.price * order_items.quantity'));
+
         // Fetch all orders with their related order items
         $orders = Order::with('orderItems')->get();
-        // Fetching Order Statuses
-        $orderStatuses = ['Order Received','In-Progress', 'Delivering', 'Completed','Canceled'];
-        $selectedStatus = $request->input('status');
-        $selectedDate = $request->input('date');
- 
-        return view('admin.home.report.list_order_report', compact ('items', 'orders','count',
-        'orderStatuses', 'selectedStatus', 'selectedDate' ));
+
+        return view('admin.home.report.list_report', compact ('items', 'orders','count','completedOrdersTotalPrice'));
     }
     
     //==================End Method=======================//
 
-    public function filterOrders_reportByDate (Request $request){
-        $count = 1; 
-        $items = Item::all();
-        $orderStatuses = ['Order Received','In-Progress', 'Delivering', 'Completed','Canceled'];
-        $startDate = $request->input('start_date');
-        $endDate = $request->input('end_date');
-        $selectedStatus = $request->input('status'); // Assuming 'status' is the field name for status filtering
-    
-        $ordersQuery = Order::with('orderItems')
-            ->whereDate('created_at', '>=', $startDate)
-            ->whereDate('created_at', '<=', $endDate);
-    
-        if ($selectedStatus && in_array($selectedStatus, $orderStatuses)) {
-            $ordersQuery->where('delivery_status', $selectedStatus);
-        }
-    
-        $orders = $ordersQuery->get();
-    
-        // You can then pass $orders to a view to display the filtered orders
-        return view('admin.home.report.list_order_report', compact('count', 'orders', 'orderStatuses', 'items', 'selectedStatus'));       
-    }
-    //==================End Method=======================//
- 
+    // //==================End Method=======================//
+    // public function filter_reportByDate(Request $request)
+    // {   
+    //     $items = Item::with('orderItems')->get(); // Fetch all items
+    //     $startDate = $request->input('start_date');
+    //     $endDate = $request->input('end_date');
 
-    
+    //     // Filter orders based on the provided date range
+    //     $orders = Order::with('orderItems')
+    //         ->whereDate('created_at', '>=', $startDate)
+    //         ->whereDate('created_at', '<=', $endDate)
+    //         ->get();
+
+    //     // You can pass $orders to your view for displaying the filtered results
+    //     return view('admin.home.report.list_report', ['items' => $orders]);
+    // }
+    // //==================End Method=======================// 
+
+
+  
+
     
 }

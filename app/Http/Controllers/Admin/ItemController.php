@@ -18,7 +18,7 @@ class ItemController extends Controller
         {
             $item = Item::with('menus')->orderByDesc('id')->get(); // Include the menu relationship
             $menus = Menu::all();
-            $submenus = Menu::all();
+            $submenus = Submenu::all();
             $count = 1;
         
             return view(
@@ -26,9 +26,6 @@ class ItemController extends Controller
                 compact('count', 'item', 'menus','submenus')
             );
         }
-    
-
-
         //==================End Method=======================//
 
         //==================Create_item=======================//
@@ -87,6 +84,7 @@ class ItemController extends Controller
 
         return redirect()->back()->with("success", "Item created successfully!");
     }
+    //=====================End Method==========================//
 
     //==================Delete Item=======================//
     public function delete_item($id_item)
@@ -166,7 +164,7 @@ class ItemController extends Controller
             ->with('submenuId', $submenuId);
     }
     //===================== End Method ==========================//
-    //===================== getSubmenus Method ==========================//
+    // //===================== getSubmenus Method ==========================//
 
     public function getSubmenus($menuId)
     {
@@ -175,6 +173,6 @@ class ItemController extends Controller
         return response()->json(['submenus' => $submenus]);
     }
     
-    //===================== End Method ==========================//
+    // //===================== End Method ==========================//
   
 }

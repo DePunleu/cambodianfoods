@@ -85,12 +85,13 @@
                 </a>
                 
             </li>
-            <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">Report</span><i></i></a>
-                <ul class="treeview-menu">
-                    <li><a class="treeview-item" href="/admin/order_report"><i class="icon fa fa-circle-o"></i>Order Report</a></li>
-                    <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i>Item Report</a></li>
-          
-                </ul>
+            <li >
+                <a class="app-menu__item" href="{{url('/admin/report')}}" >
+                    <i class="app-menu__icon fa fa-edit"></i>
+                    &nbsp;&nbsp;&nbsp;
+                    <span class="app-menu__label">Report</span>
+                    
+                </a> 
             </li>
         </ul>
     </aside>
@@ -159,8 +160,9 @@
 
                         <button type="submit">Find</button>
                     </form>
+
+
                         
-                    </form>
                     <table class="table table-hover table-bordered" id="sampleTable">
                         <thead class="bg-light text-dark p-3 text-center">
                             <tr>
@@ -226,38 +228,5 @@
     </main>
     <!-- Essential javascripts for application to work-->
     @include('admin.js.script') 
-    <script>
-    $(document).ready(function() {
-        $('#filter_menu').change(function() {
-            var menuId = $(this).val();
-            if (menuId) {
-                $.ajax({
-                    type: "GET",
-                    url: "{{ route('admin.getSubmenus', ['menuId' => ':menuId']) }}".replace(':menuId', menuId),
-                    dataType: "json",
-                    success: function(response) {
-                        if (response.submenus && response.submenus.length > 0) {
-                            $('#filter_submenu').empty();
-                            $('#filter_submenu').append('<option value="">Select Submenu</option>');
-                            $.each(response.submenus, function(key, value) {
-                                $('#filter_submenu').append('<option value="' + value.id + '">' + value.submenu_name + '</option>');
-                            });
-                            $('#submenu_dropdown').show(); // Show the submenu dropdown
-                        } else {
-                            $('#filter_submenu').empty();
-                            $('#submenu_dropdown').hide(); // Hide the submenu dropdown if no submenus found
-                        }
-                    }
-                });
-            } else {
-                $('#filter_submenu').empty();
-                $('#submenu_dropdown').hide(); // Hide the submenu dropdown if no menu selected
-            }
-        });
-    });
-</script>
-
-
-    
 </body>
 </html>

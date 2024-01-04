@@ -14,8 +14,10 @@ class AdminController extends Controller
 {
     //====================Update Admin Password========================//
     public function update_password(Request $request)
-    {
+    {   
+        // Check if the current request is a POST request
         if($request->isMethod('post')){
+            // Retrieves all the input data from the POST request
             $data = $request->all();
             //Check if current password is correct
             if (Hash::check($data['current_password'], Auth::guard('web')->user()->password)) {
@@ -35,23 +37,10 @@ class AdminController extends Controller
         return view('admin.home.admin.update_password');
     }
     //======================== End Method =========================//
-    //=============== Check current admin password ================//
-    public function check_current_password(Request $request)
-    {
-        $data = $request->all();
-        dd($data);
-        if (Hash::check($data['current_password'], Auth::guard('web')->user()->password)) {
-        return "true";
-        } else {
-        return "false";
-        }
-    }
-    //======================== End Method ======================//
-    //=============== End Update Admin Password ================//
 
     //=============== Update Admin Details ====================//
     public function update_details(Request $request)
-    {
+    {   // Check if the current request is a POST request
         if($request->isMethod('post')){
             $data = $request->all();
             $rules = [
@@ -59,9 +48,11 @@ class AdminController extends Controller
                 'admin_phone' => 'required|numeric',
             ];
             $this->validate($request,$rules);
-            //upload admin Image
+            // Check if the request has a file named 'admin_image'
             if($request->hasFile('admin_image')){
+            // Get the file from the request
             $image_tmp = $request->file('admin_image');
+
             if($image_tmp->isValid()){
                 //Get image extension
                 $extension = $image_tmp->getClientOriginalExtension();
@@ -78,26 +69,17 @@ class AdminController extends Controller
                 $imageName = "";
             }
             
-            //update admin details
-            User::where('email',Auth::guard('web')->user()->email)->update(['name'=>$data['admin_name'],'phone'=>$data['admin_phone'],'image'=> $imageName]);
+            //update admin details and retrieves the user by email
+            User::where('email',Auth::guard('web')->user()->email)
+            ->update([
+                'name'=>$data['admin_name'],
+                'phone'=>$data['admin_phone'],
+                'image'=> $imageName]);
             return redirect()->back()->with('success_message', 'Admin details has been updated successfully!');
         }
         return view('admin.home.admin.update_details');
     }
-    //==================End Update Admin Details=======================//
-
-    //==================Start Update user Details=======================//
-    public function updateUserRole(Request $request, $userId) {
-        // Fetch the user
-        $user = User::find($userId);
-    
-        // Update the user role
-        $user->role = $request->input('user_role');
-        $user->save();
-    
-        // Redirect or show a success message
-        return redirect()->back()->with('message', 'User role updated successfully!');
-    }
-    //==================End Update user Details=======================//
-    
+    //==================End Update Admin Details=======================//    
 }
+
+

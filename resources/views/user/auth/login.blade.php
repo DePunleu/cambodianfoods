@@ -23,14 +23,14 @@
     }
     .card-header{      
       padding: 0.75rem 1.25rem;
-      background-color: rgba(255, 195, 18, 1) !important;
+      background-color: rgb(42, 2, 2) !important;
       border-bottom: 1px solid rgba(0, 0, 0, 0.125);
       
     }
     .input-group-prepend span{
       width: 50px;
-      background-color: #FFC312;
-      color: black;
+      background-color: rgb(42, 2, 2) !important;
+      color: white;
       border:0 !important;
       }
       input:focus{
@@ -45,12 +45,12 @@
       margin-right: 5px;
       }
       .login_btn{
-      color: black;
-      background-color: #FFC312;
+      color: white;
+      background-color: rgb(42, 2, 2) !important;
       width: 100px;
       }
       .login_btn:hover{
-      color: black;
+      color: white;
       background-color: white;
       }
       .links{
@@ -73,7 +73,7 @@
     <!-- end header section -->
     <div class="form-container">
       <div class="card-header text-center">
-        LOGIN
+      <span style="color: white;">LOGIN</span>
       </div>
       <br>     
         <div class="container">        

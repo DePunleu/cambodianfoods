@@ -20,13 +20,13 @@
     }
     .card-header{
       padding: 0.75rem 1.25rem;
-      background-color: rgba(255, 195, 18, 1) !important;
+      background-color: rgb(42, 2, 2) !important;
       border-bottom: 1px solid rgba(0, 0, 0, 0.125);
     }
     .input-group-prepend span{
       width: 50px;
-      background-color: #FFC312;
-      color: black;
+      background-color: rgb(42, 2, 2) !important;
+      color: white;
       border:0 !important;
       }
       input:focus{
@@ -42,12 +42,12 @@
       }
 
       .login_btn{
-      color: black;
-      background-color: #FFC312;
+      color: white;
+      background-color: rgb(42, 2, 2) !important;
       width: 100px;
       }
       .login_btn:hover{
-      color: black;
+      color: white;
       background-color: white;
       }
       .links{
@@ -68,10 +68,8 @@
     @include('user.layout.header')
     <!-- end header section -->
     <div class="form-container">
-        {{-- <h3 class="text-center">REGISTER</h3> --}}
         <div class="card-header text-center">
-          {{-- <h3 style="font-weight: bold">REGISTER</h3>  --}}
-          REGISTER
+          <span style="color: white;">REGISTER</span>
         </div>
         <br>
         <div class="container">

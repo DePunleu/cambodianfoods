@@ -111,12 +111,13 @@
                     
                 </a>     
             </li>
-            <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">Report</span><i></i></a>
-                <ul class="treeview-menu">
-                    <li><a class="treeview-item" href="/admin/order_report"><i class="icon fa fa-circle-o"></i>Order Report</a></li>
-                    <li><a class="treeview-item" href=""><i class="icon fa fa-circle-o"></i>Item Report</a></li>
-          
-                </ul>
+            <li >
+                <a class="app-menu__item" href="{{url('/admin/report')}}" >
+                    <i class="app-menu__icon fa fa-edit"></i>
+                    &nbsp;&nbsp;&nbsp;
+                    <span class="app-menu__label">Report</span>
+                    
+                </a> 
             </li>
         </ul>
     </aside>
@@ -184,12 +185,12 @@
                                         <button type="submit">Filter Orders</button>
                                     </form> 
                             </div> 
-                            <div class="col-sm-2 text-right mt-3">
+                            {{--<div class="col-sm-2 text-right mt-3">
                             <!-- Move the button to the right within the same row -->
                                 <a href="{{ route('admin.order_report') }}" class="btn btn-info">
                                     <i class="fas fa-chart-bar"></i> Order Report
                                 </a>               
-                            </div>
+                            </div>--}}
                         </div>
                         
                         
