@@ -136,9 +136,9 @@
                                 <div class="col-sm-10">
                                     <div><h2>Report</h2></div>
                                     <div>
-                                    <h3>Total Revenue: {{ $completedOrdersTotalPrice }}$</h3>
+                                    {{--<h3>Total Revenue: {{ $completedOrdersTotalPrice }}$</h3>--}}
 
-                                    {{--<form method="POST" action="{{ route('admin.report.filter') }}">
+                                    <form method="POST" action="{{ route('admin.report.filter') }}">
                                         @csrf <!-- CSRF protection -->
 
                                         <!-- Start Date Input -->
@@ -150,8 +150,8 @@
                                         <input type="date" id="end_date" name="end_date">
 
                                         <!-- Submit Button -->
-                                        <button type="submit">Filter Orders</button>
-                                    </div>--}}
+                                        <button type="submit">Find</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -165,6 +165,7 @@
                                 <th>Price</th>
                                 <th>Sale</th>
                                 <th>Revenue</th>
+                                <th>Remaining</th>
                                 <th>Created at</th>                      
                         </tr>
                         </thead>
@@ -191,7 +192,8 @@
                                             echo $revenue;
                                         @endphp
                                         $
-                                    </td> 
+                                    </td>
+                                    <td>{{$item->store_quantity}}</td>
                                     <td>{{$item->created_at}}</td>
                                     
                                 </tr>

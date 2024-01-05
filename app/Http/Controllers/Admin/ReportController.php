@@ -44,26 +44,27 @@ class ReportController extends Controller
     
     //==================End Method=======================//
 
-    // //==================End Method=======================//
-    // public function filter_reportByDate(Request $request)
-    // {   
-    //     $items = Item::with('orderItems')->get(); // Fetch all items
-    //     $startDate = $request->input('start_date');
-    //     $endDate = $request->input('end_date');
+    //==================filter_reportByDate=======================// 
+    public function filter_reportByDate(Request $request)
+    {   
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
 
-    //     // Filter orders based on the provided date range
-    //     $orders = Order::with('orderItems')
-    //         ->whereDate('created_at', '>=', $startDate)
-    //         ->whereDate('created_at', '<=', $endDate)
-    //         ->get();
+        // Retrieve items associated with orders within the specified date range
+        $items = Item::whereHas('orderItems.orders', function ($query) use ($startDate, $endDate) {
+                $query->whereDate('created_at', '>=', $startDate)
+                       ->whereDate('created_at', '<=', $endDate);
+            })
+            ->with(['orderItems' => function ($query) use ($startDate, $endDate) {
+                $query->whereHas('orders', function ($orderQuery) use ($startDate, $endDate) {
+                    $orderQuery->whereDate('created_at', '>=', $startDate)
+                               ->whereDate('created_at', '<=', $endDate);
+                });
+            }])
+            ->get();
 
-    //     // You can pass $orders to your view for displaying the filtered results
-    //     return view('admin.home.report.list_report', ['items' => $orders]);
-    // }
-    // //==================End Method=======================// 
-
-
-  
-
-    
+        // Pass the filtered $items to the view
+        return view('admin.home.report.list_report', compact('items', 'startDate', 'endDate'));
+    }
+    //==================End Method=======================//
 }
