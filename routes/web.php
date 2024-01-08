@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Accountant\AccountantReportController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\AuthUserController;
 use App\Http\Controllers\User\HomeController;
@@ -192,7 +193,7 @@ Route::controller(SubmenuController::class)->middleware('authadmin')->group(func
     Route::post('/admin/create_submenu', 'create_submenuPost')->name('admin.create_submenu.post');
     Route::get('/admin/update_submenu/{id}', 'update_submenu')->name('admin.update_submenu');
     Route::post('/admin/update_submenu/{id}', 'update_submenuPost')->name('admin.update_submenu.post');
-    Route::get('/admin/submenu/{id}', 'delete_submenu')->name('admin.delete_submenu');   
+    Route::get('/admin/submenu/{id}', 'delete_submenu')->name('admin.delete_submenu'); 
 })->middleware('cache');
 
 //================Admin Items Management Route=========================//
@@ -239,6 +240,7 @@ Route::controller(SupplierController::class)->middleware('authadmin')->group(fun
 Route::controller(ReportController::class)->middleware('authadmin')->group(function () {
     Route::get('/admin/report', 'showReport')->name('admin.list_report');
     Route::post('/admin/report/filter', 'filter_reportByDate')->name('admin.report.filter');
+    Route::get('/admin/download-report', 'downloadReportByDate')->name('admin.report.download');
 })->middleware('cache');
 //=======================================================================//
 //==============================End Admin Route==========================//
@@ -363,6 +365,12 @@ Route::controller(AccountantOrderController::class)->middleware('authaccountant'
     Route::get('/accountant/order/{id}', 'delete_order')->name('accountant.delete_order');   
     Route::get('/accountant/invoice_pdf/{id}', 'invoice_pdf')->name('accountant.invoice_pdf');
    
+})->middleware('cache');
+
+//================Accountant Report Route=========================//
+Route::controller(AccountantReportController::class)->middleware('authaccountant')->group(function () {
+    Route::get('/accountant/report', 'showReport')->name('accountant.list_report');
+    Route::post('/accountant/report/filter', 'filter_reportByDate')->name('accountant.report.filter');
 })->middleware('cache');
 
 

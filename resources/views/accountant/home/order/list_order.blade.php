@@ -62,6 +62,14 @@
                 </a>
                 
             </li>
+            <li >
+                <a class="app-menu__item" href="{{url('/accountant/report')}}" >
+                    <i class="app-menu__icon fa fa-edit"></i>
+                    &nbsp;&nbsp;&nbsp;
+                    <span class="app-menu__label">Report</span>
+                    
+                </a> 
+            </li>
         </ul>
     </aside>
     <!-- Body-->
@@ -125,12 +133,12 @@
                                         <button type="submit">Filter Orders</button>
                                     </form>
                             </div>
-                            <div class="col-sm-2 text-right mt-3">
+                            {{--<div class="col-sm-2 text-right mt-3">
                             <!-- Move the button to the right within the same row -->
                                 <a href="{{ route('accountant.order_report') }}" class="btn btn-info">
                                     <i class="fas fa-chart-bar"></i> Order Report
                                 </a>               
-                            </div>
+                            </div>--}}
                         </div><br>
                     </div>
                     <table class="table table-hover table-bordered" id="sampleTable">

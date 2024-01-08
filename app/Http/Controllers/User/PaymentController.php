@@ -182,15 +182,4 @@ class PaymentController extends Controller
         return redirect('/order_history')->with('success', 'Order successful! Thanks for your order!');
          
     }
-
-    
-
-
-
-
-
-
-
-
-
 }

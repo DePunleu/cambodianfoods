@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    @include('admin.css.style')
+    @include('accountant.css.style')
     <!-- Main CSS-->
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <!-- Font-icon css-->
@@ -12,56 +12,31 @@
 
 <body class="app sidebar-mini rtl">
     <!-- Navbar-->
-    @include('admin.layout.header')
+    @include('accountant.layout.header')
     <!-- Sidebar menu-->
-    @include('admin.layout.sidebar')
+    @include('accountant.layout.sidebar')
     <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
     <aside class="app-sidebar">
         <div class="app-sidebar__user">
             @if(!empty(Auth::guard('web')->user()->image))
             <img class="app-sidebar__user-avatar" src="{{asset('backend/images/'.Auth::guard('web')->user()->image)}}" width="70px" alt="User Image">
             @else
-            <img src="{{asset('backend/images/admin.png')}}" width="70px" class="img-circle elevation-2" alt="User Image">
+            <img src="{{asset('backend/images/accountant.png')}}" width="70px" class="img-circle elevation-2" alt="User Image">
             @endif
             <div>
                 <a href="#" class="d-block">{{Auth::guard('web')->user()->name}}</a>
-                <p class="app-sidebar__user-designation">Admin</p>
+                <p class="app-sidebar__user-designation">Accountant</p>
             </div>
         </div>
         <ul class="app-menu">
             <li>
-                <a class="app-menu__item" href="{{url('admin/dashboard')}}">
+                <a class="app-menu__item" href="{{url('accountant/dashboard')}}">
                     <i class="app-menu__icon fa fa-dashboard"></i>
                     <span class="app-menu__label">Dashboard</span>
                 </a>
             </li>
             <li >
-                <a class="app-menu__item" href="{{url('/admin/users')}}" >
-                    <i class="fa fa-users"></i>&nbsp;&nbsp;&nbsp;
-                    <span class="app-menu__label">Users</span>         
-                </a>
-                
-            </li>
-            <li>
-                <a class="app-menu__item " href="{{url('/admin/menu')}}" >
-                    <i class="fas fa-utensils"></i>
-                    &nbsp;&nbsp;&nbsp;
-                    <span class="app-menu__label">Menus</span>
-                    
-                </a>
-                
-            </li>
-            <li>
-                <a class="app-menu__item" href="{{url('/admin/submenu')}}" >
-                    <i class="fas fa-utensils"></i>
-                    &nbsp;&nbsp;&nbsp;
-                    <span class="app-menu__label">Sub Menus</span>
-                    
-                </a>
-                
-            </li>
-            <li >
-                <a class="app-menu__item" href="{{url('/admin/item')}}" >
+                <a class="app-menu__item" href="{{url('//item')}}" >
                     <i class="fas fa-hamburger"></i>
                     &nbsp;&nbsp;&nbsp;
                     <span class="app-menu__label">Items</span>
@@ -70,7 +45,7 @@
                 
             </li>
             <li >
-                <a class="app-menu__item" href="{{url('/admin/order')}}" >
+                <a class="app-menu__item" href="{{url('/accountant/order')}}" >
                     <i class="fa fa-shopping-cart"></i>
                     &nbsp;&nbsp;&nbsp;
                     <span class="app-menu__label">Orders</span>
@@ -79,16 +54,7 @@
                 
             </li>
             <li >
-                <a class="app-menu__item" href="{{url('/admin/supplier')}}" >
-                    <i class="fas fa-users"></i>
-                    &nbsp;&nbsp;&nbsp;
-                    <span class="app-menu__label">Suppliers</span>
-                    
-                </a>
-                
-            </li>
-            <li >
-                <a class="app-menu__item" href="{{url('/admin/report')}}" >
+                <a class="app-menu__item" href="{{url('/accountant/report')}}" >
                     <i class="app-menu__icon fa fa-edit"></i>
                     &nbsp;&nbsp;&nbsp;
                     <span class="app-menu__label">Report</span>
@@ -138,7 +104,7 @@
                                     <div>
                                     {{--<h3>Total Revenue: {{ $completedOrdersTotalPrice }}$</h3>--}}
 
-                                    <form method="POST" action="{{ route('admin.report.filter') }}">
+                                    <form method="POST" action="{{ route('accountant.report.filter') }}">
                                         @csrf <!-- CSRF protection -->
 
                                         <!-- Start Date Input -->
@@ -148,10 +114,9 @@
                                         <!-- End Date Input -->
                                         <label for="end_date">End Date:</label>
                                         <input type="date" id="end_date" name="end_date">
-                                        
+
                                         <!-- Submit Button -->
                                         <button type="submit">Find</button>
-                                        
                                     </div>
                                 </div>
                             </div>
@@ -208,7 +173,7 @@
         </div>
     </main>
     <!-- Essential javascripts for application to work-->
-    @include('admin.js.script')
+    @include('accountant.js.script')
     <!-- Include jQuery library -->
     
 </body>

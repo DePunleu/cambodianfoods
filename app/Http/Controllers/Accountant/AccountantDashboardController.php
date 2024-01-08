@@ -31,8 +31,6 @@ class AccountantDashboardController extends Controller
     //==========================Dashboard Accountant======================//
     public function dashboard()
     {
-        $menus_count = Menu::all()->count();
-        $items_count = Item::all()->count();
         $foods_count = Item::where('menu_id', 1)->count();
         $combo_count = Item::where('menu_id', 2)->count();
         $dessert_count = Item::where('menu_id', 3)->count();
@@ -42,16 +40,20 @@ class AccountantDashboardController extends Controller
         $completedOrdersTotalPrice = Order::where('delivery_status', 'Completed')
         ->join('order_items', 'orders.id', '=', 'order_items.order_id')
         ->sum(DB::raw('order_items.price * order_items.quantity'));
-        $users_count = User::where('role', '0')->count();
-        $users = User::where('role', '0')->selectRaw('MONTH(created_at) as month, COUNT(*) as count')
+
+        // Chart User
+        $users_count = User::where('role', 'user')->count();
+        $users = User::where('role', 'user')->selectRaw('MONTH(created_at) as month, COUNT(*) as count')
             ->whereYear('created_at', date('Y'))
             ->groupBy('month')
             ->orderBy('month')
             ->get();
-        $labels = [];
-        $data = [];
+        // Preparing Data for Charting
+        $labels = []; // array to hold month names
+        $data = []; // array to hold user counts
         $colors = ['#EEE418','#18EE22','#EE8D18','#18EEDE','#18A3EE','#18EEB7',
             '#8618EE','#C418EE','#EE18AD','#EE1818','#18EEBA','#EE7318'];
+        // Loops through the 12 months of a year
         for ($i=1; $i<13; $i++) {
             $month = date('F', mktime(0,0,0,$i,1));
             $count = 0;
@@ -72,10 +74,6 @@ class AccountantDashboardController extends Controller
             ]   
         ];
         
-        
-
-
-
         // Pie chart for order delivery statuses
         $deliveryStatusCounts = Order::select('delivery_status', DB::raw('count(*) as count'))
         ->groupBy('delivery_status')
@@ -93,12 +91,37 @@ class AccountantDashboardController extends Controller
                 'backgroundColor' => $colors
             ]   
         ];
-        return view('accountant.home.dashboard', compact('menus_count','items_count','foods_count', 'combo_count', 'dessert_count', 'drink_count',
-        'users_count', 'orders_count','completedOrdersTotalPrice',
-        'datasets', 'labels', 'orderDataset', 'orderLabels'));
+
+        $ordersByDay = Order::selectRaw('DATE(created_at) as date, COUNT(*) as count')
+        ->groupBy('date')
+        ->orderBy('date')
+        ->get();
+
+        // Fetch orders grouped by week
+        $ordersByWeek = Order::selectRaw('YEARWEEK(created_at) as week, COUNT(*) as count')
+            ->groupBy('week')
+            ->orderBy('week')
+            ->get();
+
+        // Fetch orders grouped by month
+        $ordersByMonth = Order::selectRaw('YEAR(created_at) as year, MONTH(created_at) as month, COUNT(*) as count')
+            ->groupBy('year', 'month')
+            ->orderBy('year')
+            ->orderBy('month')
+            ->get();
+
+        // Fetch orders grouped by year
+        $ordersByYear = Order::selectRaw('YEAR(created_at) as year, COUNT(*) as count')
+            ->groupBy('year')
+            ->orderBy('year')
+            ->get();
+
+       
+        return view('accountant.home.dashboard', compact('users_count', 'orders_count','completedOrdersTotalPrice',
+        'datasets', 'labels', 'orderDataset', 'orderLabels', 'foods_count', 'combo_count', 'dessert_count', 'drink_count',
+        'ordersByDay','ordersByWeek','ordersByMonth','ordersByYear'));
     }
-    //=========================End Method============================//   
-
-
 
 }
+    //=========================End Method============================//  
+    

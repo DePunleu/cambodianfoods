@@ -102,7 +102,6 @@ class UserController extends Controller
     public function delete($id_user)
     {
         $delete = User::where('id', $id_user)->first();
-       // File::delete(public_path().'/uploads/employees/'.$user->image);
         $delete->delete();
         return redirect('/admin/users')
         ->with("success","User deleted successfully!");

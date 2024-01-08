@@ -68,17 +68,6 @@
                         <span class="review-no">{{ $item->reviews->count() }} reviews</span>
                     </div>
                     <p class="lead">{{ $item->description }}</p>
-                    {{--<form action="{{url('add_cart', ['id' => $item->id])}}" method="POST">
-                        @csrf
-                        <div class="d-flex">
-                            <input class="form-control text-center me-3" name="item_quantity" id="inputQuantity" type="number" min="1" value="1" style="max-width: 3rem" />
-                            <button class="btn btn-yellow bg-dark text-white flex-shrink-0" type="submit">
-                                <i class="fa fa-shopping-cart"></i>
-                                Add to cart
-                            </button>
-                        </div>
-                    </form>
-                    --}}
                     <form action="{{ url('add_cart', ['id' => $item->id]) }}" method="POST">
                         @csrf
                         <div class="d-flex">

@@ -1,20 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Accountant;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Response;
-use Illuminate\Support\Str;
-use Illuminate\Http\Response as IlluminateResponse;
+
 
 use App\Models\Item;
 use App\Models\Order;
 
 
 
-class ReportController extends Controller
+class AccountantReportController extends Controller
 {
     //==================Start showRepor Method=======================//
     public function showReport(Request $request)
@@ -30,7 +28,7 @@ class ReportController extends Controller
         // Fetch all orders with their related order items
         $orders = Order::with('orderItems')->get();
 
-        return view('admin.home.report.list_report', compact ('items', 'orders','count','completedOrdersTotalPrice'));
+        return view('accountant.home.report.list_report', compact ('items', 'orders','count','completedOrdersTotalPrice'));
     }
     
     //==================End Method=======================//
@@ -55,7 +53,9 @@ class ReportController extends Controller
             ->get();
 
         // Pass the filtered $items to the view
-        return view('admin.home.report.list_report', compact('items', 'startDate', 'endDate'));
+        return view('accountant.home.report.list_report', compact('items', 'startDate', 'endDate'));
     }
     //==================End Method=======================//
+
+   
 }

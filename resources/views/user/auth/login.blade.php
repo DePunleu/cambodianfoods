@@ -104,7 +104,6 @@
               <input type="password" class="form-control" name="password" placeholder="Password" required="">             
             </div>
             <div class="row align-items-center remember">
-              {{-- <input type="checkbox">Show Password --}}
               <label>
                 <input type="checkbox" id="show-password" class="show-password"><span class="label-text"> Show Password</span>
               </label>

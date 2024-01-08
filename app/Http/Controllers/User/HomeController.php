@@ -5,16 +5,10 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Intervention\Image\Facades\Image;
-use Illuminate\Support\Facades\DB;
-use Carbon\Carbon;
-use App\Models\User;
 use App\Models\Item;
 use App\Models\Cart;
 use App\Models\Menu;
 use App\Models\Submenu;
-
-
 
 
 
@@ -24,7 +18,6 @@ class HomeController extends Controller
     public function home()
     {
         $item = Item::paginate(9);
-        //$item = Item::all();
         $user_id = Auth::id();
         $count = Cart::where('user_id',$user_id)->count();
         $menu = Menu::all();
@@ -35,7 +28,6 @@ class HomeController extends Controller
     //================Menu==================//
     public function menu()
     {
-       // $item = Item::all();
         $item = Item::paginate(9);
         $user_id = Auth::id();
         $count = Cart::where('user_id',$user_id)->count();
@@ -44,40 +36,17 @@ class HomeController extends Controller
         return view('user.home.subpages.menu',compact('item','count','menu','submenu'));
     }
     //================End Method==================//
-    public function showMenuItems($menuId)
-    {
-        $user_id = Auth::id();
-        $count = Cart::where('user_id',$user_id)->count();
-        $item = Item::where('menu_id', $menuId)->paginate(9);
-        //$item = Item::paginate(9);
-        $menu = Menu::all();
-        $submenu = Submenu::all();
-        return view('user.home.subpages.menu_items', compact('count','item','menu','submenu'));
-    }
-
-      //================Submenu==================//
-      public function submenu()
-      {
-         // $item = Item::all();
-          $item = Item::paginate(9);
-          $user_id = Auth::id();
-          $count = Cart::where('user_id',$user_id)->count();
-          $submenu = Submenu::all();
-          $menu = Menu::all();
-          return view('user.home.subpages.submenu',compact('item','count','submenu','menu'));
-      }
-      //================End Method==================//
+    //================Start showSubmenuItem==================//
       public function showSubmenuItems($submenuId)
       {
           $user_id = Auth::id();
           $count = Cart::where('user_id',$user_id)->count();
-          $item = Item::where('submenu_id', $submenuId)->paginate(9);
-          //$item = Item::paginate(9);
           $submenu = Submenu::all();
           $menu = Menu::all();
+          $item = Item::where('submenu_id', $submenuId)->paginate(9);
+          
           return view('user.home.subpages.submenu_items', compact('count','item','submenu','menu'));
       }
-
     //================About==================//
     public function about()
     {
@@ -95,14 +64,16 @@ class HomeController extends Controller
         $count = Cart::where('user_id', $user_id)->count();
         $menu = Menu::all();
         $search_text = $request->search;
-        $item = Item::where('title', 'LIKE', "%$search_text%")
+        $item = Item::where('title', 'LIKE', "%$search_text%") // Filters items where the title is similar to the search text
             ->orWhereHas('menus', function ($query) use ($search_text) {
-                $query->where('name_menu', 'LIKE', "%$search_text%");
+                $query->where('name_menu', 'LIKE', "%$search_text%"); // Filters items by related menu names
             })
-            ->orWhere('menu_id', $search_text)
-            ->paginate(6);
+            ->orWhereHas('submenus', function ($query) use ($search_text) {
+                $query->where('submenu_name', 'LIKE', "%$search_text%"); // Filters items by related submenu names
+            })
+            ->paginate(9);
         return view('user.home.subpages.menu', compact('item', 'count', 'menu'));
     }
     
-    
 }
+

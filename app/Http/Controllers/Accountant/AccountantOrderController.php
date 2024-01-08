@@ -189,39 +189,39 @@ class AccountantOrderController extends Controller
             'yearOrdersCount' => $yearOrdersCount,
         ]);
     }
-    public function exportOrders(){
-    $orders = Order::all(); // Fetch all orders
+    // public function exportOrders(){
+    // $orders = Order::all(); // Fetch all orders
 
-    $headers = [
-        'Content-Type' => 'text/csv',
-        'Content-Disposition' => 'attachment; filename="orders.csv"',
-    ];
+    // $headers = [
+    //     'Content-Type' => 'text/csv',
+    //     'Content-Disposition' => 'attachment; filename="orders.csv"',
+    // ];
 
-    $callback = function () use ($orders) {
-        $file = fopen('php://output', 'w');
+    // $callback = function () use ($orders) {
+    //     $file = fopen('php://output', 'w');
 
-        // Add headers to the CSV file
-        fputcsv($file, ['Order ID', 'Customer Name', 'Total', 'Order Date', 'Status']);
+    //     // Add headers to the CSV file
+    //     fputcsv($file, ['Order ID', 'Customer Name', 'Total', 'Order Date', 'Status']);
 
-        // Add orders data to the CSV file
-        foreach ($orders as $order) {
-            fputcsv($file, [
-                $order->id,
-                $order->name,
-                $order->orderItems->sum(function ($orderItem) {
-                    return $orderItem->price * $orderItem->quantity;
-                }),
-                $order->created_at,
-                $order->delivery_status,
-            ]);
-        }
+    //     // Add orders data to the CSV file
+    //     foreach ($orders as $order) {
+    //         fputcsv($file, [
+    //             $order->id,
+    //             $order->name,
+    //             $order->orderItems->sum(function ($orderItem) {
+    //                 return $orderItem->price * $orderItem->quantity;
+    //             }),
+    //             $order->created_at,
+    //             $order->delivery_status,
+    //         ]);
+    //     }
 
-        fclose($file);
-    };
+    //     fclose($file);
+    // };
 
-    return Response::stream($callback, 200, $headers);
-    }
-    //==================End Method=======================//
+    // return Response::stream($callback, 200, $headers);
+    // }
+    // //==================End Method=======================//
 
 
 

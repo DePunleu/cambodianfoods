@@ -26,13 +26,6 @@
 
     <div class="container padding">
             <div class="main-body">
-                <!-- Breadcrumb -->
-                {{-- <ul class="app-breadcrumb breadcrumb">
-                    <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-                    <li class="breadcrumb-item">Settings</li>
-                    <li class="breadcrumb-item"><a href="#">Update Details</a></li>
-                  </ul> --}}
-                <!-- /Breadcrumb -->
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="card">

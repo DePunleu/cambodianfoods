@@ -36,7 +36,6 @@ class SupplierController extends Controller
                 'required',
                 Rule::unique('suppliers', 'name_supplier'),
             ],
-            'supplier_name' => 'required',
             'supplier_description' => 'required',
         ]);
         $data['name_supplier'] = $request -> supplier_name;

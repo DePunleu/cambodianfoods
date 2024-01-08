@@ -16,10 +16,10 @@ class ProfileController extends Controller
 {
     //====================Show Profile Details=====================//
     public function profile(){
-        $id = Auth::user()->id;
-        $profileData = User::find($id);
-        $user_id = Auth::id();
-        $count = Cart::where('user_id',$user_id)->count();
+        $id = Auth::user()->id;  // Retrieve the ID of the currently authenticated user
+        $profileData = User::find($id); // Find the user record in the database based on the retrieved ID
+        $user_id = Auth::id(); // Get the ID of the currently authenticated user (same as $id = Auth::user()->id)
+        $count = Cart::where('user_id',$user_id)->count(); // Count the number of items in the Cart associated with the currently authenticated user
         return view('user.home.profile.update_profile',compact('profileData','count'));
     } 
     //====================End Method===============================//
@@ -27,6 +27,8 @@ class ProfileController extends Controller
     public function profilePost(Request $request){
         $id = Auth::user()->id;
         $data = User::find($id);
+
+        // Update user details with data from the incoming request
         $data -> name = $request-> user_name;
         $data -> email = $request-> user_email;
         $data -> phone = $request-> user_phone;

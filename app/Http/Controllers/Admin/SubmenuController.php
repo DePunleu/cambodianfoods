@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Models\Submenu;
-use App\Models\Menu;
+//use App\Models\Menu;
 
 class SubmenuController extends Controller
 {

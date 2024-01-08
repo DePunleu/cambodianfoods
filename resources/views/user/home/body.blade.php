@@ -7,17 +7,14 @@
           <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
               <div class="service-item rounded pt-3 ">
                   <div class="p-4 text-center">
-                      {{-- <i class="fa fa-3x fa-user-tie text-warning mb-4"></i> --}}
                       <img class="mb-4" src="frontend/images/salads.png" alt="">
-                      <h5>100% Fresh</h5>
-                      
+                      <h5>100% Fresh</h5> 
                   </div>
               </div>
           </div>
           <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
               <div class="service-item rounded pt-3">
                   <div class="p-4 text-center">
-                      {{-- <i class="fa fa-3x fa-utensils text-warning mb-4"></i> --}}
                       <img class="mb-4" src="frontend/images/vegetables-packages.png" alt="">
                       <h5>Locally Sourced</h5>
                       
@@ -26,8 +23,7 @@
           </div>
           <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
               <div class="service-item rounded pt-3">
-                  <div class="p-4 text-center">
-                      {{-- <i class="fa fa-3x fa-cart-plus text-warning mb-4"></i> --}}
+                  <div class="p-4 text-center"> 
                       <img class="mb-4" src="frontend/images/love.png" alt="">
                       <h5>High Quality</h5>
                       
@@ -37,7 +33,6 @@
           <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
               <div class="service-item rounded pt-3">
                   <div class="p-4 text-center">
-                      {{-- <i class="fa fa-3x fa-headset text-warning mb-4"></i> --}}
                       <img class="mb-4" src="frontend/images/user-ex.png" alt="">
                       <h5>Unique Experience</h5>
                       

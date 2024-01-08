@@ -57,6 +57,14 @@
               </a>
               
           </li>
+          <li >
+                <a class="app-menu__item" href="{{url('/accountant/report')}}" >
+                    <i class="app-menu__icon fa fa-edit"></i>
+                    &nbsp;&nbsp;&nbsp;
+                    <span class="app-menu__label">Report</span>
+                    
+                </a> 
+          </li>
       </ul>
     </aside>
     <!-- Body-->
@@ -108,7 +116,7 @@
           
         </div>
     
-        <!-- <div class="row">
+        <div class="row">
           <div class="col-md-6">
             <div class="tile">
               <h3 class="tile-title">Users Chart</h3>
@@ -117,7 +125,7 @@
                 </canvas>
               </div>    
             </div>
-          </div> -->
+          </div>
           <div class="col-md-6">
             <div class="tile">
               <h3 class="tile-title">Orders Status Chart</h3>
@@ -141,7 +149,7 @@
     <!-- Essential javascripts for application to work-->
     @include('accountant.js.script') 
     <!-- User Chart script-->   
-    <!-- <script>
+    <script>
       var ctx = document.getElementById('chart').getContext('2d');
       var userChart = new Chart(ctx,{
         type:'bar',
@@ -150,7 +158,7 @@
           datasets: {!! json_encode($datasets) !!}
         },
       });
-    </script> -->
+    </script>
     <script>
       // Order Delivery Status Chart
     var orderStatusData = {
