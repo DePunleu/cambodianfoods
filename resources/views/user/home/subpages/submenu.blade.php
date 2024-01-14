@@ -136,7 +136,7 @@
               </a>
               {{-- <a class="user_link" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fa fa-user" aria-hidden="true"></i>
-              </a> --}}
+              </a> 
               @auth
               <a class="user_link" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   @if(!empty(Auth::guard('web')->user()->image))

@@ -50,8 +50,11 @@ class CartController extends Controller
             $user_id = Auth::id();
             $counts = 1;
             $count = Cart::where('user_id',$user_id)->count();
-            $cart = DB::table('carts')->where('user_id',$user_id)->join('items','carts.item_id','=','items.id')
-            ->select('carts.*','items.title','items.price','items.image','items.store_quantity')->orderBy('carts.id','desc')->get();
+            // Fetch cart details and related item information
+            $cart = DB::table('carts')->where('user_id',$user_id)
+            ->join('items','carts.item_id','=','items.id')
+            ->select('carts.*','items.title','items.price','items.image','items.store_quantity')
+            ->orderBy('carts.id','desc')->get();
             return view('user.home.cart',compact('count','cart','counts'));
         }
         else
@@ -63,7 +66,8 @@ class CartController extends Controller
 
     //================Update Cart==================//
     public function update_cart(Request $request)
-    {
+    {   
+        // Retrieve the cart ID and quantity from the request
         $cartId = $request->id;
         $quantity = $request->quantity;
         // Update the cart item with the given ID using the new quantity

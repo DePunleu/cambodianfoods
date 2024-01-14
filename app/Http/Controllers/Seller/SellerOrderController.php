@@ -19,8 +19,7 @@ use App\Models\OrderItem;
 
 
 
-class SellerOrderController extends Controller
-{
+class SellerOrderController extends Controller{
      //==================Show All Order=======================//
     public function order() {
         $count =1; 
@@ -83,16 +82,6 @@ class SellerOrderController extends Controller
 
     return response()->json(['success' => false, 'message' => 'Order not found']);
 }
-
-
-
-    
-    
-    
-    //==================End Method=======================//
-    //==================Update Store Quantity=======================//
-   
-
     //==================End Method=======================//
 
 
@@ -167,68 +156,5 @@ class SellerOrderController extends Controller
     }
     
         
-    //==================End Method=======================//
-
-    //==================Order Report=======================//
-
-    public function orderReport(){
-        $todayOrdersCount = Order::whereDate('created_at', Carbon::today())->count();
-
-        // For a week
-        $startOfWeek = Carbon::now()->startOfWeek();
-        $endOfWeek = Carbon::now()->endOfWeek();
-        $weekOrdersCount = Order::whereBetween('created_at', [$startOfWeek, $endOfWeek])->count();
-
-        // For a month
-        $startOfMonth = Carbon::now()->startOfMonth();
-        $endOfMonth = Carbon::now()->endOfMonth();
-        $monthOrdersCount = Order::whereBetween('created_at', [$startOfMonth, $endOfMonth])->count();
-
-        // For a year
-        $startOfYear = Carbon::now()->startOfYear();
-        $endOfYear = Carbon::now()->endOfYear();
-        $yearOrdersCount = Order::whereBetween('created_at', [$startOfYear, $endOfYear])->count();
-
-
-        return view('seller.home.order.order_report')->with([
-            'todayOrdersCount' => $todayOrdersCount,
-            'weekOrdersCount' => $weekOrdersCount,
-            'monthOrdersCount' => $monthOrdersCount,
-            'yearOrdersCount' => $yearOrdersCount,
-        ]);
-    }
-    public function exportOrders(){
-    $orders = Order::all(); // Fetch all orders
-
-    $headers = [
-        'Content-Type' => 'text/csv',
-        'Content-Disposition' => 'attachment; filename="orders.csv"',
-    ];
-
-    $callback = function () use ($orders) {
-        $file = fopen('php://output', 'w');
-
-        // Add headers to the CSV file
-        fputcsv($file, ['Order ID', 'Customer Name', 'Total', 'Order Date', 'Status']);
-
-        // Add orders data to the CSV file
-        foreach ($orders as $order) {
-            fputcsv($file, [
-                $order->id,
-                $order->name,
-                $order->orderItems->sum(function ($orderItem) {
-                    return $orderItem->price * $orderItem->quantity;
-                }),
-                $order->created_at,
-                $order->delivery_status,
-            ]);
-        }
-
-        fclose($file);
-    };
-
-    return Response::stream($callback, 200, $headers);
-    }
-    //==================End Method=======================//
-    
+    //==================End Method=======================//    
 }

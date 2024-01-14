@@ -45,15 +45,6 @@
               </a>
             </li>
             <li >
-                <a class="app-menu__item" href="{{url('/accountant/item')}}" >
-                    <i class="fas fa-hamburger"></i>
-                    &nbsp;&nbsp;&nbsp;
-                    <span class="app-menu__label">Items</span>
-                    
-                </a>
-                
-            </li>
-            <li >
                 <a class="app-menu__item active" href="{{url('/accountant/order')}}" >
                     <i class="fa fa-shopping-cart"></i>
                     &nbsp;&nbsp;&nbsp;
@@ -230,11 +221,11 @@
                 </div>
             </div>
         </div>
-        <div class="d-print-none">
+        {{--<div class="d-print-none">
             <div class="float-right">
                 <a href="javascript:window.print()" class="btn btn-success waves-effect waves-light"><i class="fa fa-print"></i></a>
             </div>
-        </div>
+        </div>--}}
     </main>
     <!-- Essential javascripts for application to work-->
     @include('accountant.js.script') 

@@ -137,12 +137,12 @@
             url: '{{ route('user.update_cart') }}',
             method: "patch",
             data: {
-                _token: '{{ csrf_token() }}', 
-                id: ele.parents("tr").attr("data-id"), 
-                quantity: ele.parents("tr").find(".quantity").val()
+                _token: '{{ csrf_token() }}',  // CSRF token for security
+                id: ele.parents("tr").attr("data-id"), // Get the ID from the parent <tr> element
+                quantity: ele.parents("tr").find(".quantity").val() // Get the quantity from an element with class '.quantity' in the same <tr>
             },
             success: function (response) {
-              window.location.reload();
+              window.location.reload(); // Reload the page after successful update
             }
         });
     });

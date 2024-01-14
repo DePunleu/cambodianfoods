@@ -36,15 +36,6 @@
                 </a>
             </li>
             <li >
-                <a class="app-menu__item" href="{{url('//item')}}" >
-                    <i class="fas fa-hamburger"></i>
-                    &nbsp;&nbsp;&nbsp;
-                    <span class="app-menu__label">Items</span>
-                    
-                </a>
-                
-            </li>
-            <li >
                 <a class="app-menu__item" href="{{url('/accountant/order')}}" >
                     <i class="fa fa-shopping-cart"></i>
                     &nbsp;&nbsp;&nbsp;
