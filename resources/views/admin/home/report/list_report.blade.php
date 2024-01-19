@@ -113,24 +113,6 @@
             <div class="col-md-12">
                 <div class="tile">
                     <div class="tile-body">
-                        @if(session()->has('success'))
-                        <div class="alert alert-success" role="alert">
-                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                            {{session('success')}}
-                        </div>
-                        @endif
-                        @if(session('success'))
-                        <div class="alert alert-success">
-                            {{ session('success') }}
-                        </div>
-                        @endif
-
-                        @if(session('error'))
-                        <div class="alert alert-danger">
-                            {{ session('error') }}
-                        </div>
-                        @endif
-
                         <div class="table-title">
                             <div class="row">
                                 <div class="col-sm-10">

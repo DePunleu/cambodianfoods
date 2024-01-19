@@ -115,8 +115,7 @@
         <div class="row">
             <div class="col-md-2"></div>
             <div class="col-md-8">
-                <div class="tile">               
-                    {{-- <h3 class="tile-title">Create New User</h3>            --}}
+                <div class="tile">                         
                     <div class="row">
                         <div class="col-sm-10">
                             <h2>Update User</h2>

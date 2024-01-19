@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Accountant\AccountantReportController;
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\AuthUserController;
 use App\Http\Controllers\User\HomeController;
@@ -35,8 +35,8 @@ use App\Http\Controllers\Seller\SellerOrderController;
 use App\Http\Controllers\Accountant\AuthAccountantController;
 use App\Http\Controllers\Accountant\AccountantController;
 use App\Http\Controllers\Accountant\AccountantDashboardController;
-use App\Http\Controllers\Accountant\AccountantItemController;
 use App\Http\Controllers\Accountant\AccountantOrderController;
+use App\Http\Controllers\Accountant\AccountantReportController;
 
 
 
@@ -334,19 +334,6 @@ Route::controller(AccountantController::class)->middleware('authaccountant')->gr
     Route::match(['get','post'],'/accountant/update_password', 'update_password');
     Route::match(['get','post'],'/accountant/update_details', 'update_details');  
     })->middleware('cache');
-
-//================Accountant Items Management Route=========================//
-Route::controller(AccountantItemController::class)->middleware('authaccountant')->group(function () {
-    Route::get('/accountant/item', 'item')->name('accountant.item');
-    Route::get('/accountant/create_item', 'create_item')->name('accountant.create_item');
-    Route::post('/accountant/create_item', 'create_itemPost')->name('accountant.create_item.post');
-    Route::get('/accountant/update_item/{id}', 'update_item')->name('accountant.update_item');
-    Route::post('/accountant/update_item/{id}', 'update_itemPost')->name('accountant.update_item.post');
-    Route::get('/accountant/item/{id}', 'delete_item')->name('accountant.delete_item');
-    Route::get('/accountant/item', 'filter_item')->name('accountant.filter_item');
-    Route::get('/accountant/get-submenus/{menuId}', 'getSubmenus')->name('accountant.getSubmenus');
-})->middleware('cache');
-
 
 //================Accountant Orders Management Route=========================//
 Route::controller(AccountantOrderController::class)->middleware('authaccountant')->group(function () {

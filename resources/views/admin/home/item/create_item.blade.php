@@ -140,12 +140,6 @@
                                     <input class="form-control" name="item_title" type="text" placeholder="Enter title">
                                 </div>
                             </div>
-                            <!-- <div class="form-group row">
-                                <label class="control-label col-md-3">Origin Price</label>
-                                <div class="col-md-8">
-                                    <input class="form-control" name="item_origin_price" type="float" placeholder="Enter origin price">
-                                </div>
-                            </div> -->
                             <div class="form-group row">
                                 <label class="control-label col-md-3">Price</label>
                                 <div class="col-md-8">

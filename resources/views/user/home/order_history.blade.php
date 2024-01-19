@@ -80,9 +80,6 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {{-- @php
-                                $counts = 1;
-                                @endphp --}}
                                 @foreach ($order->reverse() as $order)
                                     @foreach ($order->orderItems as $index => $item)
                                         <tr>

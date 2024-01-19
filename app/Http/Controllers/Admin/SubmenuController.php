@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Models\Submenu;
-//use App\Models\Menu;
 
 class SubmenuController extends Controller
 {
@@ -62,6 +61,7 @@ class SubmenuController extends Controller
         $request->validate([
             'submenu_name' => [
                 'required',
+            
                 Rule::unique('submenus', 'submenu_name'),
             ],
         ]);
@@ -82,5 +82,31 @@ class SubmenuController extends Controller
     }
 
     //==================End Method=======================//
+
+    //     // Modify the submenu method
+    // public function submenus(Request $request) {
+    //     $menus = [
+    //         1 => 'Food',
+    //         2 => 'Combo',
+    //         3 => 'Dessert',
+    //         4 => 'Drink',
+    //     ];
+
+    //     $selectedMenu = $request->input('menu_id');
+    //     $submenuQuery = Submenu::orderByDesc('id');
+
+    //     if (!empty($selectedMenu) && array_key_exists($selectedMenu, $menus)) {
+    //         $submenuQuery->where('menu_id', $selectedMenu);
+    //     }
+
+    //     $submenu = $submenuQuery->get();
+    //     $count = 1;
+
+    //     return view(
+    //         'admin.home.submenu.list_submenu',
+    //         compact('count', 'submenu', 'menus', 'selectedMenu')
+    //     );
+        //}
+
     
 }

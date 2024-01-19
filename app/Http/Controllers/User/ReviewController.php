@@ -5,7 +5,6 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Order;
 use App\Models\Review;
 use App\Models\Item;
 use App\Models\Cart;
@@ -23,14 +22,14 @@ class ReviewController extends Controller
         $user = Auth::user();
         $user_id = Auth::id();
         $count = Cart::where('user_id', $user_id)->count();
-        $counts = 1;
+        
         //Fetching Order Item Details
         $orderItem = OrderItem::with('items')->whereHas('orders', function ($query) use ($user, $orderId) {
             $query->where('user_id', $user->id);
         })->where('item_id', $orderId)->first();
         // Find the existing review for the user and item
         $existingReview = Review::where('user_id', $user->id)->where('item_id', $orderItem->item_id)->first();
-        return view('user.home.review', compact('orderItem', 'count', 'counts','existingReview'));
+        return view('user.home.review', compact('orderItem', 'count','existingReview'));
     }
     //====================Store Review =====================//
     public function reviewPost(Request $request, $itemId)

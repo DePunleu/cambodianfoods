@@ -85,19 +85,5 @@ class AccountantController extends Controller
         return view('accountant.home.accountant.update_details');
     }
     //==================End Update Accountant Details=======================//
-
-    //==================Start Update user Details=======================//
-    public function updateUserRole(Request $request, $userId) {
-        // Fetch the user
-        $user = User::find($userId);
-    
-        // Update the user role
-        $user->role = $request->input('user_role');
-        $user->save();
-    
-        // Redirect or show a success message
-        return redirect()->back()->with('message', 'User role updated successfully!');
-    }
-    //==================End Update user Details=======================//
     
 }

@@ -5,9 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
-use Intervention\Image\Facades\Image;
 use App\Models\User;
 use App\Models\Cart;
 
@@ -16,10 +14,10 @@ class ProfileController extends Controller
 {
     //====================Show Profile Details=====================//
     public function profile(){
-        $id = Auth::user()->id;  // Retrieve the ID of the currently authenticated user
-        $profileData = User::find($id); // Find the user record in the database based on the retrieved ID
-        $user_id = Auth::id(); // Get the ID of the currently authenticated user (same as $id = Auth::user()->id)
-        $count = Cart::where('user_id',$user_id)->count(); // Count the number of items in the Cart associated with the currently authenticated user
+        $id = Auth::user()->id;  
+        $profileData = User::find($id);
+        $user_id = Auth::id(); 
+        $count = Cart::where('user_id',$user_id)->count();
         return view('user.home.profile.update_profile',compact('profileData','count'));
     } 
     //====================End Method===============================//

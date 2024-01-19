@@ -122,7 +122,19 @@
                     <div class="table-title">
                         <div class="row">                
                             <div class="col-sm-10">
-                                <h2>All Sub Menus</h2>
+                                <h2>All Sub Menus</h2>       
+                                    <!-- <div class="row">
+                                        <div class="col-sm-4">
+                                            <label for="menu_filter">Filter by Menu:</label>
+                                            <select id="menu_filter" class="form-control" onchange="filterSubmenus(this.value)">
+                                                <option value="">All Menus</option>
+                                                <option value="1">Food</option>
+                                                <option value="2">Combo</option>
+                                                <option value="3">Dessert</option>
+                                                <option value="4">Drink</option>
+                                            </select>
+                                        </div>
+                                    </div>          -->
                             </div>
                             <div class="col-sm-2">
                                 <a href="{{ route('admin.create_submenu') }}">
@@ -178,6 +190,11 @@
     </main>
     <!-- Essential javascripts for application to work-->
     @include('admin.js.script') 
+    <!-- <script>
+    function filterSubmenus(menuId) {
+        window.location.href = "{{ url('/admin/submenu') }}" + (menuId ? '?menu_id=' + menuId : '');
+        }
+    </script> -->
     
 </body>
 </html>

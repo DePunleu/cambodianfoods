@@ -31,7 +31,7 @@
       <img src="frontend/images/Prohok-Ktis.jpg" alt="">
     </div>
     <!-- header section strats -->
-    {{-- @include('user.layout.header') --}}
+    @include('user.layout.header')
     
     <!-- header section strats -->
     <header class="header_section">

@@ -31,7 +31,19 @@
         
         color: white !important;
         background-color:  #d7d2d2 !important;
+    
     }
+    /* .filters_menu li {
+      width: 100px; /* Set the desired width for each menu item 
+      margin-right: 30px; /* Add some spacing between menu items 
+    }
+    .filters_menu .dropdown {
+      margin-right: 30px; /* Add some spacing to the right of the dropdown 
+    }
+
+    .filters_menu .dropdown-menu {
+      padding: 30px; /* Add padding to the dropdown menu
+    } */
   </style>
 </head>
 <body class="sub_page">

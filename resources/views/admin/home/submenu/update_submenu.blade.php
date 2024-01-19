@@ -151,8 +151,7 @@
                                         <div class="alert alert-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
-                            </div>
-                                                  
+                            </div>                                                  
                             <div class="tile-footer">
                                 <div class="row">
                                     <div class="col-md-3">
