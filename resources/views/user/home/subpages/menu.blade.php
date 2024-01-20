@@ -255,9 +255,6 @@
                       {{$data->description}}
                     </p> --}}
                     <div class="options">
-                      {{-- <h4 class="item_price">
-                        ${{$data->price}}
-                      </h4> --}}
                       <div >
                         <div >
                           <h5 class="item_price">

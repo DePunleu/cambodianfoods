@@ -40,10 +40,10 @@
     <div class="bg-box">
       <img src="frontend/images/Prohok-Ktis.jpg" alt="">
     </div>
-    <!-- header section strats -->
+    <!-- header section start -->
     {{-- @include('user.layout.header') --}}
     
-    <!-- header section strats -->
+    <!-- header section start -->
     <header class="header_section">
       <div class="container">
         <nav class="navbar navbar-expand-lg custom_nav-container ">
@@ -134,7 +134,7 @@
                 <span class="cart_count badge bg-warning text-white ms-1 rounded-pill">{{$count}}</span>
                 @endif
               </a>
-              {{-- <a class="user_link" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a class="user_link" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fa fa-user" aria-hidden="true"></i>
               </a> 
               @auth
@@ -243,9 +243,6 @@
                       {{$data->description}}
                     </p> --}}
                     <div class="options">
-                      {{-- <h4 class="item_price">
-                        ${{$data->price}}
-                      </h4> --}}
                       <div >
                         <div >
                           <h5 class="item_price">

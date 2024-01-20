@@ -173,7 +173,7 @@
 
                                       
 
-                                         <!-- Status selection -->
+                                        <!-- Status selection -->
                                         <label for="status">Status:</label>
                                         <select id="status" name="status">
                                             <option value="">Select Status</option>
@@ -185,12 +185,6 @@
                                         <button type="submit">Filter Orders</button>
                                     </form> 
                             </div> 
-                            {{--<div class="col-sm-2 text-right mt-3">
-                            <!-- Move the button to the right within the same row -->
-                                <a href="{{ route('admin.order_report') }}" class="btn btn-info">
-                                    <i class="fas fa-chart-bar"></i> Order Report
-                                </a>               
-                            </div>--}}
                         </div>
                         
                         
@@ -238,18 +232,7 @@
 
                                     
                                     
-                                </td>
-                                {{--<td>
-                                    <select class="form-control order-status-select small-width" data-order-id="{{ $order->id }}" data-url="{{ route('admin.updateOrderStatus') }}">
-                                        @foreach ($orderStatuses as $orderStatus)
-                                            <option value="{{ $orderStatus }}" {{ $order->delivery_status == $orderStatus ? 'selected' : '' }}>
-                                                {{ $orderStatus }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                --}}
-                                    
-                                </td>
+                                </td>                                 
                                 <td>
                                     <a href="{{ url('/admin/detail_order/'.$order->id) }}">
                                         <button type="button" class="btn btn-primary center-text" >
@@ -259,10 +242,6 @@
                                         </a>
                                     </td>
                                 <td class="text-center">
-                                    {{-- <a class="badge badge-warning edit " href="{{url('/admin/update_order/'.$order->id)}}" title="Update" data-toggle="tooltip">
-                                        <i class="fa fa-edit"></i>
-                                    </a>                         --}}
-                                    &nbsp;
                                     <a class="badge badge-danger delete" href="{{url('/admin/order/'.$order->id)}}" onclick="return confirm('Are you sure?')" title="Delete" data-toggle="tooltip">
                                         <i class="fa fa-trash"></i>
                                     </a>
@@ -271,9 +250,6 @@
                                     {{--<a class="badge badge-success view" href="{{url('/admin/invoice/'.$order->id)}}" title="View" data-toggle="tooltip">
                                         <i class="fa fa-eye"></i>
                                     </a>--}}
-                                    
-                                    
-                                                            
                                 </td>
                             </tr>
                             @endforeach
@@ -285,13 +261,7 @@
                 </div>
             </div>
                 
-        </div>
-        {{--<div class="d-print-none">
-            <div class="float-right">
-                <a href="javascript:window.print()" class="btn btn-success waves-effect waves-light"><i class="fa fa-print"></i></a>
-            </div>
-        </div>--}}
-            
+        </div>        
     </main>
     <!-- Essential javascripts for application to work-->
     @include('admin.js.script') 

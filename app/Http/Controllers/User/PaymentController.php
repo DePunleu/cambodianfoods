@@ -41,10 +41,9 @@ class PaymentController extends Controller
         }
         return view('user.home.checkout',compact('count','totalPrice'));
     }
-    //================CheckoutPost==================//
 
-    public function checkoutPost(Request $request)
-    {
+    //================CheckoutPost==================//
+        public function checkoutPost(Request $request){
         $user_id = Auth::id();
         $count = Cart::where('user_id', $user_id)->count();
         $cartItems = Cart::where('user_id', $user_id)->get();

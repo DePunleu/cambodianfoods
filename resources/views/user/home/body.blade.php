@@ -228,7 +228,7 @@
                 <div class="d-flex align-items-center">
                     <img class="img-fluid flex-shrink-0 rounded-circle" src="frontend/user_images/202305050814IMG_8904.jpg" style="width: 50px; height: 50px;">
                     <div class="ps-3">
-                        <h5 class="mb-1">Punleu</h5>
+                        <h5 class="mb-1">De Punleu</h5>
                         <small>Customer</small>
                     </div>
                 </div>
@@ -240,7 +240,7 @@
                 <div class="d-flex align-items-center">
                     <img class="img-fluid flex-shrink-0 rounded-circle" src="frontend/user_images/202330051149bunny-155674_1280.png" style="width: 50px; height: 50px;">
                     <div class="ps-3">
-                        <h5 class="mb-1">Chisang</h5>
+                        <h5 class="mb-1">Mam Chisang</h5>
                         <small>Customer</small>
                     </div>
                 </div>
@@ -253,7 +253,7 @@
                 <div class="d-flex align-items-center">
                     <img class="img-fluid flex-shrink-0 rounded-circle" src="frontend/user_images/202309050921penguin-158551_1280.png" style="width: 50px; height: 50px;">
                     <div class="ps-3">
-                        <h5 class="mb-1">Nary</h5>
+                        <h5 class="mb-1">De Nary</h5>
                         <small>Customer</small>
                     </div>
                 </div>
@@ -266,7 +266,7 @@
                 <div class="d-flex align-items-center">
                     <img class="img-fluid flex-shrink-0 rounded-circle" src="frontend/user_images/202330051151doctor-2027768_1280.png" style="width: 50px; height: 50px;">
                     <div class="ps-3">
-                        <h5 class="mb-1">Dany</h5>
+                        <h5 class="mb-1">De Dany</h5>
                         <small>Customer</small>
                     </div>
                 </div>

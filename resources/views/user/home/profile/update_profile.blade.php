@@ -148,12 +148,6 @@
                                                 <input class="form-control" id="user_image" name="user_image" type="file">
                                             </div>
                                         </div>
-                                        {{-- <div class="mb-3">
-                                            <label for="user_image">Photo</label>
-                                        </div>
-                                        <div class="mb-3">
-                                            <input class="form-control" id="user_image" name="user_image" type="file">
-                                        </div> --}}
                                         <div class="row mb-3">
                                             <div class="col-sm-3">
                                                 

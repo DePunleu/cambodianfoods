@@ -8,7 +8,6 @@ use App\Models\Item;
 use App\Models\Menu;
 use App\Models\Supplier;
 use App\Models\Submenu;
-use Illuminate\Support\Facades\DB;
 
 
 class SellerItemController extends Controller
