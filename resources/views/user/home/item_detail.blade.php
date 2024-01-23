@@ -71,7 +71,7 @@
                     <form action="{{ url('add_cart', ['id' => $item->id]) }}" method="POST">
                         @csrf
                         <div class="d-flex">
-                            <input class="form-control text-center me-3" name="item_quantity" id="inputQuantity" type="number" min="1" max="{{ $item->store_quantity }}" value="1" style="max-width: 3rem" />
+                            <input class="form-control text-center me-3" name="item_quantity" id="inputQuantity" type="number" min="1" max="{{ $item->store_quantity }}" value="1" style="max-width: 6rem" />
                             <button class="btn btn-yellow bg-dark text-white flex-shrink-0" type="submit">
                                 <i class="fa fa-shopping-cart"></i>
                                 Add to cart

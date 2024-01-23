@@ -148,8 +148,7 @@
                 <p><b>{{ $drink_count }}</b></p>
               </div>
             </div>
-          </div> 
-
+          </div>
         </div>
     
         <div class="row">

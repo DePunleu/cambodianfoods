@@ -72,13 +72,13 @@
                             <div class="col-sm-10">
                                 <h2>All Items</h2>
                             </div>
-                            <div class="col-sm-2">
+                            {{--<div class="col-sm-2">
                                 <a href="{{ route('seller.create_item') }}">
                                 <button type="button" class="btn btn-info add-new">
                                     <i class="fa fa-plus"></i> Add New
                                 </button>
                                 </a>
-                            </div>
+                            </div>--}}
                         </div><br>
                     </div>
                   
@@ -151,9 +151,9 @@
                                     <i class="fa fa-edit"></i>
                                     </a>                        
                                     &nbsp;
-                                    <a class="badge badge-danger delete" href="{{url('/seller/item/'.$row->id)}}" onclick="return confirm('Are you sure?')" title="Delete" data-toggle="tooltip">
+                                    {{--<a class="badge badge-danger delete" href="{{url('/seller/item/'.$row->id)}}" onclick="return confirm('Are you sure?')" title="Delete" data-toggle="tooltip">
                                     <i class="fa fa-trash "></i>
-                                    </a>
+                                    </a>--}}
                                    
                                 </td>
                             </tr>

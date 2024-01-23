@@ -79,15 +79,9 @@ class DashboardController extends Controller
                 'backgroundColor' => $colors
             ]   
         ];
-
-
-        //=========================End Method============================//   
-
-       
         return view('admin.home.dashboard', compact('users_count', 'orders_count','completedOrdersTotalPrice',
-        'datasets', 'labels', 'orderDataset', 'orderLabels', 'foods_count', 'combo_count', 'dessert_count', 'drink_count',));
+        'datasets', 'labels', 'orderDataset', 'orderLabels', 'foods_count', 'combo_count', 'dessert_count', 'drink_count'));
     }
-
 }
     //=========================End Method============================//  
     

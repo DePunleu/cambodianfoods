@@ -88,7 +88,7 @@
                 
             </li>
             <li >
-                <a class="app-menu__item" href="{{url('/admin/report')}}" >
+                <a class="app-menu__item active" href="{{url('/admin/report')}}" >
                     <i class="app-menu__icon fa fa-edit"></i>
                     &nbsp;&nbsp;&nbsp;
                     <span class="app-menu__label">Report</span>
@@ -177,8 +177,13 @@
                                         $
                                     </td>
                                     <td>{{$item->store_quantity}}</td>
+                                    {{--<td>
+                                        <img class="" src="{{(!empty($item->image))
+                                        ? url('upload/item_images/'.$item->image):url('frontend/user_images/no_image.jpg')}}" 
+                                        width="40px" height="40px" alt="item">
+                                    </td>--}}
                                     <td>{{$item->created_at}}</td>
-                                    
+  
                                 </tr>
                             @endforeach
                            

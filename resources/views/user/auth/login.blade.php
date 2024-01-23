@@ -59,8 +59,7 @@
 
       .links a{
       margin-left: 4px;
-      }
-    
+      }   
   </style>
 </head>
 <body>

@@ -141,7 +141,7 @@
                                 <th>Payment</th>
                                 <th>Order Date</th>
                                 <th>Status</th>
-                                <th class="text-center">Action</th>
+                                {{--<th class="text-center">Action</th>--}}
                                 <th class="text-center"></th>
                             </tr>
                         </thead>
@@ -186,27 +186,23 @@
                                 --}}
                                     
                                 </td>
-                                <td>
+                                {{--<td>
                                     <a href="{{ url('/accountant/detail_order/'.$order->id) }}">
                                         <button type="button" class="btn btn-primary center-text" >
                                             <i class="fa fa-fw fa-lg fa-check-circle"></i>
                                             View
                                         </button>
                                         </a>
-                                    </td>
+                                </td>--}}
                                 <td class="text-center">
-                                    {{-- <a class="badge badge-warning edit " href="{{url('/accountant/update_order/'.$order->id)}}" title="Update" data-toggle="tooltip">
-                                        <i class="fa fa-edit"></i>
-                                    </a>                         --}}
-                                    &nbsp;
-                                    <a class="badge badge-danger delete" href="{{url('/accountant/order/'.$order->id)}}" onclick="return confirm('Are you sure?')" title="Delete" data-toggle="tooltip">
+                                    {{--<a class="badge badge-danger delete" href="{{url('/accountant/order/'.$order->id)}}" onclick="return confirm('Are you sure?')" title="Delete" data-toggle="tooltip">
                                         <i class="fa fa-trash"></i>
                                     </a>
-                                    &nbsp;
+                                    &nbsp;--}}
                                     
-                                    {{--<a class="badge badge-success view" href="{{url('/accountant/invoice/'.$order->id)}}" title="View" data-toggle="tooltip">
+                                    <a class="badge badge-success view" href="{{url('/accountant/invoice/'.$order->id)}}" title="View" data-toggle="tooltip">
                                         <i class="fa fa-eye"></i>
-                                    </a>--}}
+                                    </a>
                                     
                                     
                                                             

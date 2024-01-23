@@ -233,7 +233,7 @@
                                     
                                     
                                 </td>                                 
-                                <td>
+                                <td  class="text-center">
                                     <a href="{{ url('/admin/detail_order/'.$order->id) }}">
                                         <button type="button" class="btn btn-primary center-text" >
                                             <i class="fa fa-fw fa-lg fa-check-circle"></i>

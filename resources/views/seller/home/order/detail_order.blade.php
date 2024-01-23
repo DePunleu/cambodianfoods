@@ -231,10 +231,10 @@
                                                      
                                                         
                                                         <td>
-                                                        <a class="badge badge-danger delete" href="{{url('/seller/order/'.$order->id)}}" onclick="return confirm('Are you sure?')" title="Delete" data-toggle="tooltip">
+                                                        {{--<a class="badge badge-danger delete" href="{{url('/seller/order/'.$order->id)}}" onclick="return confirm('Are you sure?')" title="Delete" data-toggle="tooltip">
                                                                 <i class="fa fa-trash"></i>
                                                             </a>
-                                                            &nbsp;   
+                                                            &nbsp;--}}   
                                                             <a><button class="btn btn-primary waves-effect waves-light" onclick="printInvoice()">
                                                                 <i class="fa fa-print"></i> Print Invoice
                                                             </button> 

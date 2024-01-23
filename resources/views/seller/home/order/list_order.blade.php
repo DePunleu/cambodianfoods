@@ -137,7 +137,6 @@
                                 <th>Order Date</th>
                                 <th>Status</th>
                                 <th class="text-center">Action</th>
-                                <th class="text-center"></th>
                             </tr>
                         </thead>
                         <tbody >
@@ -189,23 +188,6 @@
                                         </button>
                                         </a>
                                     </td>
-                                <td class="text-center">
-                                    {{-- <a class="badge badge-warning edit " href="{{url('/seller/update_order/'.$order->id)}}" title="Update" data-toggle="tooltip">
-                                        <i class="fa fa-edit"></i>
-                                    </a>                         --}}
-                                    &nbsp;
-                                    <a class="badge badge-danger delete" href="{{url('/seller/order/'.$order->id)}}" onclick="return confirm('Are you sure?')" title="Delete" data-toggle="tooltip">
-                                        <i class="fa fa-trash"></i>
-                                    </a>
-                                    &nbsp;
-                                    
-                                    {{--<a class="badge badge-success view" href="{{url('/seller/invoice/'.$order->id)}}" title="View" data-toggle="tooltip">
-                                        <i class="fa fa-eye"></i>
-                                    </a>--}}
-                                    
-                                    
-                                                            
-                                </td>
                             </tr>
                             @endforeach
                         </tbody>
@@ -216,11 +198,11 @@
             </div>
             
         </div>
-        <div class="d-print-none">
+        {{--<div class="d-print-none">
             <div class="float-right">
                 <a href="javascript:window.print()" class="btn btn-success waves-effect waves-light"><i class="fa fa-print"></i></a>
             </div>
-        </div>
+        </div>--}}
     </main>
     <!-- Essential javascripts for application to work-->
     @include('seller.js.script') 

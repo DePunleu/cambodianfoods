@@ -25,6 +25,7 @@
               </li>                     
             </ul>
             <div class="user_option">
+              <!-- Search Form -->
               <form class="form-inline" action="{{route('user.search')}}" method="GET">
                 @csrf
                 <input class="form-control mr-sm-2 nav_search-input" type="search" name="search" placeholder="Search" aria-label="Search" style="display:none;">

@@ -194,7 +194,7 @@
                                     <img class="" src="{{(!empty($row->image))
                                     ? url('upload/item_images/'.$row->image):url('frontend/user_images/no_image.jpg')}}" 
                                     width="40px" height="40px" alt="item">
-                                    
+
                                 </td>
                                 <td>{{$row->created_at}}</td>
                                 <td class="text-center">

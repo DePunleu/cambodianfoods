@@ -285,7 +285,7 @@
                                                         <a class="badge badge-danger delete" href="{{url('/admin/order/'.$order->id)}}" onclick="return confirm('Are you sure?')" title="Delete" data-toggle="tooltip">
                                                                 <i class="fa fa-trash"></i>
                                                             </a>
-                                                            &nbsp;   
+                                                            &nbsp; 
                                                             <a><button class="btn btn-primary waves-effect waves-light" onclick="printInvoice()">
                                                                 <i class="fa fa-print"></i> Print Invoice
                                                             </button> 
@@ -323,8 +323,6 @@
     </script>
     <!-- Hidden iframe to load the invoice content -->
 <iframe id="invoiceFrame" style="display:none;"></iframe>
-
-<!-- Rest of your HTML content -->
 
 <script>
     function printInvoice() {

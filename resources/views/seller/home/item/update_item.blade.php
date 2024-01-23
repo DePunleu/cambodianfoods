@@ -63,7 +63,6 @@
             <div class="col-md-2"></div>
             <div class="col-md-8">
                 <div class="tile">               
-                    {{-- <h3 class="tile-title">Create New User</h3>            --}}
                     <div class="row">
                         <div class="col-sm-10">
                             <h2>Update Item</h2>
@@ -91,12 +90,6 @@
                                     <input class="form-control" name="item_title" type="text" value="{{$item->title}}">
                                 </div>
                             </div>
-                            <!-- <div class="form-group row">
-                                <label class="control-label col-md-3">Origin Price</label>
-                                <div class="col-md-8">
-                                    <input class="form-control" name="item_origin_price" type="float" placeholder="Enter price" value="{{$item->origin_price}}">
-                                </div>
-                            </div> -->
                             <div class="form-group row">
                                 <label class="control-label col-md-3">Price</label>
                                 <div class="col-md-8">
