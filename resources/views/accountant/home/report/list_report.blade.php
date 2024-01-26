@@ -45,7 +45,7 @@
                 
             </li>
             <li >
-                <a class="app-menu__item" href="{{url('/accountant/report')}}" >
+                <a class="app-menu__item active" href="{{url('/accountant/report')}}" >
                     <i class="app-menu__icon fa fa-edit"></i>
                     &nbsp;&nbsp;&nbsp;
                     <span class="app-menu__label">Report</span>

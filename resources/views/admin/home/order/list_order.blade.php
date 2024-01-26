@@ -280,8 +280,6 @@
                 statusBadge.html('<span class="badge badge-primary">' + selectedStatus + '</span>');
             } else if (selectedStatus === 'In-Progress') {
                 statusBadge.html('<span class="badge badge-secondary">' + selectedStatus + '</span>');
-            } else if (selectedStatus === 'Shipped') {
-                statusBadge.html('<span class="badge badge-warning">' + selectedStatus + '</span>');
             } else if (selectedStatus === 'Delivered') {
                 statusBadge.html('<span class="badge badge-info">' + selectedStatus + '</span>');
             } else if (selectedStatus === 'Completed') {

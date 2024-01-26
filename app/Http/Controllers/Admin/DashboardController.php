@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use App\Models\Item;
@@ -22,20 +23,22 @@ class DashboardController extends Controller
     //=========================End Method============================//
 
     //==========================Dashboard Admin======================//
-    public function dashboard()
+    public function dashboard(Request $request)
     {
         $foods_count = Item::where('menu_id', 1)->count();
         $combo_count = Item::where('menu_id', 2)->count();
         $dessert_count = Item::where('menu_id', 3)->count();
         $drink_count = Item::where('menu_id', 4)->count();
         $orders_count = Order::all()->count();
+        //$selectedYear = $request->input('year', date('Y'));
         // Total price of completed orders
         $completedOrdersTotalPrice = Order::where('delivery_status', 'Completed')
         ->join('order_items', 'orders.id', '=', 'order_items.order_id')
         ->sum(DB::raw('order_items.price * order_items.quantity'));
+        // Users Chart
         $users_count = User::where('role', 'user')->count();
         $users = User::where('role', 'user')->selectRaw('MONTH(created_at) as month, COUNT(*) as count')
-            ->whereYear('created_at', date('Y'))
+            //->whereYear('created_at', date('Y'))
             ->groupBy('month')
             ->orderBy('month')
             ->get();
@@ -81,6 +84,7 @@ class DashboardController extends Controller
         ];
         return view('admin.home.dashboard', compact('users_count', 'orders_count','completedOrdersTotalPrice',
         'datasets', 'labels', 'orderDataset', 'orderLabels', 'foods_count', 'combo_count', 'dessert_count', 'drink_count'));
+        //->with('selectedYear', $selectedYear);
     }
 }
     //=========================End Method============================//  

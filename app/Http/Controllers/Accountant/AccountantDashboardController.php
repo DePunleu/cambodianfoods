@@ -38,7 +38,7 @@ class AccountantDashboardController extends Controller
         // Chart User
         $users_count = User::where('role', 'user')->count();
         $users = User::where('role', 'user')->selectRaw('MONTH(created_at) as month, COUNT(*) as count')
-            ->whereYear('created_at', date('Y'))
+            //->whereYear('created_at', date('Y'))
             ->groupBy('month')
             ->orderBy('month')
             ->get();

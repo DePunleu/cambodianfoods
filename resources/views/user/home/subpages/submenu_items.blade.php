@@ -226,7 +226,12 @@
                           </h5>
                         </div>
                         <div class="text-center">
-                          <span> {{ $data->orderItems->count() }} sold</span>
+                        <span>
+                              <td>@php
+                                  $totalOrders = $data->orderItems->sum('quantity');
+                                    echo $totalOrders;       
+                                  @endphp
+                          </td>Sold</span>
                         </div>
                       </div>
                       <div class="stars-and-reviews">

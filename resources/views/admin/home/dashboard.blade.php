@@ -150,7 +150,7 @@
             </div>
           </div>
         </div>
-    
+        
         <div class="row">
           <div class="col-md-6">
             <div class="tile">
@@ -194,6 +194,7 @@
         },
       });
     </script>
+
     <script>
       // Order Delivery Status Chart
     var orderStatusData = {
@@ -209,7 +210,6 @@
     // Order Delivery Status Chart
 
   </script>
-    
     
 
   </body>

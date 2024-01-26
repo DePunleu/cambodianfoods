@@ -110,7 +110,12 @@
                           </h5>
                         </div>
                         <div class="text-center">
-                          <span> {{ $data->orderItems->count() }} sold</span>
+                          <span> 
+                            <td>@php
+                                    $totalOrders = $data->orderItems->sum('quantity');
+                                    echo $totalOrders;           
+                                @endphp
+                            </td>sold</span>
                         </div>
                       </div>
                         <div class="stars-and-reviews">
@@ -238,7 +243,7 @@
                 <p>
                 Bobor Chicken, The dish's consistency was beautifully thick, with the rice blending seamlessly into the flavorful broth. The chicken, cooked to perfection, effortlessly fell apart, adding a velvety touch to each spoonful.
                 <div class="d-flex align-items-center">
-                    <img class="img-fluid flex-shrink-0 rounded-circle" src="frontend/user_images/202330051149bunny-155674_1280.png" style="width: 50px; height: 50px;">
+                    <img class="img-fluid flex-shrink-0 rounded-circle" src="frontend/user_images/202307121035WIN_20221219_10_15_30_Pro.jpg" style="width: 50px; height: 50px;">
                     <div class="ps-3">
                         <h5 class="mb-1">Mam Chisang</h5>
                         <small>Customer</small>
@@ -251,9 +256,9 @@
                 Iced-coffee, The coffee's texture was impeccably smooth, even with the presence of ice, maintaining its velvety consistency. The chill of the ice didn't compromise the rich essence of the brew, allowing it to retain its robust flavor.
                 </p>
                 <div class="d-flex align-items-center">
-                    <img class="img-fluid flex-shrink-0 rounded-circle" src="frontend/user_images/202309050921penguin-158551_1280.png" style="width: 50px; height: 50px;">
+                    <img class="img-fluid flex-shrink-0 rounded-circle" src="frontend/user_images/202307120941WIN_20221231_20_50_11_Pro.jpg" style="width: 50px; height: 50px;">
                     <div class="ps-3">
-                        <h5 class="mb-1">De Nary</h5>
+                        <h5 class="mb-1">De Phenary</h5>
                         <small>Customer</small>
                     </div>
                 </div>
@@ -264,7 +269,7 @@
                 Jek Ktis, The glutinous rice cakes were perfectly soft and chewy, offering a comforting texture with each bite. The coconut cream topping provided a velvety contrast, adding a creamy element to the overall experience.
                 </p>
                 <div class="d-flex align-items-center">
-                    <img class="img-fluid flex-shrink-0 rounded-circle" src="frontend/user_images/202330051151doctor-2027768_1280.png" style="width: 50px; height: 50px;">
+                    <img class="img-fluid flex-shrink-0 rounded-circle" src="frontend/user_images/86032.jpg" style="width: 50px; height: 50px;">
                     <div class="ps-3">
                         <h5 class="mb-1">De Dany</h5>
                         <small>Customer</small>

@@ -235,10 +235,10 @@
                                                                 <i class="fa fa-trash"></i>
                                                             </a>
                                                             &nbsp;--}}   
-                                                            <a><button class="btn btn-primary waves-effect waves-light" onclick="printInvoice()">
+                                                            {{--<a><button class="btn btn-primary waves-effect waves-light" onclick="printInvoice()">
                                                                 <i class="fa fa-print"></i> Print Invoice
                                                             </button> 
-                                                            </a>                                                     
+                                                            </a>--}}                                                     
                                                         </td>
                                                                                         
                                                     </tbody>

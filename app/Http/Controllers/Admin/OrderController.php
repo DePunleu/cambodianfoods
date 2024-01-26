@@ -36,7 +36,7 @@ class OrderController extends Controller
     if ($order) {
         if ($order->delivery_status === 'Completed') {
             // If the order status is already 'Completed', prevent further changes
-            return response()->json(['success' => false, 'message' => 'Order status is already Completed and cannot be changed.']);
+            return response()->json(['success' => false, 'message' => 'Order has already been Completed and cannot be deleted.']);
         }
 
         if ($order->delivery_status === 'Delivering' && $status === 'Completed') {

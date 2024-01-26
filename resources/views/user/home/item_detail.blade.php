@@ -44,7 +44,12 @@
                     <h4 class=" fw-bolder">{{ $item->title }}</h4>
                     <div class="fs-5 ">
                         <h4 class="item_price">Price <strong>${{ $item->price }}</strong></h4>
-                        <span> {{ $item->orderItems->count() }} sold</span>
+                        <span> 
+                            <td>@php
+                                    $totalOrders = $item->orderItems->sum('quantity');
+                                    echo $totalOrders;           
+                                @endphp
+                            </td>sold</span>
                         <br>
                         <span>{{ $item->store_quantity }} remaining</span>
                         <div class="stars">

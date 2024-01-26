@@ -47,7 +47,9 @@ class HomeController extends Controller
           
           return view('user.home.subpages.submenu_items', compact('count','item','submenu','menu'));
       }
-    //================About==================//
+    //================End Method==================//
+
+    //==================About=====================//
     public function about()
     {
         $user_id = Auth::id();

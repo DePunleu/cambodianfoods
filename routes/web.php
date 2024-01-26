@@ -240,7 +240,8 @@ Route::controller(SupplierController::class)->middleware('authadmin')->group(fun
 Route::controller(ReportController::class)->middleware('authadmin')->group(function () {
     Route::get('/admin/report', 'showReport')->name('admin.list_report');
     Route::post('/admin/report/filter', 'filter_reportByDate')->name('admin.report.filter');
-    Route::get('/admin/download-report', 'downloadReportByDate')->name('admin.report.download');
+    // Route::get('/admin/download-report', 'downloadReportByDate')->name('admin.report.download');
+    // Route::post('/admin/report/export-csv',  'exportReportCsv')->name('admin.report.export-csv');
 })->middleware('cache');
 //=======================================================================//
 //==============================End Admin Route==========================//

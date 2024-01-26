@@ -79,7 +79,7 @@
                     </td>
                     <td class="border-0 align-middle text-center">{{$row->price}}$</td>
                     <td class="border-0 align-middle p-4 text-center ">
-                      <input type="number" min="1" name="cart_quantity" value="{{$row->quantity}}" class="form-control form-control-sm custom-input text-center quantity cart_update">
+                      <input type="number" min="1" name="cart_quantity"  value="{{$row->quantity}}" class="form-control form-control-sm custom-input text-center quantity cart_update">
                     </td>
                     <td class="border-0 align-middle text-center">{{$row->store_quantity}}</td>
                     <td class="border-0 align-middle text-center">{{$row->price*$row->quantity}}$</td>

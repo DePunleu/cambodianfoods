@@ -161,6 +161,7 @@
                                     <td>@php
                                             $totalOrders = $item->orderItems->sum('quantity');
                                             echo $totalOrders;
+                                            
                                         @endphp
                                     </td> 
                                     <td>
@@ -177,7 +178,7 @@
                                         $
                                     </td>
                                     <td>{{$item->store_quantity}}</td>
-                                    {{--<td>
+                                    {{--<td class="text-center">
                                         <img class="" src="{{(!empty($item->image))
                                         ? url('upload/item_images/'.$item->image):url('frontend/user_images/no_image.jpg')}}" 
                                         width="40px" height="40px" alt="item">

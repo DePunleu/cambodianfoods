@@ -148,12 +148,12 @@
                         <tbody >
                             @foreach ($orders->reverse() as $order)
                             <tr  data-order-id="{{ $order->id }}">
-                                <td>{{$count++}}</td>   
-                                <td>{{ $order->name }}</td>
-                                <td>{{ $order->orderItems->sum(function ($orderItem) { return $orderItem->price * $orderItem->quantity; }) }}$</td>
-                                <td>{{ $order->payment_status }}</td>
-                                <td>{{ $order->created_at }}</td> 
-                                <td class="">
+                                <td class="text-center">{{$count++}}</td>   
+                                <td class="text-center">{{ $order->name }}</td>
+                                <td class="text-center">{{ $order->orderItems->sum(function ($orderItem) { return $orderItem->price * $orderItem->quantity; }) }}$</td>
+                                <td class="text-center">{{ $order->payment_status }}</td>
+                                <td class="text-center">{{ $order->created_at }}</td> 
+                                <td class="text-center">
                                     
                                         <span id="delivery-status-{{ $order->id }}">
                                             @if ($order->delivery_status === 'Order Received')
